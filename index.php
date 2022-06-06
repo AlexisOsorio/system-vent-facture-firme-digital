@@ -42,6 +42,7 @@
                         <input type="password" name="pass" placeholder="Ingrese su contraseña" class="input">
                     </div>
                 </div>
+                <p class="alert"></p>
                 <input type="submit" class="btn" value="Iniciar Sesión">
             </form>
         </div>
