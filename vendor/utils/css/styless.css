@@ -72,7 +72,7 @@ header {
 
 .header {
     color: #FFF;
-    background: #0a4661;
+    background: #610a0a;
     height: 35px;
     display: -webkit-flex;
     display: -moz-flex;
@@ -123,7 +123,7 @@ header {
 }
 
 nav ul {
-    background: #058167;
+    background: #810505;
     /*background: #05817d;*/
     list-style: none;
     display: -webkit-flex;
@@ -148,7 +148,7 @@ nav a {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: background .5s;
-    border-right: 1px solid #319B8F;
+    border-right: 1px solid #9b3131;
 }
 
 nav .principal>a {
@@ -166,7 +166,7 @@ nav ul li:hover ul {
 
 nav li ul {
     /*background: #177470;*/
-    background: #2d9872;
+    background: #982d2d;
     display: none;
     flex-direction: column;
     position: absolute;
@@ -182,7 +182,7 @@ nav li ul a {
 
 nav li ul a:hover {
     /*background: #2c9595;*/
-    background: #147556;
+    background: #751414;
 }
 
 nav li ul li:last-child {

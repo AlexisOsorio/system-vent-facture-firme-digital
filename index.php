@@ -18,7 +18,7 @@
     <img class="wave" src="utils/images/ola.png" alt="img1">
     <div class="contenedor">
         <div class="img">
-            
+
         </div>
         <div class="contenido-login">
             <form action="" method="post">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="div">
                         <h5>Usuario</h5>
-                        <input type="text" name="usuario" placeholder="Ingese su usuario" class="input">
+                        <input type="text" name="usuario" class="input">
                     </div>
                 </div>
                 <div class="input-div pass">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="div">
                         <h5>Contraseña</h5>
-                        <input type="password" name="pass" placeholder="Ingrese su contraseña" class="input">
+                        <input type="password" name="pass" class="input">
                     </div>
                 </div>
                 <p class="alert"></p>
@@ -48,5 +48,6 @@
         </div>
     </div>
 </body>
-<script src="../js/login.js"></script>
+<script src="utils/js/login.js"></script>
+
 </html>
