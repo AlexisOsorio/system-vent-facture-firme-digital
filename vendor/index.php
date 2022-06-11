@@ -10,9 +10,15 @@
 </head>
 
 <body>
+	<?php
+	include_once "layouts/header.php"
+	?>
 	<section id="container">
 		<h1>Bienvenido al sistema</h1>
 	</section>
 	<?php
 	include_once "layouts/footer.php"
 	?>
+</body>
+
+</html>

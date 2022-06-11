@@ -1,8 +1,14 @@
+<?php
+session_start();
+if (empty($_SESSION['active'])) {
+    header('location: ../index.php');
+}
+?>
 <header>
     <div class="header">
         <h1>Sistema de Venta y Facturación</h1>
         <div class="optionsBar">
-            <p>La Maná, 15 mayo de 2022</p>
+            <p>La Maná,  <?php echo fechaC(); ?></p>
             <span>|</span>
             <span class="user">Alx Os</span>
             <img class="photouser" src="img/user.png" alt="Usuario">
