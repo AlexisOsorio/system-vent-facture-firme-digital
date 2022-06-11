@@ -28,7 +28,7 @@
                with font-awesome or any other icon font library -->
                     <li class="nav-header">PAGINA PRINCIPAL</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="../views/index.php" class="nav-link">
                             <i class="nav-icon fas fa-house"></i>
                             <p>
                                 Inicio
@@ -129,7 +129,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
+                            <i class="nav-icon fas fa-file-invoice-dollar"></i>
                             <p>
                                 Facturas
                                 <i class="right fas fa-angle-left"></i>
@@ -158,20 +158,4 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Bienvenido al Sistema</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                            <li class="breadcrumb-item active">Pagina Principal</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+    

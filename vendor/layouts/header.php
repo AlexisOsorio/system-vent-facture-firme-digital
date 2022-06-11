@@ -48,7 +48,9 @@ if (empty($_SESSION['active'])) {
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
-            <a style="padding: 7px;" href="../core/leave.php">Cerrar Sesion</a>
+            <li class="nav-item">
+            <a href="../core/leave.php" class="btn bg-danger text-center"><b>Cerrar Sesion</b></a>
+            </li>
         </ul>
     </nav>
     <!-- /.navbar -->
