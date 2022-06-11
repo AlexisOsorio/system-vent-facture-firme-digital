@@ -15,7 +15,7 @@
 				<span>|</span>
 				<span class="user">Alx Os</span>
 				<img class="photouser" src="img/user.png" alt="Usuario">
-				<a href="#"><img class="close" src="img/salir.png" alt="Salir del sistema" title="Salir"></a>
+				<a href="./core/leave.php"><img class="close" src="img/salir.png" alt="Salir del sistema" title="Salir"></a>
 			</div>
 		</div>
 		<nav>
