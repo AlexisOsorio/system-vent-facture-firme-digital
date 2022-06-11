@@ -4,7 +4,7 @@
         <li class="principal">
             <a href="#">Usuarios</a>
             <ul>
-                <li><a href="../views/register/registro_users.php">Nuevo Usuario</a></li>
+                <li><a href="../views/registro_users.php">Nuevo Usuario</a></li>
                 <li><a href="#">Lista de Usuarios</a></li>
             </ul>
         </li>

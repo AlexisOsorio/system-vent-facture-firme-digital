@@ -4,14 +4,14 @@
 <head>
 	<meta charset="UTF-8">
 	<?php
-	include_once "layouts/style.php"
+	include_once "../layouts/style.php"
 	?>
-	<title>Registro Usuario</title>
+	<title>Registro Usuarios</title>
 </head>
 
 <body>
 	<?php
-	include_once "layouts/header.php"
+	include_once "../layouts/header.php"
 	?>
 	<section id="container">
 		<div class="form-register">
@@ -25,7 +25,7 @@
         </div>
 	</section>
 	<?php
-	include_once "layouts/footer.php"
+	include_once "../layouts/footer.php"
 	?>
 </body>
 

@@ -11,8 +11,8 @@ if (empty($_SESSION['active'])) {
             <p>La Maná,  <?php echo fechaC(); ?></p>
             <span>|</span>
             <span class="user"><?php echo $_SESSION['user'] ?></span>
-            <img class="photouser" src="img/user.png" alt="Usuario">
-            <a href="./core/leave.php"><img class="close" src="img/salir.png" alt="Salir del sistema" title="Salir"></a>
+            <img class="photouser" src="../utils/img/user.png" alt="Usuario">
+            <a href="../core/leave.php"><img class="close" src="../utils/img/salir.png" alt="Salir del sistema" title="Salir"></a>
         </div>
     </div>
     <?php

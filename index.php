@@ -2,7 +2,7 @@
 $alert = '';
 session_start();
 if (!empty($_SESSION['active'])) {
-    header('location: vendor/');
+    header('location: vendor/views');
 } else {
     if (!empty($_POST)) {
         if (empty($_POST['usuario']) || empty($_POST['pass'])) {
@@ -23,7 +23,7 @@ if (!empty($_SESSION['active'])) {
                 $_SESSION['user'] = $dato['usuario'];
                 $_SESSION['rol'] = $dato['idrol'];
                 $_SESSION['rol_name'] = $dato['rol'];
-                header('location: vendor/');
+                header('location: vendor/views');
             } else {
                 $alert = '<div class="alert alert-danger" role="alert">
               Usuario o Contraseña Incorrecta
