@@ -1,3 +1,41 @@
+<?php
+include_once "../../config/conexion.php";
+if (!empty($_POST)) {
+    $alerta = '';
+
+    if (
+        empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) ||
+        empty($_POST['pass']) || empty($_POST['rol'])
+    ) {
+        $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
+    } else {
+
+
+        $nombre = $_POST['nombre'];
+        $email = $_POST['correo'];
+        $user = $_POST['usuario'];
+        $pass = md5($_POST['pass']);
+        $rol = $_POST['rol'];
+
+        $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR '$email'");
+        $result = mysqli_fetch_array($query);
+
+        if ($result > 0) {
+            $alerta = '<p class="msg_error">El correo o usuario ya existe.</p>';
+        } else {
+            $query_insert = mysqli_query($conexion, "INSERT INTO usuario(nombre,correo, usuario, clave, rol) 
+                VALUES ('$nombre','$email','$user','$pass','$rol')");
+
+            if ($query_insert) {
+                $alerta = '<p class="msg_save">Usuario guardado correctamente.</p>';
+            } else {
+                $alerta = '<p class="msg_error">Erro al guardar usuario.</p>';
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +47,19 @@
     <?php
     include_once "../layouts/style.php"
     ?>
+    <style>
+        .msg_error {
+            color: #BD2130;
+        }
+
+        .msg_save {
+            color: #28A745;
+        }
+
+        .alerta p {
+            padding: 10px;
+        }
+    </style>
 
 <body class="hold-transition sidebar-mini">
     <?php
@@ -43,8 +94,7 @@
                                     <h3 class="card-title text-center">Registar Nuevo Usuario</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="alerta alert-danger text-center" style="display:none;">
-                                    </div>
+                                    <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
                                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
@@ -73,6 +123,9 @@
                                         <div class="form-group row">
                                             <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
                                             <div class="col-sm-5">
+                                                <?php
+
+                                                ?>
                                                 <select name="rol" id="rol" class="form-control">
                                                     <option value="0">Selecciona un rol</option>
                                                     <option value="1">Administrador</option>
