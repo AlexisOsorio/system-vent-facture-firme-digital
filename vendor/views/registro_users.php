@@ -2,44 +2,51 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<?php
-	include_once "../layouts/style.php"
-	?>
-	<title>Registro Usuarios</title>
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema Venta</title>
 
-<body>
-	<?php
-	include_once "../layouts/header.php"
-	?>
-	<section id="container">
-		<div class="form-register">
-            <h1>Registro de Usuarios</h1>
-            <hr>
-            <div class="alert"></div>
-            <form action="">
-                <label for="nombre">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo">
-				<label for="correo">Correo Electrónico</label>
-				<input type="email" name="correo" id="correo" placeholder="Correo Electrónico">
-				<label for="usuario">Usuario:</label>
-                <input type="text" name="usuario" id="usuario" placeholder="Ingrese el Usuario">
-				<label for="pass">Contraseña:</label>
-                <input type="password" name="pass" id="pass" placeholder="Ingrese su Contraseña">
-				<label for="rol">Tipo de Usuario:</label>
-				<select name="rol" id="rol">
-					<option value="1">Administrador</option>
-					<option value="2">Supervisor</option>
-					<option value="3">Vendedor</option>
-				</select>
-				<input type="submit" value="Registrar Usuario" class="btn btn">
-            </form>
+    <?php
+    include_once "../layouts/style.php"
+    ?>
+
+<body class="hold-transition sidebar-mini">
+    <?php
+    include_once "../layouts/header.php"
+    ?>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Title</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                Start creating your amazing application!
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                Footer
+            </div>
+            <!-- /.card-footer-->
         </div>
-	</section>
-	<?php
-	include_once "../layouts/footer.php"
-	?>
-</body>
+        <!-- /.card -->
 
-</html>
+    </section>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <?php
+    include_once "../layouts/footer.php"
+    ?>
