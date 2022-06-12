@@ -1,3 +1,8 @@
+<?php
+include_once "../../config/conexion.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,15 +39,51 @@
 
         <!-- Main content -->
         <section>
-            <div class="content">
+            <div class="container">
                 <div class="container-fluid">
                     <div class="row">
-                        
+                        <div class="col-md-12" style="padding-bottom: 5px;">
+                            <ul class="nav justify-content-end">
+                                <li class="nav-item">
+                                    <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="col-md-12">
+                            
+                            <table class="table table-striped table-inverse">
+                                <thead class="bg-info thead-inverse">
+                                    <tr class="text-center">
+                                        <th scope="col-sm-2">ID</th>
+                                        <th scope="col-sm-2">NOMBRE</th>
+                                        <th scope="col-sm-2">CORREO</th>
+                                        <th scope="col-sm-2">ROL</th>
+                                        <th scope="col-sm-2">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <th scope="row">1</th>
+                                        <td>ALX OS</td>
+                                        <td>AlexisOsorio@gmail.com</td>
+                                        <td>ADMINISTRADOR</td>
+                                        <td>
+                                            <a href="#" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Usuario</a>
+                                            <a href="#" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Usuario</a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             </div>
-        </section>
-        <!-- /.content -->
+    </div>
+    </section>
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <?php

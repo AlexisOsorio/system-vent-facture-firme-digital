@@ -49,7 +49,7 @@ if (empty($_SESSION['active'])) {
                 </a>
             </li>
             <li class="nav-item">
-            <a href="../core/leave.php" class="btn bg-danger text-center"><b>Cerrar Sesion</b></a>
+                <a href="../core/leave.php" class="btn bg-danger text-center"><b>Cerrar Sesion</b></a>
             </li>
         </ul>
     </nav>
