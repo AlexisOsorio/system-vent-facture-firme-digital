@@ -124,13 +124,20 @@ if (!empty($_POST)) {
                                             <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
                                             <div class="col-sm-5">
                                                 <?php
-
+                                                $query_rol = mysqli_query($conexion, "SELECT * FROM rol");
+                                                $result_rol = mysqli_num_rows($query_rol);
                                                 ?>
                                                 <select name="rol" id="rol" class="form-control">
-                                                    <option value="0">Selecciona un rol</option>
-                                                    <option value="1">Administrador</option>
-                                                    <option value="2">Supervisor</option>
-                                                    <option value="3">Vendedor</option>
+                                                    <?php
+                                                    if ($result_rol > 0) {
+                                                        while ($rol = mysqli_fetch_array($query_rol)) {
+                                                    ?>
+                                                            <option value=" <?php echo $rol['idrol']; ?>"><?php echo $rol['rol']; ?></option>
+                                                    <?php
+
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
