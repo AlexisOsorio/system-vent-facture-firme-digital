@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrar Usuarios</title>
+    <title>Editar Usuarios</title>
 
     <?php
     include_once "../layouts/style.php"
@@ -71,12 +71,12 @@ if (!empty($_POST)) {
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h2><b>Usuarios</b></h2>
+                        <h2><b>Actualizar Usuario</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="./index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Registrar Usuarios</li>
+                            <li class="breadcrumb-item active">Editar Usuarios</li>
                         </ol>
                     </div>
                 </div>
@@ -97,9 +97,9 @@ if (!empty($_POST)) {
                             </ul>
 
                         </div>
-                            <div class="card card-success ">
+                            <div class="card card-primary ">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Registar Nuevo Usuario</h3>
+                                    <h3 class="card-title text-center">Actualizar Usuario</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
@@ -151,7 +151,7 @@ if (!empty($_POST)) {
                                         </div>
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
-                                                <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Usuario">
+                                                <input type="submit" class="btn btn-block btn-outline-primary" value="Actualizar Usuario">
                                             </div>
                                         </div>
                                     </form>
