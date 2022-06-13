@@ -34,6 +34,39 @@ if (!empty($_POST)) {
         }
     }
 }
+
+//recuperacion y muestra de datos
+if (empty($_REQUEST['id'])){
+    header('Location: list_users.php');
+}
+
+$idUser = $_REQUEST['id'];
+
+$sql = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, (u.rol) as idrol, 
+    (r.rol) as rol FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE idusuario = $idUser");
+$result_sql = mysqli_num_rows($sql);
+
+if ($result_sql == 0) {
+    header('Location: list_users.php');
+}else {
+    $option = '';
+    while ($data = mysqli_fetch_array($sql)) {
+        $idUser = $data['idusuario'];
+        $nombre = $data['nombre'];
+        $correo = $data['correo'];
+        $usuario = $data['usuario'];
+        $idrol= $data['idrol'];
+        $rol = $data['rol'];
+
+        if ($idrol == 1) {
+            $option = '<option value="'.$idrol.'">'.$rol.'</option>';
+        }elseif ($idrol == 2) {
+            $option = '<option value="'.$idrol.'">'.$rol.'</option>';
+        }elseif ($idrol) {
+            $option = '<option value="'.$idrol.'">'.$rol.'</option>';
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,10 +107,10 @@ if (!empty($_POST)) {
                         <h2><b>Actualizar Usuario</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        <ul class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="./index.php">Inicio</a></li>
                             <li class="breadcrumb-item active">Editar Usuarios</li>
-                        </ol>
+                        </ul>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -92,14 +125,14 @@ if (!empty($_POST)) {
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <ul class="nav justify-content-end">
                                 <li class="nav-item">
-                                    <button class="btn btn-block bg-danger"><a href="../views/list_users.php">Regresar</a></button>
+                                    <a class="btn btn-block bg-danger" href="../views/list_users.php">Regresar</a>
                                 </li>
                             </ul>
 
                         </div>
                             <div class="card card-primary ">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Actualizar Usuario</h3>
+                                    <h3 class="card-title text-center">Actualizar datos del Usuario</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
@@ -107,25 +140,25 @@ if (!empty($_POST)) {
                                         <div class="form-group row">
                                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" class="form-control">
+                                                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" class="form-control" value="<?php echo $nombre; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="correo" class="col-sm-2 col-form-label">Correo Electrónico</label>
                                             <div class="col-sm-10">
-                                                <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" class="form-control">
+                                                <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" class="form-control" value="<?php echo $correo; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="usuario" id="usuario" placeholder="Ingrese el Usuario" class="form-control">
+                                                <input type="text" name="usuario" id="usuario" placeholder="Ingrese el Usuario" class="form-control" value="<?php echo $usuario; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pass" class="col-sm-2 col-form-label">Contraseña</label>
                                             <div class="col-sm-10">
-                                                <input type="password" name="pass" id="pass" placeholder="Ingrese la Contraseña" class="form-control">
+                                                <input type="password" name="pass" id="pass" placeholder="Ingrese la Contraseña" class="form-control" >
                                             </div>
                                         </div>
                                         <div class="form-group row">

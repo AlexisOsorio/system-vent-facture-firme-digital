@@ -77,8 +77,8 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['usuario']; ?></td>
                                                 <td><?php echo $data['rol']; ?></td>
                                                 <td>
-                                                    <a href="editar_usuarios.php" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Usuario</a>
-                                                    <a href="#" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Usuario</a>
+                                                    <a href="editar_usuarios.php?id=<?php echo $data['idusuario']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Usuario</a>
+                                                    <a href="?id=<?php echo $data['idusuario']; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Usuario</a>
                                                 </td>
                                             </tr>
 
