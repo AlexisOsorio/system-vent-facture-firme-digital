@@ -142,7 +142,8 @@ if (!empty($_POST)) {
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="offset-sm-2 col-sm-10 float-right">
+                                        <button class="col-sm-2 col-form-label btn bg-danger">Regresar</button>
+                                            <div class="col-sm-10 float-right">
                                                 <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Usuario">
                                             </div>
                                         </div>
