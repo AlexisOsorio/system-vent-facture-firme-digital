@@ -2,7 +2,7 @@
 include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
-
+ 
     if (
         empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) ||
         empty($_POST['pass']) || empty($_POST['rol'])
