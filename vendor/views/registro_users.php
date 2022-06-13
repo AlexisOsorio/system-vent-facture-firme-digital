@@ -89,6 +89,14 @@ if (!empty($_POST)) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
+                        <div class="col-md-12" style="padding-bottom: 5px;">
+                            <ul class="nav justify-content-end">
+                                <li class="nav-item">
+                                    <button class="btn btn-block bg-danger"><a href="../views/list_users.php">Regresar</a></button>
+                                </li>
+                            </ul>
+
+                        </div>
                             <div class="card card-success ">
                                 <div class="card-header">
                                     <h3 class="card-title text-center">Registar Nuevo Usuario</h3>
@@ -142,8 +150,7 @@ if (!empty($_POST)) {
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                        <button class="col-sm-2 col-form-label btn bg-danger">Regresar</button>
-                                            <div class="col-sm-10 float-right">
+                                            <div class="offset-sm-2 col-sm-10 float-right">
                                                 <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Usuario">
                                             </div>
                                         </div>
