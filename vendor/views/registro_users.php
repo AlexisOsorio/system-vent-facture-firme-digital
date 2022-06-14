@@ -17,7 +17,7 @@ if (!empty($_POST)) {
         $pass = md5($_POST['pass']);
         $rol = $_POST['rol'];
 
-        $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR '$email'");
+        $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
         $result = mysqli_fetch_array($query);
 
         if ($result > 0) {

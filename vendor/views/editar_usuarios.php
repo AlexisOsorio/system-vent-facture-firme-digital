@@ -3,33 +3,38 @@ include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (
-        empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) ||
-        empty($_POST['pass']) || empty($_POST['rol'])
-    ) {
+    if (empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['rol'])) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-
+        $idUsuario = $_POST['idUsuario'];
         $nombre = $_POST['nombre'];
         $email = $_POST['correo'];
         $user = $_POST['usuario'];
         $pass = md5($_POST['pass']);
         $rol = $_POST['rol'];
 
-        $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR '$email'");
+        $query = mysqli_query($conexion, "SELECT * FROM usuario 
+                                    WHERE (usuario = '$user' AND idusuario != $idUsuario)
+                                    OR (correo = '$email' AND idusuario != $idUsuario)");
         $result = mysqli_fetch_array($query);
 
         if ($result > 0) {
             $alerta = '<p class="msg_error">El correo o usuario ya existe.</p>';
         } else {
-            $query_insert = mysqli_query($conexion, "INSERT INTO usuario(nombre,correo, usuario, clave, rol) 
-                VALUES ('$nombre','$email','$user','$pass','$rol')");
 
-            if ($query_insert) {
-                $alerta = '<p class="msg_save">Usuario guardado correctamente.</p>';
+            if (empty($_POST['pass'])) {
+                $query_update = mysqli_query($conexion, "UPDATE usuario SET nombre = '$nombre',
+                correo = '$email', usuario = '$user', rol = '$rol' WHERE idusuario = $idUsuario ");
             } else {
-                $alerta = '<p class="msg_error">Erro al guardar usuario.</p>';
+                $query_update = mysqli_query($conexion, "UPDATE usuario SET nombre = '$nombre',
+                correo = '$email', usuario = '$user', clave = '$pass', rol = '$rol' WHERE idusuario = $idUsuario ");
+            }
+
+            if ($query_update) {
+                $alerta = '<p class="msg_save">Usuario editado correctamente.</p>';
+            } else {
+                $alerta = '<p class="msg_error">Erro al editar usuario.</p>';
             }
         }
     }
@@ -49,7 +54,6 @@ $result_sql = mysqli_num_rows($sql);
 if ($result_sql == 0) {
     header('Location: list_users.php');
 } else {
-    $option = '';
     while ($data = mysqli_fetch_array($sql)) {
         $idUser = $data['idusuario'];
         $nombre = $data['nombre'];
@@ -57,14 +61,6 @@ if ($result_sql == 0) {
         $usuario = $data['usuario'];
         $idrol = $data['idrol'];
         $rol = $data['rol'];
-
-        if($idrol == 1){
-            $option = '<option value="'.$idrol.'" select>'.$rol.'</option>';
-        }else if ($idrol == 2) {
-            $option = '<option value="'.$idrol.'" select>'.$rol.'</option>';
-        }else if ($idrol == 3) {
-            $option = '<option value="'.$idrol.'" select>'.$rol.'</option>'; 
-        }
     }
 }
 ?>
@@ -91,6 +87,10 @@ if ($result_sql == 0) {
 
         .alerta p {
             padding: 10px;
+        }
+
+        .notItemOne option:first-child {
+            display: none;
         }
     </style>
 
@@ -138,6 +138,11 @@ if ($result_sql == 0) {
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
+                                            <div class="col-sm-10">
+                                                <input type="hidden" name="idUsuario" class="form-control" value="<?php echo $idUser; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                             <div class="col-sm-10">
                                                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" class="form-control" value="<?php echo $nombre; ?>">
@@ -164,24 +169,23 @@ if ($result_sql == 0) {
                                         <div class="form-group row">
                                             <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
                                             <div class="col-sm-5">
-                                                <?php
-                                                $query_rol = mysqli_query($conexion, 'SELECT * FROM rol');
-                                                $result_rol = mysqli_num_rows($query_rol);
-                                                ?>
-                                                <select name="rol" id="rol" class="form-control">
-                                                    <?php
-                                                    echo $option;
-                                                    if ($result_rol > 0) {
-                                                        while ($rol = mysqli_fetch_array($query_rol)) {
-                                                    ?>
-                                                            <option value="<?php echo $rol['$idrol']; ?>"><?php echo $rol['$rol']; ?></option>
-
-                                                    <?php
-                                                            # code...
-                                                        }
-                                                    }
-                                                    ?>
-
+                                                
+                                                <select name="rol" id="rol" class="form-control notItemOne">
+                                                    <option value="1" <?php
+                                                                        if ($rol == 1) {
+                                                                            echo "selected";
+                                                                        }
+                                                                        ?>>Administrador</option>
+                                                    <option value="2" <?php
+                                                                        if ($rol == 2) {
+                                                                            echo "selected";
+                                                                        }
+                                                                        ?>>Supervisor</option>
+                                                    <option value="3" <?php
+                                                                        if ($rol == 3) {
+                                                                            echo "selected";
+                                                                        }
+                                                                        ?>>Vendedor</option>
                                                 </select>
                                             </div>
                                         </div>
