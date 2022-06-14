@@ -1,3 +1,27 @@
+<?php
+if (empty($_REQUEST['id'])) {
+    header('Location: list_users.php');
+} else {
+    include_once '../../config/conexion.php';
+
+    $iduserD = $_REQUEST['id'];
+
+    $query = mysqli_query($conexion, "SELECT u.nombre, u.usuario, r.rol  FROM usuario u INNER JOIN rol r 
+                            ON u.rol = r.idrol WHERE u.idusuario = $iduserD");
+    $result = mysqli_num_rows($query);
+
+    if ($result > 0) {
+        while ($data = mysqli_fetch_array($query)) {
+            $nombre = $data['nombre'];
+            $usuario = $data['usuario'];
+            $rol = $data['rol'];
+        }
+    } else {
+        header('Location: list_users.php');
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +44,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h2>Eliminar Usuario</h2>
+
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -33,35 +57,45 @@
         </section>
 
         <!-- Main content -->
-        <section class="content">
+        <section>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
 
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Title</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-danger">
+                                <div class="card-header">
+                                    <h3 class="card-title">Elimnar datos del Usuario</h3>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4><strong>¿Esta seguro que desea eliminar el registro?</strong></h4>
+                                    <p><b>Nombre:</b><span class="badge bg-dark"> <?php echo $nombre ?></span></p>
+                                    <p><b>Usuario:</b><span class="badge bg-dark"> <?php echo $usuario ?></span></p>
+                                    <p><b>Categoria:</b><span class="badge bg-dark"> <?php echo $rol ?></span></p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="form-group row">
+                                        <form action="" class="form-horizontal" method="POST">
+                                            <input type="submit" class="btn btn-block bg-danger" value="Aceptar"></input>
+                                        </form>
+                                        <div class="offset-sm-6 col-md-2 float-right">
+                                            <button class="btn bg-secondary"><a href="list_users.php">Cancelar</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
                     </div>
                 </div>
-                <div class="card-body">
-                    Start creating your amazing application!
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    Footer
-                </div>
-                <!-- /.card-footer-->
             </div>
-            <!-- /.card -->
-
-        </section>
-        <!-- /.content -->
+    </div>
+    </section>
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <?php
