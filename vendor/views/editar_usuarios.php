@@ -36,11 +36,11 @@ if (!empty($_POST)) {
 }
 
 //recuperacion y muestra de datos
-if (empty($_REQUEST['id'])){
+if (empty($_GET['id'])) {
     header('Location: list_users.php');
 }
 
-$idUser = $_REQUEST['id'];
+$idUser = $_GET['id'];
 
 $sql = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, (u.rol) as idrol, 
     (r.rol) as rol FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE idusuario = $idUser");
@@ -48,22 +48,22 @@ $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
     header('Location: list_users.php');
-}else {
+} else {
     $option = '';
     while ($data = mysqli_fetch_array($sql)) {
         $idUser = $data['idusuario'];
         $nombre = $data['nombre'];
         $correo = $data['correo'];
         $usuario = $data['usuario'];
-        $idrol= $data['idrol'];
+        $idrol = $data['idrol'];
         $rol = $data['rol'];
 
-        if ($idrol == 1) {
-            $option = '<option value="'.$idrol.'">'.$rol.'</option>';
-        }elseif ($idrol == 2) {
-            $option = '<option value="'.$idrol.'">'.$rol.'</option>';
-        }elseif ($idrol) {
-            $option = '<option value="'.$idrol.'">'.$rol.'</option>';
+        if($idrol == 1){
+            $option = '<option value="'.$idrol.'" select>'.$rol.'</option>';
+        }else if ($idrol == 2) {
+            $option = '<option value="'.$idrol.'" select>'.$rol.'</option>';
+        }else if ($idrol == 3) {
+            $option = '<option value="'.$idrol.'" select>'.$rol.'</option>'; 
         }
     }
 }
@@ -122,14 +122,14 @@ if ($result_sql == 0) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                        <div class="col-md-12" style="padding-bottom: 5px;">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="btn btn-block bg-danger" href="../views/list_users.php">Regresar</a>
-                                </li>
-                            </ul>
+                            <div class="col-md-12" style="padding-bottom: 5px;">
+                                <ul class="nav justify-content-end">
+                                    <li class="nav-item">
+                                        <a class="btn btn-block bg-danger" href="../views/list_users.php">Regresar</a>
+                                    </li>
+                                </ul>
 
-                        </div>
+                            </div>
                             <div class="card card-primary ">
                                 <div class="card-header">
                                     <h3 class="card-title text-center">Actualizar datos del Usuario</h3>
@@ -158,27 +158,30 @@ if ($result_sql == 0) {
                                         <div class="form-group row">
                                             <label for="pass" class="col-sm-2 col-form-label">Contraseña</label>
                                             <div class="col-sm-10">
-                                                <input type="password" name="pass" id="pass" placeholder="Ingrese la Contraseña" class="form-control" >
+                                                <input type="password" name="pass" id="pass" placeholder="Ingrese la Contraseña" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
                                             <div class="col-sm-5">
                                                 <?php
-                                                $query_rol = mysqli_query($conexion, "SELECT * FROM rol");
+                                                $query_rol = mysqli_query($conexion, 'SELECT * FROM rol');
                                                 $result_rol = mysqli_num_rows($query_rol);
                                                 ?>
                                                 <select name="rol" id="rol" class="form-control">
                                                     <?php
+                                                    echo $option;
                                                     if ($result_rol > 0) {
                                                         while ($rol = mysqli_fetch_array($query_rol)) {
                                                     ?>
-                                                            <option value=" <?php echo $rol['idrol']; ?>"><?php echo $rol['rol']; ?></option>
-                                                    <?php
+                                                            <option value="<?php echo $rol['$idrol']; ?>"><?php echo $rol['$rol']; ?></option>
 
+                                                    <?php
+                                                            # code...
                                                         }
                                                     }
                                                     ?>
+
                                                 </select>
                                             </div>
                                         </div>
