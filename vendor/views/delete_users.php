@@ -1,8 +1,23 @@
 <?php
-if (empty($_REQUEST['id'])) {
+include_once '../../config/conexion.php';
+
+if (!empty($_POST)){
+    $iduserD = $_POST['iduserD'];
+
+    //$query_D = mysqli_query($conexion, "DELETE FROM usuario WHERE idusuario = $iduserD");
+    $query_D = mysqli_query($conexion, "UPDATE usuario SET estatus = 0 WHERE idusuario = $iduserD");
+
+    if ($query_D) {
+        header('Location: list_users.php');
+    }else {
+        echo 'Error al eliminar usuario';
+    }
+}
+
+if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     header('Location: list_users.php');
 } else {
-    include_once '../../config/conexion.php';
+    
 
     $iduserD = $_REQUEST['id'];
 
@@ -47,10 +62,10 @@ if (empty($_REQUEST['id'])) {
 
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        <ul class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../views/index.php">Inicio</a></li>
                             <li class="breadcrumb-item active">Eliminar Usuario</li>
-                        </ol>
+                        </ul>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -78,6 +93,7 @@ if (empty($_REQUEST['id'])) {
                                 <div class="card-footer">
                                     <div class="form-group row">
                                         <form action="" class="form-horizontal" method="POST">
+                                            <input type="hidden" name="iduserD" value="<?php echo $iduserD ?>">
                                             <input type="submit" class="btn btn-block bg-danger" value="Aceptar"></input>
                                         </form>
                                         <div class="offset-sm-6 col-md-2 float-right">

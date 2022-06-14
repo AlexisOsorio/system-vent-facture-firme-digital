@@ -23,10 +23,10 @@
                         <h2>Sistema de Facturación</h2>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        <ul class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../views/index.php">Inicio</a></li>
                             <li class="breadcrumb-item active">Pagina Principal</li>
-                        </ol>
+                        </ul>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

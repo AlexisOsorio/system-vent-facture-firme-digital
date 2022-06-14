@@ -64,7 +64,7 @@ include_once "../../config/conexion.php";
                                 </thead>
                                 <?php
                                 $query = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol FROM usuario u 
-                                        INNER JOIN rol r ON u.rol = r.idrol");
+                                        INNER JOIN rol r ON u.rol = r.idrol WHERE estatus =1");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
@@ -78,7 +78,13 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['rol']; ?></td>
                                                 <td>
                                                     <a href="editar_usuarios.php?id=<?php echo $data['idusuario']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Usuario</a>
-                                                    <a href="delete_users.php?id=<?php echo $data['idusuario']; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Usuario</a>
+                                                    <?php
+                                                    if ($data['idusuario'] != 1) {
+                                                    ?>
+                                                        <a href="delete_users.php?id=<?php echo $data['idusuario']; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Usuario</a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </td>
                                             </tr>
 

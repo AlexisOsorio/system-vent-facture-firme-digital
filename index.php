@@ -11,7 +11,7 @@ if (!empty($_SESSION['active'])) {
             require_once "config/conexion.php";
             $user = mysqli_real_escape_string($conexion, $_POST['usuario']);
             $clave = md5(mysqli_real_escape_string($conexion, $_POST['pass']));
-            $query = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo,u.usuario,r.idrol,r.rol FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE u.correo = '$user' AND u.clave = '$clave'");
+            $query = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo,u.usuario,r.idrol,r.rol FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE u.correo = '$user' AND u.clave = '$clave' AND estatus = 1");
             mysqli_close($conexion);
             $resultado = mysqli_num_rows($query);
             if ($resultado > 0) {

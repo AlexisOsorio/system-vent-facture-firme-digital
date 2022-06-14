@@ -169,7 +169,7 @@ if ($result_sql == 0) {
                                         <div class="form-group row">
                                             <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
                                             <div class="col-sm-5">
-                                                
+
                                                 <select name="rol" id="rol" class="form-control notItemOne">
                                                     <option value="1" <?php
                                                                         if ($rol == 1) {
