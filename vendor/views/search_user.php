@@ -54,7 +54,7 @@ include_once "../../config/conexion.php";
         <section>
             <div class="container">
                 <?php
-                $search_u = strtolower($_GET['busqueda']);
+                $search_u = strtolower($_REQUEST['busqueda']);
 
                 if (empty($search_u)) {
                     header("location: list_users.php");
@@ -68,10 +68,7 @@ include_once "../../config/conexion.php";
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
                                     <input type="submit" value="Buscar" class="btn btn-outline-info" value="<?php echo $search_u; ?>">
                                 </form>
-                                <!--form class="col-md-9 d-flex" action="" method="get" class="form-horizontal">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
-                                    <input class="btn btn-outline-info" type="submit" value="Buscar" value="<?php echo $search_u; ?>">
-                                </!--form-->
+                                
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
                                         <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
@@ -126,6 +123,7 @@ include_once "../../config/conexion.php";
                             
                                                                     OR u.usuario LIKE '%$search_u%' OR r.rol LIKE '%$search_u%') AND estatus = 1 ORDER BY u.idusuario ASC LIMIT $desde_pg,$pag_num");
                                 $result = mysqli_num_rows($query);
+                                mysqli_close($conexion);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
                                 ?>

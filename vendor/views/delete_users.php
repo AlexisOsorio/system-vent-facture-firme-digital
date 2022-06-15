@@ -11,7 +11,7 @@ if (!empty($_POST)) {
 
     //$query_D = mysqli_query($conexion, "DELETE FROM usuario WHERE idusuario = $iduserD");
     $query_D = mysqli_query($conexion, "UPDATE usuario SET estatus = 0 WHERE idusuario = $iduserD");
-
+    mysqli_close($conexion);
     if ($query_D) {
         header('Location: list_users.php');
     } else {
@@ -29,7 +29,7 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     $query = mysqli_query($conexion, "SELECT u.nombre, u.usuario, r.rol  FROM usuario u INNER JOIN rol r 
                             ON u.rol = r.idrol WHERE u.idusuario = $iduserD");
     $result = mysqli_num_rows($query);
-
+    mysqli_close($conexion);
     if ($result > 0) {
         while ($data = mysqli_fetch_array($query)) {
             $nombre = $data['nombre'];
