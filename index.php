@@ -60,7 +60,7 @@ if (!empty($_SESSION['active'])) {
         <div class="contenido-login">
             <form action="" method="post">
                 <img src="utils/images/user.png" alt="Usuario">
-                <h2>Login System</h2>
+                <h2>RPEIV System</h2>
                 <div class="input-div usr">
                     <div class="i">
                         <i class="fa-solid fa-user"></i>
