@@ -2,7 +2,7 @@
 include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
- 
+
     if (
         empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) ||
         empty($_POST['pass']) || empty($_POST['rol'])
@@ -60,7 +60,7 @@ if (!empty($_POST)) {
             padding: 10px;
         }
     </style>
-
+ </head> 
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"
@@ -89,14 +89,14 @@ if (!empty($_POST)) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                        <div class="col-md-12" style="padding-bottom: 5px;">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <button class="btn btn-block bg-danger"><a href="../views/list_users.php">Regresar</a></button>
-                                </li>
-                            </ul>
+                            <div class="col-md-12" style="padding-bottom: 5px;">
+                                <ul class="nav justify-content-end">
+                                    <li class="nav-item">
+                                        <a class="btn btn-block bg-danger" href="../views/list_users.php">Regresar</a>
+                                    </li>
+                                </ul>
 
-                        </div>
+                            </div>
                             <div class="card card-success ">
                                 <div class="card-header">
                                     <h3 class="card-title text-center">Registar Nuevo Usuario</h3>

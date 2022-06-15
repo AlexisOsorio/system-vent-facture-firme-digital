@@ -6,4 +6,3 @@
 <script src="https://kit.fontawesome.com/258935b168.js" crossorigin="anonymous"></script>
 <!-- Theme style -->
 <link rel="stylesheet" href="../utils/css/adminlte.min.css">
-</head>

@@ -1,15 +1,20 @@
 <?php
 include_once '../../config/conexion.php';
 
-if (!empty($_POST)){
+if (!empty($_POST)) {
+    if ($_POST['iduserD']== 1) {
+        header('Location: list_users.php');
+        exit;
+    }
     $iduserD = $_POST['iduserD'];
+
 
     //$query_D = mysqli_query($conexion, "DELETE FROM usuario WHERE idusuario = $iduserD");
     $query_D = mysqli_query($conexion, "UPDATE usuario SET estatus = 0 WHERE idusuario = $iduserD");
 
     if ($query_D) {
         header('Location: list_users.php');
-    }else {
+    } else {
         echo 'Error al eliminar usuario';
     }
 }
@@ -17,7 +22,7 @@ if (!empty($_POST)){
 if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     header('Location: list_users.php');
 } else {
-    
+
 
     $iduserD = $_REQUEST['id'];
 
@@ -48,7 +53,7 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     <?php
     include_once "../layouts/style.php"
     ?>
-
+</head> 
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"

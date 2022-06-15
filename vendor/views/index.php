@@ -9,7 +9,7 @@
     <?php
     include_once "../layouts/style.php"
     ?>
-
+ </head> 
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"

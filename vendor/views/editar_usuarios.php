@@ -93,7 +93,7 @@ if ($result_sql == 0) {
             display: none;
         }
     </style>
-
+ </head> 
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"

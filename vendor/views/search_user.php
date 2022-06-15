@@ -55,6 +55,13 @@ include_once "../../config/conexion.php";
             <div class="container">
                 <div class="container-fluid">
                     <div class="row">
+                        <?php
+                        $search_u = $_GET['busqueda'];
+
+                        if (empty($search_u)) {
+                            header('Location: list_users.php');
+                        }
+                        ?>
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
                                 <form class="col-md-9 d-flex" action="search_user.php" method="GET" class="form-horizontal" role="search">
