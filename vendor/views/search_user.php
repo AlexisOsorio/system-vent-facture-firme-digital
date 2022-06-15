@@ -156,51 +156,55 @@ include_once "../../config/conexion.php";
 
                             </table>
                             <div>
-                                <nav aria-label="...">
-                                    <ul class="pagination justify-content-end">
-                                        <?php
-                                        if ($pag != 1) {
-                                            # code...
+                                <?php
+                                if ($registros_totales != 0) {
+                                ?>
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-end">
+                                            <?php
+                                            if ($pag != 1) {
+                                                # code...
 
-                                        ?>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo 1; ?>">Inicio</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                        <?php
-                                        }
-                                        for ($i = 1; $i <= $total_pg; $i++) {
-                                            # code...
-                                            if ($i == $pag) {
-                                                echo '  <li class="page-link activar">' . $i . '</li>';
-                                            } else {
-                                                echo '  <li class="page-item">
-                                                            <a class="page-link" href="?pagina=' . $i . '">' . $i . '</a>
-                                                        </li>';
+                                            ?>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $search_u; ?>">Inicio</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>&busqueda=<?php echo $search_u; ?>" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            <?php
                                             }
-                                        }
-                                        if ($pag != $total_pg) {
-                                            # code...
+                                            for ($i = 1; $i <= $total_pg; $i++) {
+                                                # code...
+                                                if ($i == $pag) {
+                                                    echo '  <li class="page-link activar">' . $i . '</li>';
+                                                } else {
+                                                    echo '  <li class="page-item">
+                                                            <a class="page-link" href="?pagina=' . $i . '&busqueda=' . $search_u . '">' . $i . '</a>
+                                                        </li>';
+                                                }
+                                            }
+                                            if ($pag != $total_pg) {
+                                            ?>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>&busqueda=<?php echo $search_u; ?>" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo $total_pg; ?>&busqueda=<?php echo $search_u; ?>">Fin</a>
+                                                </li>
 
-                                        ?>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $total_pg; ?>">Fin</a>
-                                            </li>
-
-                                        <?php
-                                        }
-                                        ?>
-                                    </ul>
-                                </nav>
+                                            <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                    </nav>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
