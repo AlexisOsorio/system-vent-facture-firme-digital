@@ -53,21 +53,25 @@ include_once "../../config/conexion.php";
         <!-- Main content -->
         <section>
             <div class="container">
+                <?php
+                $search_u = strtolower($_GET['busqueda']);
+
+                if (empty($search_u)) {
+                    header("location: list_users.php");
+                }
+                ?>
                 <div class="container-fluid">
                     <div class="row">
-                        <?php
-                        $search_u = $_GET['busqueda'];
-
-                        if (empty($search_u)) {
-                            header('Location: list_users.php');
-                        }
-                        ?>
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
-                                <form class="col-md-9 d-flex" action="search_user.php" method="GET" class="form-horizontal" role="search">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario" aria-label="Search">
-                                    <input class="btn btn-outline-info" type="submit" value="Buscar">
+                                <form action="search_user.php" method="get" class=" col-sm-9 d-flex">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
+                                    <input type="submit" value="Buscar" class="btn btn-outline-info" value="<?php echo $search_u; ?>">
                                 </form>
+                                <!--form class="col-md-9 d-flex" action="" method="get" class="form-horizontal">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
+                                    <input class="btn btn-outline-info" type="submit" value="Buscar" value="<?php echo $search_u; ?>">
+                                </!--form-->
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
                                         <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
@@ -89,8 +93,19 @@ include_once "../../config/conexion.php";
                                 </thead>
                                 <?php
 
-                                //paginador
-                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM usuario WHERE estatus = 1");
+                                //buscador
+                                $cate = '';
+                                if ($search_u == 'administrador') {
+                                    $cate = "OR rol LIKE '%1%'";
+                                } else if ($search_u == 'supervisor') {
+                                    $cate = "OR rol LIKE '%2%'";
+                                } else if ($search_u == 'vendedor') {
+                                    $cate = "OR rol LIKE '%3%'";
+                                }
+                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM usuario WHERE (idusuario LIKE '%$search_u%' 
+                                            OR nombre LIKE '%$search_u%' OR correo LIKE '%$search_u%' OR usuario LIKE '%$search_u%' $cate) AND estatus = 1");
+
+
                                 $result_reg = mysqli_fetch_array($sql_reg);
                                 $registros_totales = $result_reg['registros_totales'];
 
@@ -106,7 +121,10 @@ include_once "../../config/conexion.php";
                                 $total_pg = ceil($registros_totales / $pag_num);
 
                                 $query = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol FROM usuario u 
-                                    INNER JOIN rol r ON u.rol = r.idrol WHERE estatus = 1 ORDER BY u.idusuario ASC LIMIT $desde_pg,$pag_num ");
+
+                                                                    INNER JOIN rol r ON u.rol = r.idrol WHERE (u.idusuario LIKE '%$search_u%' OR u.nombre LIKE '%$search_u%' OR u.correo LIKE '%$search_u%' 
+                            
+                                                                    OR u.usuario LIKE '%$search_u%' OR r.rol LIKE '%$search_u%') AND estatus = 1 ORDER BY u.idusuario ASC LIMIT $desde_pg,$pag_num");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {

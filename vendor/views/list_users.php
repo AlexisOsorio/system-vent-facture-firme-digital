@@ -57,10 +57,14 @@ include_once "../../config/conexion.php";
                     <div class="row">
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
-                                <form class="col-md-9 d-flex" action="search_user.php" method="GET" class="form-horizontal" role="search">
+                                <form action="search_user.php" method="get" class=" col-sm-9 d-flex">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
+                                    <input type="submit" value="Buscar" class="btn btn-outline-info">
+                                </form>
+                                <!--form-- class="col-md-9 d-flex" action="search_user.php" method="get" class="form-horizontal">
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario" aria-label="Search">
                                     <input class="btn btn-outline-info" type="submit" value="Buscar">
-                                </form>
+                                </!--form-->
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
                                         <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
