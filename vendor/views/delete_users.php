@@ -2,8 +2,9 @@
 include_once '../../config/conexion.php';
 
 if (!empty($_POST)) {
-    if ($_POST['iduserD']== 1) {
+    if ($_POST['iduserD'] == 1) {
         header('Location: list_users.php');
+        mysqli_close($conexion);
         exit;
     }
     $iduserD = $_POST['iduserD'];
@@ -21,6 +22,7 @@ if (!empty($_POST)) {
 
 if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     header('Location: list_users.php');
+    mysqli_close($conexion);
 } else {
 
 
@@ -28,8 +30,9 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
 
     $query = mysqli_query($conexion, "SELECT u.nombre, u.usuario, r.rol  FROM usuario u INNER JOIN rol r 
                             ON u.rol = r.idrol WHERE u.idusuario = $iduserD");
-    $result = mysqli_num_rows($query);
     mysqli_close($conexion);
+    $result = mysqli_num_rows($query);
+
     if ($result > 0) {
         while ($data = mysqli_fetch_array($query)) {
             $nombre = $data['nombre'];
@@ -53,7 +56,8 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     <?php
     include_once "../layouts/style.php"
     ?>
-</head> 
+</head>
+
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"

@@ -18,7 +18,7 @@ if (!empty($_POST)) {
                                     WHERE (usuario = '$user' AND idusuario != $idUsuario)
                                     OR (correo = '$email' AND idusuario != $idUsuario)");
         $result = mysqli_fetch_array($query);
-        mysqli_close($conexion);
+
         if ($result > 0) {
             $alerta = '<p class="msg_error">El correo o usuario ya existe.</p>';
         } else {
@@ -38,19 +38,22 @@ if (!empty($_POST)) {
             }
         }
     }
+    mysqli_close($conexion);
 }
 
 //recuperacion y muestra de datos
 if (empty($_GET['id'])) {
     header('Location: list_users.php');
+    mysqli_close($conexion);
 }
 
 $idUser = $_GET['id'];
 
 $sql = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, (u.rol) as idrol, 
     (r.rol) as rol FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE idusuario = $idUser");
-$result_sql = mysqli_num_rows($sql);
 mysqli_close($conexion);
+$result_sql = mysqli_num_rows($sql);
+
 if ($result_sql == 0) {
     header('Location: list_users.php');
 } else {
@@ -93,7 +96,8 @@ if ($result_sql == 0) {
             display: none;
         }
     </style>
- </head> 
+</head>
+
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"

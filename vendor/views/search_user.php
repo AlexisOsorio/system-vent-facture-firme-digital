@@ -58,6 +58,7 @@ include_once "../../config/conexion.php";
 
                 if (empty($search_u)) {
                     header("location: list_users.php");
+                    mysqli_close($conexion);
                 }
                 ?>
                 <div class="container-fluid">
@@ -68,7 +69,7 @@ include_once "../../config/conexion.php";
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
                                     <input type="submit" value="Buscar" class="btn btn-outline-info" value="<?php echo $search_u; ?>">
                                 </form>
-                                
+
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
                                         <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
@@ -122,8 +123,10 @@ include_once "../../config/conexion.php";
                                                                     INNER JOIN rol r ON u.rol = r.idrol WHERE (u.idusuario LIKE '%$search_u%' OR u.nombre LIKE '%$search_u%' OR u.correo LIKE '%$search_u%' 
                             
                                                                     OR u.usuario LIKE '%$search_u%' OR r.rol LIKE '%$search_u%') AND estatus = 1 ORDER BY u.idusuario ASC LIMIT $desde_pg,$pag_num");
-                                $result = mysqli_num_rows($query);
                                 mysqli_close($conexion);
+
+                                $result = mysqli_num_rows($query);
+
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
                                 ?>

@@ -133,6 +133,7 @@ if (!empty($_POST)) {
                                             <div class="col-sm-5">
                                                 <?php
                                                 $query_rol = mysqli_query($conexion, "SELECT * FROM rol");
+                                                mysqli_close($conexion);
                                                 $result_rol = mysqli_num_rows($query_rol);
                                                 ?>
                                                 <select name="rol" id="rol" class="form-control">
