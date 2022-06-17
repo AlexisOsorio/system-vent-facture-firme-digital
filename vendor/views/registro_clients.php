@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-if ($_SESSION['rol'] != 1) {
-    header("Location: ../views/index.php");
-}
-
 include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
@@ -47,7 +43,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrar Usuarios</title>
+    <title>Registrar Clientes</title>
 
     <?php
     include_once "../layouts/style.php"
@@ -65,7 +61,8 @@ if (!empty($_POST)) {
             padding: 10px;
         }
     </style>
- </head> 
+</head>
+
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"
@@ -110,50 +107,30 @@ if (!empty($_POST)) {
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
+                                            <label for="ruc" class="col-sm-2 col-form-label">RUC</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" name="ruc" id="ruc" placeholder="Ingrese el RUC del Cliente" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" class="form-control">
+                                                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo del Cliente" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="correo" class="col-sm-2 col-form-label">Correo Electrónico</label>
+                                            <label for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
                                             <div class="col-sm-10">
-                                                <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" class="form-control">
+                                                <input type="number" name="telefono" id="telefono" placeholder="Ingrese el Teléfono del Cliente" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
+                                            <label for="direcc" class="col-sm-2 col-form-label">Direccción</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="usuario" id="usuario" placeholder="Ingrese el Usuario" class="form-control">
+                                                <input type="text" name="direcc" id="direcc" placeholder="Ingrese la Dirección del Cliente" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="pass" class="col-sm-2 col-form-label">Contraseña</label>
-                                            <div class="col-sm-10">
-                                                <input type="password" name="pass" id="pass" placeholder="Ingrese la Contraseña" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
-                                            <div class="col-sm-5">
-                                                <?php
-                                                $query_rol = mysqli_query($conexion, "SELECT * FROM rol");
-                                                $result_rol = mysqli_num_rows($query_rol);
-                                                ?>
-                                                <select name="rol" id="rol" class="form-control">
-                                                    <?php
-                                                    if ($result_rol > 0) {
-                                                        while ($rol = mysqli_fetch_array($query_rol)) {
-                                                    ?>
-                                                            <option value=" <?php echo $rol['idrol']; ?>"><?php echo $rol['rol']; ?></option>
-                                                    <?php
-
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
                                                 <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Cliente">

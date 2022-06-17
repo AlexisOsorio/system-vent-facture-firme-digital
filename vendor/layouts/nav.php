@@ -81,7 +81,7 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../views/list_clients.php" class="nav-link">
                                 <p>Lista Clientes</p>
                             </a>
                         </li>
