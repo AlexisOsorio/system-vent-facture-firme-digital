@@ -2,7 +2,7 @@
 session_start();
 
 if ($_SESSION['rol'] != 1) {
-    header("Location: ../../");
+    header("Location: ../views/index.php");
 }
 include_once "../../config/conexion.php";
 ?>
