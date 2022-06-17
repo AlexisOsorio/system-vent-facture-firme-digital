@@ -58,7 +58,7 @@ $sql = mysqli_query($conexion, "SELECT * FROM usuario WHERE idusuario = $idUser"
 									FROM usuario u
 									INNER JOIN rol r
 									on u.rol = r.idrol
-									WHERE idusuario= $idUserser ");*/
+									WHERE idusuario= $idUser");*/
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
