@@ -43,25 +43,28 @@ if (!empty($_POST)) {
             }
         }
     }
-    mysqli_close($conexion);
 }
 
 //recuperacion y muestra de datos
-if (empty($_GET['id'])) {
+if (empty($_REQUEST['id'])) {
     header('Location: list_users.php');
-    mysqli_close($conexion);
 }
 
-$idUser = $_GET['id'];
+$idUser = $_REQUEST['id'];
 
-$sql = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, (u.rol) as idrol, 
-    (r.rol) as rol FROM usuario u INNER JOIN rol r ON u.rol = r.idrol WHERE idusuario = $idUser");
-mysqli_close($conexion);
+$sql = mysqli_query($conexion, "SELECT * FROM usuario WHERE idusuario = $idUser");
+// consulta alternativa
+/*$sql= mysqli_query($conection,"SELECT u.idusuario, u.nombre,u.correo,u.usuario, (u.rol) as idrol, (r.rol) as rol
+									FROM usuario u
+									INNER JOIN rol r
+									on u.rol = r.idrol
+									WHERE idusuario= $idUserser ");*/
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
     header('Location: list_users.php');
 } else {
+    //$option = '';
     while ($data = mysqli_fetch_array($sql)) {
         $idUser = $data['idusuario'];
         $nombre = $data['nombre'];
@@ -179,7 +182,7 @@ if ($result_sql == 0) {
                                             <label for="rol" class="col-sm-2 col-form-label">Tipo de Usuario</label>
                                             <div class="col-sm-5">
 
-                                                <select name="rol" id="rol" class="form-control notItemOne">
+                                                <select name="rol" id="rol" class="form-control ">
                                                     <option value="1" <?php
                                                                         if ($rol == 1) {
                                                                             echo "selected";
@@ -195,6 +198,7 @@ if ($result_sql == 0) {
                                                                             echo "selected";
                                                                         }
                                                                         ?>>Vendedor</option>
+
                                                 </select>
                                             </div>
                                         </div>

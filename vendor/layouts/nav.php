@@ -35,29 +35,35 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Usuarios
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="../views/registro_users.php" class="nav-link">
-                                <p>Nuevo Usuario</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="../views/list_users.php" class="nav-link">
-                                <p>Lista Usuario</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <?php
+                if ($_SESSION['rol'] == 1) {
+                ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Usuarios
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../views/registro_users.php" class="nav-link">
+                                    <p>Nuevo Usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../views/list_users.php" class="nav-link">
+                                    <p>Lista Usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-hand-holding-dollar"></i>

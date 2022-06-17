@@ -25,7 +25,6 @@ if (!empty($_POST)) {
 
         $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
         $result = mysqli_fetch_array($query);
-        mysqli_close($conexion);
         if ($result > 0) {
             $alerta = '<p class="msg_error">El correo o usuario ya existe.</p>';
         } else {
@@ -139,7 +138,6 @@ if (!empty($_POST)) {
                                             <div class="col-sm-5">
                                                 <?php
                                                 $query_rol = mysqli_query($conexion, "SELECT * FROM rol");
-                                                mysqli_close($conexion);
                                                 $result_rol = mysqli_num_rows($query_rol);
                                                 ?>
                                                 <select name="rol" id="rol" class="form-control">

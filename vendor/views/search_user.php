@@ -63,7 +63,6 @@ include_once "../../config/conexion.php";
 
                 if (empty($search_u)) {
                     header("location: list_users.php");
-                    mysqli_close($conexion);
                 }
                 ?>
                 <div class="container-fluid">
@@ -128,7 +127,6 @@ include_once "../../config/conexion.php";
                                                                     INNER JOIN rol r ON u.rol = r.idrol WHERE (u.idusuario LIKE '%$search_u%' OR u.nombre LIKE '%$search_u%' OR u.correo LIKE '%$search_u%' 
                             
                                                                     OR u.usuario LIKE '%$search_u%' OR r.rol LIKE '%$search_u%') AND estatus = 1 ORDER BY u.idusuario ASC LIMIT $desde_pg,$pag_num");
-                                mysqli_close($conexion);
 
                                 $result = mysqli_num_rows($query);
 

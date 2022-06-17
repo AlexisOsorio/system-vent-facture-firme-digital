@@ -110,7 +110,6 @@ include_once "../../config/conexion.php";
 
                                 $query = mysqli_query($conexion, "SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol FROM usuario u 
                                     INNER JOIN rol r ON u.rol = r.idrol WHERE estatus = 1 ORDER BY u.idusuario ASC LIMIT $desde_pg,$pag_num ");
-                                mysqli_close($conexion);
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
