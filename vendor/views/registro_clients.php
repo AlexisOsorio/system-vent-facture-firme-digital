@@ -76,12 +76,12 @@ if (!empty($_POST)) {
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h2><b>Usuarios</b></h2>
+                        <h2><b>Clientes</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="./index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Registrar Usuarios</li>
+                            <li class="breadcrumb-item active">Registrar Clientes</li>
                         </ol>
                     </div>
                 </div>
@@ -97,14 +97,14 @@ if (!empty($_POST)) {
                             <div class="col-md-12" style="padding-bottom: 5px;">
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
-                                        <a class="btn btn-block bg-danger" href="../views/list_users.php">Regresar</a>
+                                        <a class="btn btn-block bg-danger" href="../views/list_clients.php">Regresar</a>
                                     </li>
                                 </ul>
 
                             </div>
                             <div class="card card-success ">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Registar Nuevo Usuario</h3>
+                                    <h3 class="card-title text-center">Registar Nuevo Cliente</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
@@ -156,7 +156,7 @@ if (!empty($_POST)) {
                                         </div>
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
-                                                <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Usuario">
+                                                <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Cliente">
                                             </div>
                                         </div>
                                     </form>
