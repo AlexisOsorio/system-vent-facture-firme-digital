@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-   
+
 
 
 include_once "../../config/conexion.php";
@@ -62,8 +62,8 @@ include_once "../../config/conexion.php";
                     <div class="row">
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
-                                <form action="search_user.php" method="get" class=" col-sm-9 d-flex">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
+                                <form action="search_clients.php" method="get" class=" col-sm-9 d-flex">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Cliente">
                                     <input type="submit" value="Buscar" class="btn btn-outline-info">
                                 </form>
 
@@ -79,6 +79,7 @@ include_once "../../config/conexion.php";
                                 <thead class="bg-info thead-inverse">
                                     <tr class="text-center">
                                         <th scope="col-sm-2">ID</th>
+                                        <th scope="col-sm-2">RUC</th>
                                         <th scope="col-sm-2">NOMBRE</th>
                                         <th scope="col-sm-2">TELÉFONO</th>
                                         <th scope="col-sm-2">DIRECCIÓN</th>
@@ -103,8 +104,8 @@ include_once "../../config/conexion.php";
                                 $desde_pg = ($pag - 1) * $pag_num;
                                 $total_pg = ceil($registros_totales / $pag_num);
 
-                                $query = mysqli_query($conexion, "SELECT c.idcliente, c.nombre, c.telefono, c.direccion FROM cliente c 
-                                    WHERE estatus = 1 ORDER BY c.idcliente ASC LIMIT $desde_pg,$pag_num ");
+                                $query = mysqli_query($conexion, "SELECT * FROM cliente c 
+                                    WHERE estatus = 1 ORDER BY idcliente ASC LIMIT $desde_pg,$pag_num ");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
@@ -112,18 +113,15 @@ include_once "../../config/conexion.php";
                                         <tbody>
                                             <tr class="text-center">
                                                 <th scope="row"><?php echo $data['idcliente']; ?></th>
+                                                <td><?php echo $data['ruc']; ?></td>
                                                 <td><?php echo $data['nombre']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
                                                 <td>
                                                     <a href="editar_clients.php" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
-                                                    <?php
-                                                    if ($data['idcliente'] != 1) {
-                                                    ?>
-                                                        <a href="delete_clients.php" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
-                                                    <?php
-                                                    }
-                                                    ?>
+
+                                                    <a href="delete_clients.php" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+
                                                 </td>
                                             </tr>
 

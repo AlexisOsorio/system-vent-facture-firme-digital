@@ -16,7 +16,7 @@ if (!empty($_POST)) {
         $usuario_id = $_SESSION['idUser'];
 
         $result = 0;
-        if (is_numeric($ruc)) {
+        if (is_numeric($ruc) and $ruc != 0) {
             $query = mysqli_query($conexion, "SELECT * FROM cliente where ruc = '$ruc'");
             $result = mysqli_fetch_array($query);
         }
