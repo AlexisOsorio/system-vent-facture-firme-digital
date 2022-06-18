@@ -4,16 +4,16 @@ session_start();
 include_once '../../config/conexion.php';
 
 if (!empty($_POST)) {
-    if ($_POST['iduserD'] == 1) {
+    if ($_POST['idclientD'] == 1) {
         header('Location: list_clients.php');
         mysqli_close($conexion);
         exit;
     }
-    $iduserD = $_POST['iduserD'];
+    $idclientD = $_POST['idclientD'];
 
 
     //$query_D = mysqli_query($conexion, "DELETE FROM usuario WHERE idusuario = $iduserD");
-    $query_D = mysqli_query($conexion, "UPDATE usuario SET estatus = 0 WHERE idusuario = $iduserD");
+    $query_D = mysqli_query($conexion, "UPDATE cliente SET estatus = 0 WHERE idcliente = $idclientD");
     mysqli_close($conexion);
     if ($query_D) {
         header('Location: list_clients.php');
@@ -28,18 +28,18 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
 } else {
 
 
-    $iduserD = $_REQUEST['id'];
+    $idclientD = $_REQUEST['id'];
 
-    $query = mysqli_query($conexion, "SELECT u.nombre, u.usuario, r.rol  FROM usuario u INNER JOIN rol r 
-                            ON u.rol = r.idrol WHERE u.idusuario = $iduserD");
+    $query = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idclientD");
     mysqli_close($conexion);
     $result = mysqli_num_rows($query);
 
     if ($result > 0) {
         while ($data = mysqli_fetch_array($query)) {
+            $ruc = $data['ruc'];
             $nombre = $data['nombre'];
-            $usuario = $data['usuario'];
-            $rol = $data['rol'];
+            $telefono = $data['telefono'];
+            $direccion = $data['direccion'];
         }
     } else {
         header('Location: list_clients.php');
@@ -97,14 +97,15 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
                                 </div>
                                 <div class="card-body text-center">
                                     <h4><strong>¿Esta seguro que desea eliminar el registro?</strong></h4>
+                                    <p><b>Ruc o CI:</b><span class="badge bg-dark"> <?php echo $ruc ?></span></p>
                                     <p><b>Nombre:</b><span class="badge bg-dark"> <?php echo $nombre ?></span></p>
-                                    <p><b>Usuario:</b><span class="badge bg-dark"> <?php echo $usuario ?></span></p>
-                                    <p><b>Categoria:</b><span class="badge bg-dark"> <?php echo $rol ?></span></p>
+                                    <p><b>Teléfono:</b><span class="badge bg-dark"> <?php echo $telefono ?></span></p>
+                                    <p><b>Dirección:</b><span class="badge bg-dark"> <?php echo $direccion ?></span></p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="form-group row">
                                         <form action="" class="form-horizontal" method="POST">
-                                            <input type="hidden" name="iduserD" value="<?php echo $iduserD ?>">
+                                            <input type="hidden" name="idclientD" value="<?php echo $idclientD ?>">
                                             <input type="submit" class="btn btn-block bg-danger" value="Aceptar"></input>
                                         </form>
                                         <div class="offset-sm-6 col-md-2 float-right">

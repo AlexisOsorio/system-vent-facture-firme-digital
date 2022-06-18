@@ -121,11 +121,16 @@ include_once "../../config/conexion.php";
 
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
+                                        if ($data['ruc'] == 0) {
+                                            $ruc = 'C/F';
+                                        } else {
+                                            $ruc = $data['ruc'];
+                                        }
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
                                                 <th scope="row"><?php echo $data['idcliente']; ?></th>
-                                                <td><?php echo $data['ruc']; ?></td>
+                                                <td><?php echo $ruc; ?></td>
                                                 <td><?php echo $data['nombre']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
