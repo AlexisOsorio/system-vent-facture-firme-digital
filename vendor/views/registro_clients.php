@@ -5,32 +5,30 @@ include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (
-        empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) ||
-        empty($_POST['pass']) || empty($_POST['rol'])
-    ) {
+    if (empty($_POST['nombre']) || empty($_POST['telefono']) || empty($_POST['direccion'])) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-
+        $ruc = $_POST['ruc'];
         $nombre = $_POST['nombre'];
-        $email = $_POST['correo'];
-        $user = $_POST['usuario'];
-        $pass = md5($_POST['pass']);
-        $rol = $_POST['rol'];
+        $telefono = $_POST['telefono'];
+        $direccion = $_POST['direccion'];
+        $usuario_id = $_SESSION['idUser'];
 
-        $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
-        $result = mysqli_fetch_array($query);
+        $result = 0;
+        if (is_numeric($ruc)) {
+            $query = mysqli_query($conexion, "SELECT * FROM cliente where ruc = '$ruc'");
+            $result = mysqli_fetch_array($query);
+        }
         if ($result > 0) {
-            $alerta = '<p class="msg_error">El correo o usuario ya existe.</p>';
+            $alerta = '<p class="msg_error">El ruc del cliente ya existe.</p>';
         } else {
-            $query_insert = mysqli_query($conexion, "INSERT INTO usuario(nombre,correo, usuario, clave, rol) 
-                VALUES ('$nombre','$email','$user','$pass','$rol')");
-
+            $query_insert = mysqli_query($conexion, "INSERT INTO cliente(ruc,nombre,telefono,direccion, usuario_id) 
+            values ('$ruc', '$nombre', '$telefono', '$direccion', '$usuario_id')");
             if ($query_insert) {
-                $alerta = '<p class="msg_save">Usuario guardado correctamente.</p>';
+                $alerta = '<p class="msg_save">Cliente guardado correctamente.</p>';
             } else {
-                $alerta = '<p class="msg_error">Erro al guardar usuario.</p>';
+                $alerta = '<p class="msg_error">Erro al guardar el cliente.</p>';
             }
         }
     }
@@ -109,7 +107,7 @@ if (!empty($_POST)) {
                                         <div class="form-group row">
                                             <label for="ruc" class="col-sm-2 col-form-label">RUC</label>
                                             <div class="col-sm-10">
-                                                <input type="number" name="ruc" id="ruc" placeholder="Ingrese el RUC del Cliente" class="form-control">
+                                                <input type="number" name="ruc" id="ruc" placeholder="Ingrese el RUC o C.I. del Cliente" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -125,12 +123,12 @@ if (!empty($_POST)) {
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="direcc" class="col-sm-2 col-form-label">Direccción</label>
+                                            <label for="direccion" class="col-sm-2 col-form-label">Direccción</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="direcc" id="direcc" placeholder="Ingrese la Dirección del Cliente" class="form-control">
+                                                <input type="text" name="direccion" id="direccion" placeholder="Ingrese la Dirección del Cliente" class="form-control">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
                                                 <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Cliente">

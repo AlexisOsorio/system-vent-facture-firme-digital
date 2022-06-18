@@ -32,9 +32,9 @@ if (!empty($_POST)) {
                 VALUES ('$nombre','$email','$user','$pass','$rol')");
 
             if ($query_insert) {
-                $alerta = '<p class="msg_save">Usuario guardado correctamente.</p>';
+                $alerta = '<p class="msg_save">Usuario creado correctamente.</p>';
             } else {
-                $alerta = '<p class="msg_error">Erro al guardar usuario.</p>';
+                $alerta = '<p class="msg_error">Erro al crear usuario.</p>';
             }
         }
     }

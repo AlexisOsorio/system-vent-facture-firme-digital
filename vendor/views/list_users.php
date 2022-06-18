@@ -67,10 +67,7 @@ include_once "../../config/conexion.php";
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
                                     <input type="submit" value="Buscar" class="btn btn-outline-info">
                                 </form>
-                                <!--form-- class="col-md-9 d-flex" action="search_user.php" method="get" class="form-horizontal">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario" aria-label="Search">
-                                    <input class="btn btn-outline-info" type="submit" value="Buscar">
-                                </!--form-->
+                                
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
                                         <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
