@@ -1,36 +1,34 @@
 <?php
 session_start();
-
 include_once "../../config/conexion.php";
+
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (empty($_POST['nombre']) || empty($_POST['telefono']) || empty($_POST['direcc'])) {
+    if (empty($_POST['nombre']) || empty($_POST['telefono']) || empty($_POST['direccion'])) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-        $idcliente = $_POST['idCliente'];
+        $idCliente = $_POST['id'];
         $ruc = $_POST['ruc'];
         $nombre = $_POST['nombre'];
-        $telf = $_POST['telefono'];
-        $direcc = $_POST['direcc'];
-        
+        $telefono = $_POST['telefono'];
+        $direccion = $_POST['direccion'];
 
-        $query = mysqli_query($conexion, "SELECT * FROM cliente 
-                                    WHERE (ruc = '$ruc' AND idcliente != $idcliente)");
-        $result = mysqli_fetch_array($query);
+        $result = 0;
+        if (is_numeric($ruc) and $ruc != 0) {
+            $query = mysqli_query($conexion, "SELECT * FROM cliente WHERE (ruc = '$ruc' AND idcliente = $idCliente)");
+            $result = mysqli_fetch_array($query);
+        }
 
         if ($result > 0) {
-            $alerta = '<p class="msg_error">El ruc del cliente ya existe.</p>';
+            $alerta = '<p class="msg_error">El ruc ya existe.</p>';
         } else {
-
-            if (empty($_POST['ruc'])) {
-                $query_update = mysqli_query($conexion, "UPDATE cliente SET nombre = '$nombre',
-                telefono = '$telf' ,direccion = '$direcc', ruc = '$ruc' WHERE idcliente = $idcliente ");
-            } else {
-                $query_update = mysqli_query($conexion, "UPDATE cliente SET nombre = '$nombre',
-                telefono = '$telf', direccion = '$direcc', ruc = '$ruc' WHERE idcliente = $idcliente ");
+            if ($ruc == ''){
+                $ruc = 0;
             }
+            $query_update = mysqli_query($conexion, "UPDATE cliente SET ruc = $ruc, nombre = '$nombre' , 
+            telefono = '$telefono', direccion = '$direccion' WHERE idcliente = $idCliente");
 
             if ($query_update) {
                 $alerta = '<p class="msg_save">Cliente editado correctamente.</p>';
@@ -44,31 +42,27 @@ if (!empty($_POST)) {
 //recuperacion y muestra de datos
 if (empty($_REQUEST['id'])) {
     header('Location: list_clients.php');
+    mysqli_close($conexion);
 }
+$idClient = $_GET['id'];
 
-$idUser = $_REQUEST['id'];
-
-$sql = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idUser");
-// consulta alternativa
-/*$sql= mysqli_query($conection,"SELECT u.idusuario, u.nombre,u.correo,u.usuario, (u.rol) as idrol, (r.rol) as rol
-									FROM usuario u
-									INNER JOIN rol r
-									on u.rol = r.idrol
-									WHERE idusuario= $idUser");*/
+$sql = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idClient");
+mysqli_close($conexion);
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
-    header('Location: list_clients.php');
+    header('Location: list_users.php');
+    mysqli_close($conexion);
 } else {
     //$option = '';
     while ($data = mysqli_fetch_array($sql)) {
         $idClient = $data['idcliente'];
         $ruc = $data['ruc'];
         $nombre = $data['nombre'];
-        $telf = $data['telefono'];
-        $direcc = $data['direccion'];
+        $telefono = $data['telefono'];
+        $direccion = $data['direccion'];        
     }
-}
+}  
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +71,7 @@ if ($result_sql == 0) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Cliente</title>
+    <title>Editar Usuarios</title>
 
     <?php
     include_once "../layouts/style.php"
@@ -93,10 +87,6 @@ if ($result_sql == 0) {
 
         .alerta p {
             padding: 10px;
-        }
-
-        .notItemOne option:first-child {
-            display: none;
         }
     </style>
 </head>
@@ -139,20 +129,20 @@ if ($result_sql == 0) {
                             </div>
                             <div class="card card-primary ">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Actualizar datos del Cliente</h3>
+                                    <h3 class="card-title text-center">Actualizar datos del Usuario</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
                                             <div class="col-sm-10">
-                                                <input type="hidden" name="idCliente" class="form-control" value="<?php echo $idClient; ?>">
+                                                <input type="hidden" name="id" class="form-control" value="<?php echo $idClient; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="ruc" class="col-sm-2 col-form-label">RUC</label>
                                             <div class="col-sm-10">
-                                                <input type="password" name="ruc" id="pass" placeholder="Ingrese el RUC o C.I. del Cliente" class="form-control">
+                                                <input type="number" name="ruc" id="ruc" placeholder="Ingrese el RUC o C.I. del Cliente" class="form-control" value="<?php echo $ruc; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -162,21 +152,21 @@ if ($result_sql == 0) {
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
+                                            <label for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
                                             <div class="col-sm-10">
-                                                <input type="email" name="telefono" id="telefono" placeholder="Ingrese el Telefono del Cliente" class="form-control" value="<?php echo $telf; ?>">
+                                                <input type="number" name="telefono" id="telefono" placeholder="Ingrese el Teléfono del Cliente" class="form-control" value="<?php echo $telefono; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="usuario" class="col-sm-2 col-form-label">Direccion</label>
+                                            <label for="direccion" class="col-sm-2 col-form-label">Direccción</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="usuario" id="usuario" placeholder="Ingrese el Usuario" class="form-control" value="<?php echo $direcc; ?>">
+                                                <input type="text" name="direccion" id="direccion" placeholder="Ingrese la Dirección del Cliente" class="form-control" value="<?php echo $direccion; ?>">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
-                                                <input type="submit" class="btn btn-block btn-outline-primary" value="Actualizar Usuario">
+                                                <input type="submit" class="btn btn-block btn-outline-success" value="Guardar Cliente">
                                             </div>
                                         </div>
                                     </form>

@@ -106,20 +106,25 @@ include_once "../../config/conexion.php";
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
+                                        if ($data['ruc'] == 0) {
+                                            $ruc = 'C/F';
+                                        }else {
+                                            $ruc = $data['ruc'];
+                                        }
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
                                                 <th scope="row"><?php echo $data['idcliente']; ?></th>
-                                                <td><?php echo $data['ruc']; ?></td>
+                                                <td><?php echo $ruc; ?></td>
                                                 <td><?php echo $data['nombre']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
                                                 <td>
-                                                    <a href="editar_clients.php" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
+                                                    <a href="editar_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
                                                     <?php
                                                     if ($data['idcliente'] != 1) {
                                                     ?>
-                                                        <a href="delete_clients.php" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                        <a href="delete_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
                                                     <?php
                                                     }
                                                     ?>

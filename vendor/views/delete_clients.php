@@ -75,7 +75,7 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
                     <div class="col-sm-6">
                         <ul class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../views/index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Eliminar Usuario</li>
+                            <li class="breadcrumb-item active">Eliminar Cliente</li>
                         </ul>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
                         <div class="col-md-4">
                             <div class="card card-danger">
                                 <div class="card-header">
-                                    <h3 class="card-title">Elimnar datos del Usuario</h3>
+                                    <h3 class="card-title">Elimnar datos del Cliente</h3>
                                 </div>
                                 <div class="card-body text-center">
                                     <h4><strong>¿Esta seguro que desea eliminar el registro?</strong></h4>
@@ -108,7 +108,7 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
                                             <input type="submit" class="btn btn-block bg-danger" value="Aceptar"></input>
                                         </form>
                                         <div class="offset-sm-6 col-md-2 float-right">
-                                            <button class="btn bg-secondary"><a href="list_users.php">Cancelar</a></button>
+                                            <button class="btn bg-secondary"><a href="list_clients.php">Cancelar</a></button>
                                         </div>
                                     </div>
                                 </div>

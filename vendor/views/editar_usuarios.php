@@ -12,7 +12,7 @@ if (!empty($_POST)) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-        $idUsuario = $_POST['idUsuario'];
+        $idUsuario = $_POST['id'];
         $nombre = $_POST['nombre'];
         $email = $_POST['correo'];
         $user = $_POST['usuario'];
@@ -23,7 +23,6 @@ if (!empty($_POST)) {
                                     WHERE (usuario = '$user' AND idusuario != $idUsuario)
                                     OR (correo = '$email' AND idusuario != $idUsuario)");
         $result = mysqli_fetch_array($query);
-
         if ($result > 0) {
             $alerta = '<p class="msg_error">El correo o usuario ya existe.</p>';
         } else {
@@ -151,7 +150,7 @@ if ($result_sql == 0) {
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
                                             <div class="col-sm-10">
-                                                <input type="hidden" name="idUsuario" class="form-control" value="<?php echo $idUser; ?>">
+                                                <input type="hidden" name="id" class="form-control" value="<?php echo $idUser; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
