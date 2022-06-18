@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-
-
-
 include_once "../../config/conexion.php";
 ?>
 
@@ -104,7 +101,7 @@ include_once "../../config/conexion.php";
                                 $desde_pg = ($pag - 1) * $pag_num;
                                 $total_pg = ceil($registros_totales / $pag_num);
 
-                                $query = mysqli_query($conexion, "SELECT * FROM cliente c 
+                                $query = mysqli_query($conexion, "SELECT * FROM cliente 
                                     WHERE estatus = 1 ORDER BY idcliente ASC LIMIT $desde_pg,$pag_num ");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
@@ -119,9 +116,13 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['direccion']; ?></td>
                                                 <td>
                                                     <a href="editar_clients.php" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
-
-                                                    <a href="delete_clients.php" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
-
+                                                    <?php
+                                                    if ($data['idcliente'] != 1) {
+                                                    ?>
+                                                        <a href="delete_clients.php" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </td>
                                             </tr>
 
