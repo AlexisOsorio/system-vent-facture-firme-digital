@@ -101,7 +101,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../views/registro_proveedor.php" class="nav-link">
                             <i class="nav-icon fas fa-truck-medical"></i>
                                 <p>Nuevo Proveedor</p>
                             </a>
@@ -109,7 +109,7 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../views/list_proveedor" class="nav-link">
                                 <i class="fas fa-rectangle-list nav-icon"></i>
                                 <p>Lista Proveedores</p>
                             </a>
