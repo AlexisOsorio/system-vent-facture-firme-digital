@@ -44,7 +44,8 @@ if (empty($_SESSION['active'])) {
                 <p style="padding: 7px;"><b>La Maná, <?php echo fechaC(); ?> </b></p>
             </li>
             <li class="nav-item">
-                <a href="../core/leave.php" class="btn bg-danger text-center"><b>Cerrar Sesion</b></a>
+
+                <a href="../core/leave.php" class="btn bg-danger text-center"><b>Cerrar Sesion <i class="fa-solid fa-right-from-bracket"></i></b></a>
             </li>
         </ul>
     </nav>
