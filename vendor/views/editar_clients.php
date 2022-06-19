@@ -17,11 +17,11 @@ if (!empty($_POST)) {
 
         $result = 0;
         if (is_numeric($ruc) and $ruc != 0) {
-            $query = mysqli_query($conexion, "SELECT * FROM cliente WHERE (ruc = '$ruc' AND idcliente = $idCliente)");
+            $query = mysqli_query($conexion, "SELECT * FROM cliente WHERE (ruc = '$ruc' AND idcliente != $idCliente)");
             $result = mysqli_fetch_array($query);
         }
 
-        if ($result > 0) {
+        if ($result >= 1) {
             $alerta = '<p class="msg_error">El ruc ya existe.</p>';
         } else {
             if ($ruc == ''){

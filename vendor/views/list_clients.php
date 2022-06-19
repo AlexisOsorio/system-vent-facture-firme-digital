@@ -108,7 +108,7 @@ include_once "../../config/conexion.php";
                                     while ($data = mysqli_fetch_array($query)) {
                                         if ($data['ruc'] == 0) {
                                             $ruc = 'C/F';
-                                        }else {
+                                        } else {
                                             $ruc = $data['ruc'];
                                         }
                                 ?>
@@ -122,10 +122,12 @@ include_once "../../config/conexion.php";
                                                 <td>
                                                     <a href="editar_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
                                                     <?php
-                                                    if ($data['idcliente'] != 1) {
+                                                    if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                                        if ($data['idcliente'] != 1) {
                                                     ?>
-                                                        <a href="delete_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                            <a href="delete_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
                                                     <?php
+                                                        }
                                                     }
                                                     ?>
                                                 </td>
