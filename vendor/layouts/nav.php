@@ -29,7 +29,7 @@
                 <li class="nav-header">PAGINA PRINCIPAL</li>
                 <li class="nav-item">
                     <a href="../views/index.php" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-house"></i>
                         <p>
                             Dashboard
                         </p>
@@ -102,6 +102,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-truck-medical"></i>
                                 <p>Nuevo Proveedor</p>
                             </a>
                         </li>
@@ -109,6 +110,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                                <i class="fas fa-rectangle-list nav-icon"></i>
                                 <p>Lista Proveedores</p>
                             </a>
                         </li>
@@ -116,7 +118,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cart-shopping"></i>
+                        <i class="nav-icon fas fa-cubes"></i>
                         <p>
                             Productos
                             <i class="right fas fa-angle-left"></i>
@@ -125,6 +127,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-cart-plus"></i>
                                 <p>Nuevo Producto</p>
                             </a>
                         </li>
@@ -132,6 +135,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                                <i class="fas fa-rectangle-list nav-icon"></i>
                                 <p>Lista Productos</p>
                             </a>
                         </li>
@@ -148,6 +152,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-file-circle-plus"></i>
                                 <p>Nuevo Factura</p>
                             </a>
                         </li>
@@ -155,6 +160,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
+                                <i class="fas fa-rectangle-list nav-icon"></i>
                                 <p>Lista Facturas</p>
                             </a>
                         </li>

@@ -24,7 +24,7 @@ if (!empty($_POST)) {
         if ($result >= 1) {
             $alerta = '<p class="msg_error">La cedula ya existe.</p>';
         } else {
-            if ($ruc == ''){
+            if ($ruc == '') {
                 $ruc = 0;
             }
             $query_update = mysqli_query($conexion, "UPDATE cliente SET ruc = $ruc, nombre = '$nombre' , 
@@ -60,9 +60,9 @@ if ($result_sql == 0) {
         $ruc = $data['ruc'];
         $nombre = $data['nombre'];
         $telefono = $data['telefono'];
-        $direccion = $data['direccion'];        
+        $direccion = $data['direccion'];
     }
-}  
+}
 ?>
 
 <!DOCTYPE html>
@@ -122,7 +122,7 @@ if ($result_sql == 0) {
                             <div class="col-md-12" style="padding-bottom: 5px;">
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
-                                        <a class="btn btn-block bg-danger" href="../views/list_clients.php">Regresar</a>
+                                        <a class="btn btn-block bg-danger" href="../views/list_clients.php"> <i class="nav-icon fas fa-ban"></i> Regresar</a>
                                     </li>
                                 </ul>
 

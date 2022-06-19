@@ -71,12 +71,12 @@ include_once "../../config/conexion.php";
                             <div class="form-group row">
                                 <form action="search_user.php" method="get" class=" col-sm-9 d-flex">
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Usuario">
-                                    <input type="submit" value="Buscar" class="btn btn-outline-info" value="<?php echo $search_u; ?>">
+                                    <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search" value="<?php echo $search_u; ?>"></i></button>
                                 </form>
 
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
-                                        <a href="../views/registro_users.php" class=" btn bg-primary">Crear Usuario</a>
+                                        <a href="../views/registro_users.php" class=" btn bg-primary"><i class="nav-icon fas fa-user-plus"></i>Crear Usuario</a>
                                     </li>
                                 </ul>
                             </div>
