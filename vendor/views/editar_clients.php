@@ -22,7 +22,7 @@ if (!empty($_POST)) {
         }
 
         if ($result >= 1) {
-            $alerta = '<p class="msg_error">El ruc ya existe.</p>';
+            $alerta = '<p class="msg_error">La cedula ya existe.</p>';
         } else {
             if ($ruc == ''){
                 $ruc = 0;
@@ -140,9 +140,9 @@ if ($result_sql == 0) {
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="ruc" class="col-sm-2 col-form-label">RUC</label>
+                                            <label for="ruc" class="col-sm-2 col-form-label">Cedula</label>
                                             <div class="col-sm-10">
-                                                <input type="number" name="ruc" id="ruc" placeholder="Ingrese el RUC o C.I. del Cliente" class="form-control" value="<?php echo $ruc; ?>">
+                                                <input type="number" name="ruc" id="ruc" placeholder="Ingrese la Cedula del Cliente" class="form-control" value="<?php echo $ruc; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">

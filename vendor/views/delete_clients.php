@@ -4,7 +4,7 @@ session_start();
 include_once '../../config/conexion.php';
 
 if (!empty($_POST)) {
-    if ($_POST['idclientD'] == 1) {
+    if ($_POST['idclientD']) {
         header('Location: list_clients.php');
         mysqli_close($conexion);
         exit;
@@ -22,7 +22,7 @@ if (!empty($_POST)) {
     }
 }
 
-if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
+if (empty($_REQUEST['id'])) {
     header('Location: list_clients.php');
     mysqli_close($conexion);
 } else {
@@ -38,8 +38,6 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
         while ($data = mysqli_fetch_array($query)) {
             $ruc = $data['ruc'];
             $nombre = $data['nombre'];
-            $telefono = $data['telefono'];
-            $direccion = $data['direccion'];
         }
     } else {
         header('Location: list_clients.php');
@@ -97,10 +95,8 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
                                 </div>
                                 <div class="card-body text-center">
                                     <h4><strong>¿Esta seguro que desea eliminar el registro?</strong></h4>
-                                    <p><b>Ruc o CI:</b><span class="badge bg-dark"> <?php echo $ruc ?></span></p>
+                                    <p><b>Cedula:</b><span class="badge bg-dark"> <?php echo $ruc ?></span></p>
                                     <p><b>Nombre:</b><span class="badge bg-dark"> <?php echo $nombre ?></span></p>
-                                    <p><b>Teléfono:</b><span class="badge bg-dark"> <?php echo $telefono ?></span></p>
-                                    <p><b>Dirección:</b><span class="badge bg-dark"> <?php echo $direccion ?></span></p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="form-group row">

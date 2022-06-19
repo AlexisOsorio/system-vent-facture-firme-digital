@@ -76,7 +76,7 @@ include_once "../../config/conexion.php";
                                 <thead class="bg-info thead-inverse">
                                     <tr class="text-center">
                                         <th scope="col-sm-2">ID</th>
-                                        <th scope="col-sm-2">RUC</th>
+                                        <th scope="col-sm-2">CEDULA</th>
                                         <th scope="col-sm-2">NOMBRE</th>
                                         <th scope="col-sm-2">TELÉFONO</th>
                                         <th scope="col-sm-2">DIRECCIÓN</th>
