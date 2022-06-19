@@ -108,9 +108,9 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
                                     <div class="form-group row">
                                         <form action="" class="form-horizontal" method="POST">
                                             <input type="hidden" name="iduserD" value="<?php echo $iduserD ?>">
-                                            <input type="submit" class="btn btn-block bg-danger" value="Aceptar"></input>
+                                            <button type="submit" class="btn btn-block bg-danger "><i class="nav-icon fas fa-trash"></i> Eliminar</button>
                                         </form>
-                                        <div class="offset-sm-6 col-md-2 float-right">
+                                        <div class="offset-sm-5 col-md-2 float-right">
                                             <button class="btn bg-secondary"><a href="list_users.php">Cancelar</a></button>
                                         </div>
                                     </div>
