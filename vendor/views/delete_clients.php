@@ -102,7 +102,7 @@ if (empty($_REQUEST['id'])) {
                                     <div class="form-group row">
                                         <form action="" class="form-horizontal" method="POST">
                                             <input type="hidden" name="idclientD" value="<?php echo $idclientD ?>">
-                                            <input type="submit" class="btn btn-block bg-danger" value="Aceptar"></input>
+                                            <input type="submit" class="btn btn-block bg-danger " value="Aceptar"></input>
                                         </form>
                                         <div class="offset-sm-6 col-md-2 float-right">
                                             <button class="btn bg-secondary"><a href="list_clients.php">Cancelar</a></button>

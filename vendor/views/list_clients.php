@@ -66,7 +66,10 @@ include_once "../../config/conexion.php";
 
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
-                                        <a href="../views/registro_clients.php" class=" btn bg-primary">Nuevo Ciente</a>
+                                        <a href="../views/registro_clients.php" class=" btn bg-primary">
+                                            <i class="nav-icon fas fa-user-plus"></i>
+                                            Nuevo Ciente
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
