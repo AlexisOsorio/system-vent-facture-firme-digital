@@ -137,8 +137,15 @@ include_once "../../config/conexion.php";
                                                 <td>
                                                     <a href="editar_clients.php?id=<?php echo $data['idcliente']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
 
-                                                    <a href="delete_clients.php?id=<?php echo $data['idcliente']; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
-
+                                                    <?php
+                                                    if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                                        if ($data['idcliente'] != 1) {
+                                                    ?>
+                                                            <a href="delete_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </td>
                                             </tr>
 
