@@ -29,9 +29,9 @@
                 <li class="nav-header">PAGINA PRINCIPAL</li>
                 <li class="nav-item">
                     <a href="../views/index.php" class="nav-link">
-                        <i class="nav-icon fas fa-house"></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Inicio
+                            Dashboard
                         </p>
                     </a>
                 </li>
@@ -49,6 +49,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="../views/registro_users.php" class="nav-link">
+                                    <i class="fas fa-user-plus nav-icon"></i>
                                     <p>Nuevo Usuario</p>
                                 </a>
                             </li>
@@ -56,6 +57,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="../views/list_users.php" class="nav-link">
+                                    <i class="fas fa-rectangle-list nav-icon"></i>
                                     <p>Lista Usuario</p>
                                 </a>
                             </li>
@@ -75,6 +77,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="../views/registro_clients.php" class="nav-link">
+                                <i class="fas fa-user-plus nav-icon"></i>
                                 <p>Nuevo Cliente</p>
                             </a>
                         </li>
@@ -82,6 +85,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="../views/list_clients.php" class="nav-link">
+                                <i class="fas fa-rectangle-list nav-icon"></i>
                                 <p>Lista Clientes</p>
                             </a>
                         </li>
