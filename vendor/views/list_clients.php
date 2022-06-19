@@ -152,11 +152,11 @@ include_once "../../config/conexion.php";
 
                                         ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo 1; ?>">Inicio</a>
+                                                <a class="page-link" href="?pagina=<?php echo 1; ?>"><i class="nav-icon fas fa-backward-step"></i></a>
                                             </li>
                                             <li class="page-item">
                                                 <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span aria-hidden="true"><i class="nav-icon fas fa-backward-fast"></i></span>
                                                 </a>
                                             </li>
                                         <?php
@@ -177,11 +177,11 @@ include_once "../../config/conexion.php";
                                         ?>
                                             <li class="page-item">
                                                 <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span aria-hidden="true"><i class="nav-icon fas fa-forward-fast"></i></span>
                                                 </a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $total_pg; ?>">Fin</a>
+                                                <a class="page-link" href="?pagina=<?php echo $total_pg; ?>"><i class="nav-icon fas fa-forward-step"></i></a>
                                             </li>
 
                                         <?php
