@@ -132,7 +132,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../views/registro_stock.php" class="nav-link">
                                 <i class="nav-icon fas fa-cart-plus"></i>
                                 <p>Nuevo Producto</p>
                             </a>
@@ -140,7 +140,7 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../views/list_stock.php" class="nav-link">
                                 <i class="fas fa-rectangle-list nav-icon"></i>
                                 <p>Lista Productos</p>
                             </a>
