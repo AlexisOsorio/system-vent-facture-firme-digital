@@ -105,7 +105,7 @@ if (!empty($_POST)) {
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
-                                            <label for="ruc" class="col-sm-2 col-form-label">RUC</label>
+                                            <label for="ruc" class="col-sm-2 col-form-label">Cedula</label>
                                             <div class="col-sm-10">
                                                 <input type="number" name="ruc" id="ruc" placeholder="Ingrese el RUC o C.I. del Cliente" class="form-control">
                                             </div>
