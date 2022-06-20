@@ -10,7 +10,7 @@ include_once "../../config/conexion.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de usuarios</title>
+    <title>Lista de Clientes</title>
 
     <?php
     include_once "../layouts/style.php"
