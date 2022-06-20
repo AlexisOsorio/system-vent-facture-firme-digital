@@ -99,7 +99,7 @@ if (empty($_REQUEST['id'])) {
                                 </div>
                                 <div class="card-body text-center">
                                     <h4><strong>¿Esta seguro que desea eliminar el registro?</strong></h4>
-                                    <p><b>Proveedor:</b><span class="badge bg-dark"> <?php echo $proveedor ?></span></p>
+                                    <p><b>Nombre del Proveedor:</b><span class="badge bg-dark"> <?php echo $proveedor ?></span></p>
                                     <p><b>Contacto:</b><span class="badge bg-dark"> <?php echo $contacto ?></span></p>
                                     <p><b>Dirección:</b><span class="badge bg-dark"> <?php echo $direccion ?></span></p>
                                 </div>
