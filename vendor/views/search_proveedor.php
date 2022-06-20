@@ -135,12 +135,12 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
                                                 <td>
-                                                    <a href="editar_clients.php?id=<?php echo $data['codproveedor']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
+                                                    <a href="editar_proveedores.php?id=<?php echo $data['codproveedor']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
 
                                                     <?php
                                                     if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                                                     ?>
-                                                        <a href="delete_clients.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                        <a href="delete_proveedores.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
                                                     <?php
                                                     }
                                                     ?>
