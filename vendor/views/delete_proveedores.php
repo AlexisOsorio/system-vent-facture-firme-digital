@@ -4,43 +4,44 @@ session_start();
 include_once '../../config/conexion.php';
 
 if (!empty($_POST)) {
-    if ($_POST['idclientD']) {
-        header('Location: list_clients.php');
+    if ($_POST['idproveedorD']) {
+        header('Location: list_proveedor.php');
         mysqli_close($conexion);
         exit;
     }
-    $idclientD = $_POST['idclientD'];
+    $idproveedorD = $_POST['idproveedorD'];
 
 
     //$query_D = mysqli_query($conexion, "DELETE FROM usuario WHERE idusuario = $iduserD");
-    $query_D = mysqli_query($conexion, "UPDATE cliente SET estatus = 0 WHERE idcliente = $idclientD");
+    $query_D = mysqli_query($conexion, "UPDATE proveedor SET estatus = 0 WHERE codproveedor = $idproveedorD");
     mysqli_close($conexion);
     if ($query_D) {
-        header('Location: list_clients.php');
+        header('Location: list_proveedor.php');
     } else {
         echo 'Error al eliminar Cliente';
     }
 }
 
 if (empty($_REQUEST['id'])) {
-    header('Location: list_clients.php');
+    header('Location: list_proveedor.php');
     mysqli_close($conexion);
 } else {
 
 
-    $idclientD = $_REQUEST['id'];
+    $idproveedorD = $_REQUEST['id'];
 
-    $query = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idclientD");
+    $query = mysqli_query($conexion, "SELECT * FROM proveedor WHERE codproveedor = $idproveedorD");
     mysqli_close($conexion);
     $result = mysqli_num_rows($query);
 
     if ($result > 0) {
         while ($data = mysqli_fetch_array($query)) {
-            $ruc = $data['ruc'];
-            $nombre = $data['nombre'];
+            $proveedor = $data['proveedor'];
+            $contacto = $data['contacto'];
+            $direccion = $data['direccion'];
         }
     } else {
-        header('Location: list_clients.php');
+        header('Location: list_proveedor.php');
     }
 }
 
@@ -51,7 +52,7 @@ if (empty($_REQUEST['id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Eliminar Cliente</title>
+    <title>Eliminar Proveedor</title>
 
     <?php
     include_once "../layouts/style.php"
@@ -73,7 +74,7 @@ if (empty($_REQUEST['id'])) {
                     <div class="col-sm-6">
                         <ul class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../views/index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Eliminar Cliente</li>
+                            <li class="breadcrumb-item active">Eliminar Proveedor</li>
                         </ul>
                     </div>
                 </div>
@@ -91,21 +92,22 @@ if (empty($_REQUEST['id'])) {
                         <div class="col-md-4">
                             <div class="card card-danger">
                                 <div class="card-header">
-                                    <h3 class="card-title">Elimnar datos del Cliente</h3>
+                                    <h3 class="card-title">Elimnar datos del Proveedor</h3>
                                 </div>
                                 <div class="card-body text-center">
                                     <h4><strong>¿Esta seguro que desea eliminar el registro?</strong></h4>
-                                    <p><b>Cedula:</b><span class="badge bg-dark"> <?php echo $ruc ?></span></p>
-                                    <p><b>Nombre:</b><span class="badge bg-dark"> <?php echo $nombre ?></span></p>
+                                    <p><b>Proveedor:</b><span class="badge bg-dark"> <?php echo $proveedor ?></span></p>
+                                    <p><b>Contacto:</b><span class="badge bg-dark"> <?php echo $contacto ?></span></p>
+                                    <p><b>Dirección:</b><span class="badge bg-dark"> <?php echo $direccion ?></span></p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="form-group row">
                                         <form action="" class="form-horizontal" method="POST">
-                                            <input type="hidden" name="idclientD" value="<?php echo $idclientD ?>">
+                                            <input type="hidden" name="idproveedorD" value="<?php echo $idproveedorD ?>">
                                             <button type="submit" class="btn btn-block bg-danger "><i class="nav-icon fas fa-trash"></i> Eliminar</button>
                                         </form>
                                         <div class="offset-sm-5 col-md-2 float-right">
-                                            <a href="list_clientstrash.php" class="btn bg-secondary">Cancelar</a>
+                                            <a href="list_proveedor.php" class="btn bg-secondary">Cancelar</a>
                                         </div>
                                     </div>
                                 </div>
