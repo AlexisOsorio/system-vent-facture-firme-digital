@@ -82,8 +82,8 @@ include_once "../../config/conexion.php";
                                 <thead class="bg-info thead-inverse">
                                     <tr class="text-center">
                                         <th scope="col-sm-2">ID</th>
-                                        <th scope="col-sm-2">CEDULA</th>
-                                        <th scope="col-sm-2">NOMBRE</th>
+                                        <th scope="col-sm-2">PROVEEDOR</th>
+                                        <th scope="col-sm-2">CONTACTO</th>
                                         <th scope="col-sm-2">TELÉFONO</th>
                                         <th scope="col-sm-2">DIRECCIÓN</th>
                                         <th scope="col-sm-2">ACCIONES</th>
@@ -92,7 +92,7 @@ include_once "../../config/conexion.php";
                                 <?php
 
                                 //paginador
-                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM cliente WHERE estatus = 1");
+                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM proveedor WHERE estatus = 1");
                                 $result_reg = mysqli_fetch_array($sql_reg);
                                 $registros_totales = $result_reg['registros_totales'];
 
@@ -107,33 +107,27 @@ include_once "../../config/conexion.php";
                                 $desde_pg = ($pag - 1) * $pag_num;
                                 $total_pg = ceil($registros_totales / $pag_num);
 
-                                $query = mysqli_query($conexion, "SELECT * FROM cliente 
-                                    WHERE estatus = 1 ORDER BY idcliente ASC LIMIT $desde_pg,$pag_num ");
+                                $query = mysqli_query($conexion, "SELECT * FROM proveedor 
+                                    WHERE estatus = 1 ORDER BY codproveedor ASC LIMIT $desde_pg,$pag_num ");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
-                                        if ($data['ruc'] == 0) {
-                                            $ruc = 'C/F';
-                                        } else {
-                                            $ruc = $data['ruc'];
-                                        }
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
-                                                <th scope="row"><?php echo $data['idcliente']; ?></th>
-                                                <td><?php echo $ruc; ?></td>
-                                                <td><?php echo $data['nombre']; ?></td>
+                                                <th scope="row"><?php echo $data['codproveedor']; ?></th>
+                                                <td><?php echo $data['proveedor']; ?></td>
+                                                <td><?php echo $data['contacto']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
                                                 <td>
-                                                    <a href="editar_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
+                                                    <a href="editar_clients.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Proveedor</a>
                                                     <?php
                                                     if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
-                                                        if ($data['idcliente'] != 1) {
                                                     ?>
-                                                            <a href="delete_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                        <a href="delete_clients.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Proveedor</a>
                                                     <?php
-                                                        }
+
                                                     }
                                                     ?>
                                                 </td>
