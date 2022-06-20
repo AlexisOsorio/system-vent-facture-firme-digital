@@ -1,37 +1,34 @@
 <?php
 session_start();
+if ($_SESSION['rol'] != 1 and $_SESSION['rol'] != 2) {
+    header("Location: ../views/index.php");
+}
 
 include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (empty($_POST['nombre']) || empty($_POST['telefono']) || empty($_POST['direccion'])) {
+    if (empty($_POST['proveedor']) || empty($_POST['contacto']) || empty($_POST['telefono']) || empty($_POST['direccion'])) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-        $ruc = $_POST['ruc'];
-        $nombre = $_POST['nombre'];
+        $proveedor = $_POST['proveedor'];
+        $contacto = $_POST['contacto'];
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
         $usuario_id = $_SESSION['idUser'];
 
-        $result = 0;
-        if (is_numeric($ruc) and $ruc != 0) {
-            $query = mysqli_query($conexion, "SELECT * FROM cliente where ruc = '$ruc'");
-            $result = mysqli_fetch_array($query);
-        }
-        if ($result > 0) {
-            $alerta = '<p class="msg_error">El ruc del cliente ya existe.</p>';
+
+        $query_insert = mysqli_query($conexion, "INSERT INTO proveedor(proveedor,contacto,telefono,direccion, usuario_id) 
+            values ('$proveedor', '$contacto', '$telefono', '$direccion', '$usuario_id')");
+        
+        if ($query_insert) {
+            $alerta = '<p class="msg_save">Proveedor guardado correctamente.</p>';
         } else {
-            $query_insert = mysqli_query($conexion, "INSERT INTO cliente(ruc,nombre,telefono,direccion, usuario_id) 
-            values ('$ruc', '$nombre', '$telefono', '$direccion', '$usuario_id')");
-            if ($query_insert) {
-                $alerta = '<p class="msg_save">Cliente guardado correctamente.</p>';
-            } else {
-                $alerta = '<p class="msg_error">Erro al guardar el cliente.</p>';
-            }
+            $alerta = '<p class="msg_error">Erro al guardar el proveedor.</p>';
         }
     }
+    mysqli_close($conexion);
 }
 ?>
 
@@ -41,7 +38,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registrar Clientes</title>
+    <title>Registrar Proveedores</title>
 
     <?php
     include_once "../layouts/style.php"
@@ -71,12 +68,12 @@ if (!empty($_POST)) {
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h2><b>Clientes</b></h2>
+                        <h2><b>Proveedores</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="./index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Registrar Clientes</li>
+                            <li class="breadcrumb-item active">Registrar Proveedores</li>
                         </ol>
                     </div>
                 </div>
@@ -105,33 +102,33 @@ if (!empty($_POST)) {
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST">
                                         <div class="form-group row">
-                                            <label for="nombre" class="col-sm-2 col-form-label">Nombre del Proveedor</label>
+                                            <label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="nombre" id="nombre" placeholder="Ingrese el Nombre del Proveedor" class="form-control">
+                                                <input type="text" name="proveedor" id="proveedor" placeholder="Nombre del Proveedor" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="contacto" class="col-sm-2 col-form-label">Contacto</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="contacto" id="contacto" placeholder="Nombre Completo del Cliente" class="form-control">
+                                                <input type="text" name="contacto" id="contacto" placeholder="Nombre completo del Contacto" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
                                             <div class="col-sm-10">
-                                                <input type="number" name="telefono" id="telefono" placeholder="Ingrese el Teléfono del Cliente" class="form-control">
+                                                <input type="number" name="telefono" id="telefono" placeholder="Celular del Proveedor" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="direccion" class="col-sm-2 col-form-label">Direccción</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="direccion" id="direccion" placeholder="Ingrese la Dirección del Cliente" class="form-control">
+                                                <input type="text" name="direccion" id="direccion" placeholder="Dirección del Proveedor" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
-                                                <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Cliente">
+                                                <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Proveedor">
                                             </div>
                                         </div>
                                     </form>
