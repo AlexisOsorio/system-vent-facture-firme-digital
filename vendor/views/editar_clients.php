@@ -71,7 +71,7 @@ if ($result_sql == 0) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Usuarios</title>
+    <title>Editar Clientes</title>
 
     <?php
     include_once "../layouts/style.php"
