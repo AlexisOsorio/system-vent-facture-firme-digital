@@ -63,7 +63,7 @@ include_once "../../config/conexion.php";
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
                                 <form action="search_proveedor.php" method="get" class=" col-sm-9 d-flex">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Cliente">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Proveedor">
                                     <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search"></i></button>
                                 </form>
 
