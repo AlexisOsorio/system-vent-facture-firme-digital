@@ -51,7 +51,7 @@ mysqli_close($conexion);
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
-    header('Location: list_users.php');
+    header('Location: list_clients.php');
     mysqli_close($conexion);
 } else {
     //$option = '';
@@ -129,7 +129,7 @@ if ($result_sql == 0) {
                             </div>
                             <div class="card card-primary ">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Actualizar datos del Usuario</h3>
+                                    <h3 class="card-title text-center">Actualizar datos del Cliente</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
@@ -166,7 +166,7 @@ if ($result_sql == 0) {
 
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
-                                                <input type="submit" class="btn btn-block btn-outline-success" value="Guardar Cliente">
+                                                <input type="submit" class="btn btn-block btn-outline-primary" value="Guardar Cliente">
                                             </div>
                                         </div>
                                     </form>

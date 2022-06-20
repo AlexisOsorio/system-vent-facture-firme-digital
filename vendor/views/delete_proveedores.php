@@ -1,5 +1,8 @@
 <?php
 session_start();
+if ($_SESSION['rol'] != 1 and $_SESSION['rol'] != 2) {
+    header("Location: ../views/index.php");
+}
 
 include_once '../../config/conexion.php';
 

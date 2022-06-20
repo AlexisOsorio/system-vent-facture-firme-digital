@@ -136,7 +136,7 @@ if ($result_sql == 0) {
                             <div class="col-md-12" style="padding-bottom: 5px;">
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
-                                        <a class="btn btn-block bg-danger" href="../views/list_users.php">Regresar</a>
+                                        <a class="btn btn-block bg-danger" href="../views/list_users.php"><i class="nav-icon fas fa-ban"></i> Regresar</a>
                                     </li>
                                 </ul>
 

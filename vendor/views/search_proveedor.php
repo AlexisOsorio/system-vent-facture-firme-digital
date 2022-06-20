@@ -1,5 +1,8 @@
 <?php
 session_start();
+if ($_SESSION['rol'] != 1 and $_SESSION['rol'] != 2) {
+    header("Location: ../views/index.php");
+}
 
 include_once "../../config/conexion.php";
 ?>
@@ -91,6 +94,7 @@ include_once "../../config/conexion.php";
                                         <th scope="col-sm-2">CONTACTO</th>
                                         <th scope="col-sm-2">TELÉFONO</th>
                                         <th scope="col-sm-2">DIRECCIÓN</th>
+                                        <th scope="col-sm-2">FECHA</th>
                                         <th scope="col-sm-2">ACCIONES</th>
                                     </tr>
                                 </thead>
@@ -98,7 +102,7 @@ include_once "../../config/conexion.php";
 
                                 //buscador
                                 $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM proveedor WHERE (codproveedor LIKE '%$search_u%' 
-                                            OR proveedor LIKE '%$search_u%' OR contacto LIKE '%$search_u%' OR telefono LIKE '%$search_u%' OR direccion LIKE '%$search_u%') 
+                                            OR proveedor LIKE '%$search_u%' OR contacto LIKE '%$search_u%' OR telefono LIKE '%$search_u%' OR direccion LIKE '%$search_u%' OR date_add LIKE '%$search_u%') 
                                             AND estatus = 1");
 
 
@@ -120,12 +124,14 @@ include_once "../../config/conexion.php";
 
                                                                     WHERE (codproveedor LIKE '%$search_u%' OR proveedor LIKE '%$search_u%' OR contacto LIKE '%$search_u%' OR telefono LIKE '%$search_u%' 
                             
-                                                                    OR direccion LIKE '%$search_u%') AND estatus = 1 ORDER BY codproveedor ASC LIMIT $desde_pg,$pag_num");
+                                                                    OR direccion LIKE '%$search_u%' OR date_add LIKE '%$search_u%') AND estatus = 1 ORDER BY codproveedor ASC LIMIT $desde_pg,$pag_num");
 
                                 $result = mysqli_num_rows($query);
 
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
+                                        $formato = 'Y-m-d H:i:s';
+                                        $fecha = DateTime::createFromFormat($formato, $data['date_add']);
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
@@ -134,16 +140,13 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['contacto']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
+                                                <td><?php echo $fecha->format('d-m-Y'); ?></td>
                                                 <td>
-                                                    <a href="editar_proveedores.php?id=<?php echo $data['codproveedor']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
+                                                    <a href="editar_proveedores.php?id=<?php echo $data['codproveedor']; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar </a>
 
-                                                    <?php
-                                                    if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
-                                                    ?>
-                                                        <a href="delete_proveedores.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
-                                                    <?php
-                                                    }
-                                                    ?>
+
+                                                    <a href="delete_proveedores.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar </a>
+
                                                 </td>
                                             </tr>
 
