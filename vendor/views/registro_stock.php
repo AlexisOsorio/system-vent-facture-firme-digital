@@ -21,7 +21,7 @@ if (!empty($_POST)) {
 
         $query_insert = mysqli_query($conexion, "INSERT INTO proveedor(proveedor,contacto,telefono,direccion, usuario_id) 
             values ('$proveedor', '$contacto', '$telefono', '$direccion', '$usuario_id')");
-        
+
         if ($query_insert) {
             $alerta = '<p class="msg_save">Proveedor guardado correctamente.</p>';
         } else {
@@ -89,7 +89,7 @@ if (!empty($_POST)) {
                             <div class="col-md-12" style="padding-bottom: 5px;">
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
-                                        <a class="btn btn-block bg-danger" href="../views/list_stock.php">Regresar</a>
+                                        <a class="btn btn-block bg-danger" href="../views/list_stock.php"><i class="nav-icon fas fa-circle-arrow-left"></i> Regresar</a>
                                     </li>
                                 </ul>
 
@@ -100,7 +100,7 @@ if (!empty($_POST)) {
                                 </div>
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
-                                    <form action="" class="form-horizontal" method="POST">
+                                    <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
                                             <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
                                             <div class="col-sm-10">
@@ -109,8 +109,11 @@ if (!empty($_POST)) {
                                         </div>
                                         <div class="form-group row">
                                             <label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="proveedor" id="proveedor" placeholder="Nombre completo del Contacto" class="form-control">
+                                            <div class="col-sm-6">
+                                                <select name="proveedor" id="proveedor" class="form-control">
+                                                    <option value="1">Select</option>
+                                                    <option value="2">Marco Hinojosa</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
