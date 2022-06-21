@@ -51,7 +51,7 @@ if (empty($_REQUEST['id'])) {
 
 $idUser = $_REQUEST['id'];
 
-$sql = mysqli_query($conexion, "SELECT * FROM usuario WHERE idusuario = $idUser");
+$sql = mysqli_query($conexion, "SELECT * FROM usuario WHERE idusuario = $idUser AND estatus = 1");
 // consulta alternativa
 /*$sql= mysqli_query($conection,"SELECT u.idusuario, u.nombre,u.correo,u.usuario, (u.rol) as idrol, (r.rol) as rol
 									FROM usuario u
