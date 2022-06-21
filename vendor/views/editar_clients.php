@@ -46,7 +46,7 @@ if (empty($_REQUEST['id'])) {
 }
 $idClient = $_GET['id'];
 
-$sql = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idClient");
+$sql = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente = $idClient AND estatus = 1");
 mysqli_close($conexion);
 $result_sql = mysqli_num_rows($sql);
 
