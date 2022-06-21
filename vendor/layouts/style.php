@@ -8,3 +8,5 @@
 <link rel="stylesheet" href="../utils/css/adminlte.min.css">
 <!--Jquery-->
 <script type="text/javascript" src="../utils/js/jquery.min.js"></script>
+<!--Icono del Sistema-->
+<link rel="icon"  href="../utils/img/icon_page.png">
