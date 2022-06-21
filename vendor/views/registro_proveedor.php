@@ -128,7 +128,7 @@ if (!empty($_POST)) {
 
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
-                                                <input type="submit" class="btn btn-block btn-outline-primary" value="Registrar Proveedor">
+                                                <input type="submit" class="btn btn-block btn-outline-success" value="Registrar Proveedor">
                                             </div>
                                         </div>
                                     </form>
