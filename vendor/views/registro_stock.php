@@ -8,8 +8,10 @@ include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (empty($_POST['descripcion']) || empty($_POST['proveedor']) || empty($_POST['precio']) || $_POST['precio'] <= 0
-        || empty($_POST['stock']) || $_POST['stock'] <= 0){
+    if (
+        empty($_POST['descripcion']) || empty($_POST['proveedor']) || empty($_POST['precio']) || $_POST['precio'] <= 0
+        || empty($_POST['stock']) || $_POST['stock'] <= 0
+    ) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
@@ -32,17 +34,25 @@ if (!empty($_POST)) {
             $imgProd = $img_nombre . '.jpg';
             $src = $destino . $imgProd;
         }
- 
-        $query_insert = mysqli_query($conexion, "INSERT INTO producto(descripcion,proveedor,precio,existencia,usuario_id,foto) 
+
+        $query = mysqli_query($conexion, "SELECT * FROM producto WHERE descripcion = '$descripcion'");
+        $result = mysqli_fetch_array($query);
+
+        if ($result > 0) {
+            $alerta = '<p class="msg_error">La descripcion del producto ya existe.</p>';
+        } else {
+
+            $query_insert = mysqli_query($conexion, "INSERT INTO producto(descripcion,proveedor,precio,existencia,usuario_id,foto) 
             values ('$descripcion','$proveedor', '$precio', '$existencia', '$usuario_id', '$imgProd')");
 
-        if ($query_insert) {
-            if ($nombre_foto != '') {
-                move_uploaded_file($url_tmp,$src);
+            if ($query_insert) {
+                if ($nombre_foto != '') {
+                    move_uploaded_file($url_tmp, $src);
+                }
+                $alerta = '<p class="msg_save">Producto guardado correctamente.</p>';
+            } else {
+                $alerta = '<p class="msg_error">Erro al guardar el producto.</p>';
             }
-            $alerta = '<p class="msg_save">Producto guardado correctamente.</p>';
-        } else {
-            $alerta = '<p class="msg_error">Erro al guardar el producto.</p>';
         }
     }
 }
