@@ -109,13 +109,21 @@ include_once "../../config/conexion.php";
                                 $desde_pg = ($pag - 1) * $pag_num;
                                 $total_pg = ceil($registros_totales / $pag_num);
 
-                                $query = mysqli_query($conexion, "SELECT * FROM producto 
-                                    WHERE estatus = 1 ORDER BY codproducto ASC LIMIT $desde_pg,$pag_num ");
+                                $query = mysqli_query($conexion, "SELECT p.codproducto, p.descripcion,pr.proveedor, p.precio, p.existencia,
+                                                        p.date_add, p.foto FROM producto p INNER JOIN proveedor pr 
+                                                        ON p.proveedor = pr.codproveedor WHERE p.estatus = 1 
+                                                        ORDER BY p.codproducto ASC LIMIT $desde_pg,$pag_num ");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
                                             $formato = 'Y-m-d H:i:s';
                                             $fecha = DateTime::createFromFormat($formato,$data['date_add']);
+
+                                            if ($data['foto' !='imgproducto.png']) {
+                                                $foto = '../utils/img/uploads/'.$data['foto'];
+                                            }else {
+                                                $foto = '../utils/img'.$data['foto'];
+                                            }
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
