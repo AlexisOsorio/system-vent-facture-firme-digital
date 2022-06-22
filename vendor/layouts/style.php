@@ -10,3 +10,5 @@
 <script type="text/javascript" src="../utils/js/jquery.min.js"></script>
 <!--Icono del Sistema-->
 <link rel="icon"  href="../utils/img/icon_page.png">
+<script type="text/javascript" src="../utils/js/functions.js"></script>
+

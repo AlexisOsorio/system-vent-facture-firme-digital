@@ -8,16 +8,26 @@ include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (empty($_POST['proveedor']) || empty($_POST['contacto']) || empty($_POST['telefono']) || empty($_POST['direccion'])) {
+    if (empty($_POST['descripcion']) || empty($_POST['proveedor']) || empty($_POST['precio']) || empty($_POST['stock'])) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
+        $descripcion = $_POST['descripcion'];
         $proveedor = $_POST['proveedor'];
-        $contacto = $_POST['contacto'];
-        $telefono = $_POST['telefono'];
-        $direccion = $_POST['direccion'];
+        $precio = $_POST['precio'];
+        $existencia = $_POST['stock'];
         $usuario_id = $_SESSION['idUser'];
 
+        $foto = $_FILES['foto'];
+        $nombre_foto = $foto['name'];
+        $type = $foto['type'];
+        $url_tmp = $foto['tmp_name'];
+
+        $imgProd = 'imgproducto.png';
+
+        if ($nombre_foto != '') {
+            $destino = '../img/uploads/';
+        }
 
         $query_insert = mysqli_query($conexion, "INSERT INTO proveedor(proveedor,contacto,telefono,direccion, usuario_id) 
             values ('$proveedor', '$contacto', '$telefono', '$direccion', '$usuario_id')");
@@ -28,7 +38,6 @@ if (!empty($_POST)) {
             $alerta = '<p class="msg_error">Erro al guardar el proveedor.</p>';
         }
     }
-    mysqli_close($conexion);
 }
 ?>
 
@@ -54,6 +63,78 @@ if (!empty($_POST)) {
 
         .alerta p {
             padding: 10px;
+        }
+
+        /*=========================CSS=====================*/
+        .prevPhoto {
+            display: flex;
+            justify-content: space-between;
+            width: 160px;
+            height: 150px;
+            border: 1px solid #CCC;
+            position: relative;
+            cursor: pointer;
+            background: url(../utils/images/uploads/user.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            margin: auto;
+        }
+
+        .prevPhoto label {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .prevPhoto img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .upimg,
+        .notBlock {
+            display: none !important;
+        }
+
+        .errorArchivo {
+            font-size: 16px;
+            font-family: arial;
+            color: #cc0000;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .delPhoto {
+            color: #FFF;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            background: red;
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            z-index: 10;
+        }
+
+        #tbl_list_productos img {
+            width: 50px;
+        }
+
+        .imgProductoDelete {
+            width: 175px;
         }
     </style>
 </head>
@@ -109,10 +190,23 @@ if (!empty($_POST)) {
                                         </div>
                                         <div class="form-group row">
                                             <label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
+                                            <?php
+                                            $query_proveedor = mysqli_query($conexion, "SELECT codproveedor, proveedor FROM proveedor  
+                                            WHERE estatus = 1 ORDER BY proveedor ASC ");
+                                            $result_proveedor = mysqli_num_rows($query_proveedor);
+                                            mysqli_close($conexion);
+                                            ?>
                                             <div class="col-sm-6">
                                                 <select name="proveedor" id="proveedor" class="form-control">
-                                                    <option value="1">Select</option>
-                                                    <option value="2">Marco Hinojosa</option>
+                                                    <?php
+                                                    if ($result_proveedor > 0) {
+                                                        while ($proveedor = mysqli_fetch_array($query_proveedor)) {
+                                                    ?>
+                                                            <option value="<?php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -129,9 +223,16 @@ if (!empty($_POST)) {
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="Foto" class="col-sm-2 col-form-label">Foto</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="Foto" id="Foto" placeholder="Foto del producto" class="form-control">
+                                            <label for="foto" class="col-sm-2 col-form-label">Foto</label>
+                                            <div class="col-sm-5">
+                                                <div class="prevPhoto">
+                                                    <span class="delPhoto notBlock">X</span>
+                                                    <label for="foto"></label>
+                                                </div>
+                                                <div class="upimg">
+                                                    <input type="file" name="foto" id="foto">
+                                                </div>
+                                                <div id="form_alert"></div>
                                             </div>
                                         </div>
 
