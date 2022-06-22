@@ -8,7 +8,8 @@ include_once "../../config/conexion.php";
 if (!empty($_POST)) {
     $alerta = '';
 
-    if (empty($_POST['descripcion']) || empty($_POST['proveedor']) || empty($_POST['precio']) || empty($_POST['stock'])) {
+    if (empty($_POST['descripcion']) || empty($_POST['proveedor']) || empty($_POST['precio']) || $_POST['precio'] <= 0
+        || empty($_POST['stock']) || $_POST['stock'] <= 0){
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
