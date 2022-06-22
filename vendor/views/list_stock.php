@@ -30,6 +30,12 @@ include_once "../../config/conexion.php";
         .activar a:hover {
             background: #17A2B8;
         }
+        /*Lista Productos*/
+        .img_producto img{
+            width: 70px;
+            height: auto;
+            margin: auto;
+        }
     </style>
 </head>
 
@@ -112,14 +118,14 @@ include_once "../../config/conexion.php";
                                 $query = mysqli_query($conexion, "SELECT p.codproducto, p.descripcion,pr.proveedor, p.precio, p.existencia,
                                                         p.date_add, p.foto FROM producto p INNER JOIN proveedor pr 
                                                         ON p.proveedor = pr.codproveedor WHERE p.estatus = 1 
-                                                        ORDER BY p.codproducto ASC LIMIT $desde_pg,$pag_num ");
+                                                        ORDER BY p.codproducto DESC LIMIT $desde_pg,$pag_num ");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
                                             $formato = 'Y-m-d H:i:s';
                                             $fecha = DateTime::createFromFormat($formato,$data['date_add']);
 
-                                            if ($data['foto' !='imgproducto.png']) {
+                                            if ($data['foto'] !='imgproducto.png') {
                                                 $foto = '../utils/img/uploads/'.$data['foto'];
                                             }else {
                                                 $foto = '../utils/img'.$data['foto'];
@@ -133,7 +139,7 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['precio']; ?></td>
                                                 <td><?php echo $data['existencia']; ?></td>
                                                 <td><?php echo $fecha->format('d-m-Y');?></td>
-                                                <td><?php echo $data['foto']; ?></td>
+                                                <td class="img_producto"><img src="<?php echo $foto; ?>" alt="<?php echo $data['descripcion']; ?>"></td>
                                                 <td>
                                                     <a href="editar_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar </a>
                                                     <a href="delete_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar </a>
