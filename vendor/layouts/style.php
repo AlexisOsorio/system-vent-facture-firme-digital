@@ -11,4 +11,3 @@
 <!--Icono del Sistema-->
 <link rel="icon"  href="../utils/img/icon_page.png">
 <script type="text/javascript" src="../utils/js/functions.js"></script>
-

@@ -26,16 +26,22 @@ if (!empty($_POST)) {
         $imgProd = 'imgproducto.png';
 
         if ($nombre_foto != '') {
-            $destino = '../img/uploads/';
+            $destino = '../utils/img/uploads/';
+            $img_nombre = 'img_' . md5(date('d-m-Y H:m:s'));
+            $imgProd = $img_nombre . '.jpg';
+            $src = $destino . $imgProd;
         }
-
-        $query_insert = mysqli_query($conexion, "INSERT INTO proveedor(proveedor,contacto,telefono,direccion, usuario_id) 
-            values ('$proveedor', '$contacto', '$telefono', '$direccion', '$usuario_id')");
+ 
+        $query_insert = mysqli_query($conexion, "INSERT INTO producto(descripcion,proveedor,precio,existencia,usuario_id,foto) 
+            values ('$descripcion','$proveedor', '$precio', '$existencia', '$usuario_id', '$imgProd')");
 
         if ($query_insert) {
-            $alerta = '<p class="msg_save">Proveedor guardado correctamente.</p>';
+            if ($nombre_foto != '') {
+                move_uploaded_file($url_tmp,$src);
+            }
+            $alerta = '<p class="msg_save">Producto guardado correctamente.</p>';
         } else {
-            $alerta = '<p class="msg_error">Erro al guardar el proveedor.</p>';
+            $alerta = '<p class="msg_error">Erro al guardar el producto.</p>';
         }
     }
 }
