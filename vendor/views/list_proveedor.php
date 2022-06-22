@@ -113,8 +113,8 @@ include_once "../../config/conexion.php";
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
-                                            $formato = 'Y-m-d H:i:s';
-                                            $fecha = DateTime::createFromFormat($formato,$data['date_add']);
+                                        $formato = 'Y-m-d H:i:s';
+                                        $fecha = DateTime::createFromFormat($formato, $data['date_add']);
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
@@ -123,10 +123,16 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['contacto']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
-                                                <td><?php echo $fecha->format('d-m-Y');?></td>
+                                                <td><?php echo $fecha->format('d-m-Y'); ?></td>
                                                 <td>
                                                     <a href="editar_proveedores.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar </a>
-                                                    <a href="delete_proveedores.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar </a>
+                                                    <?php
+                                                    if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                                    ?>
+                                                        <a href="delete_proveedores.php?id=<?php echo $data["codproveedor"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar </a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </td>
                                             </tr>
 

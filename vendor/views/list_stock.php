@@ -30,8 +30,9 @@ include_once "../../config/conexion.php";
         .activar a:hover {
             background: #17A2B8;
         }
+
         /*Lista Productos*/
-        .img_producto img{
+        .img_producto img {
             width: 70px;
             height: auto;
             margin: auto;
@@ -122,14 +123,14 @@ include_once "../../config/conexion.php";
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
-                                            $formato = 'Y-m-d H:i:s';
-                                            $fecha = DateTime::createFromFormat($formato,$data['date_add']);
+                                        $formato = 'Y-m-d H:i:s';
+                                        $fecha = DateTime::createFromFormat($formato, $data['date_add']);
 
-                                            if ($data['foto'] !='imgproducto.png') {
-                                                $foto = '../utils/img/uploads/'.$data['foto'];
-                                            }else {
-                                                $foto = '../utils/img'.$data['foto'];
-                                            }
+                                        if ($data['foto'] != 'imgproducto.png') {
+                                            $foto = '../utils/img/uploads/' . $data['foto'];
+                                        } else {
+                                            $foto = '../utils/img' . $data['foto'];
+                                        }
                                 ?>
                                         <tbody>
                                             <tr class="text-center">
@@ -138,12 +139,19 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['proveedor']; ?></td>
                                                 <td><?php echo $data['precio']; ?></td>
                                                 <td><?php echo $data['existencia']; ?></td>
-                                                <td><?php echo $fecha->format('d-m-Y');?></td>
+                                                <td><?php echo $fecha->format('d-m-Y'); ?></td>
                                                 <td class="img_producto"><img src="<?php echo $foto; ?>" alt="<?php echo $data['descripcion']; ?>"></td>
-                                                <td>
-                                                    <a href="editar_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar </a>
-                                                    <a href="delete_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar </a>
-                                                </td>
+                                                <?php
+                                                if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                                ?>
+                                                    <td>
+                                                        <a href="add_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-success"><i class="nav-icon fas fa-plus"></i> </a>
+                                                        <a href="editar_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> </a>
+                                                        <a href="delete_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> </a>
+                                                    </td>
+                                                <?php
+                                                }
+                                                ?>
                                             </tr>
 
                                         </tbody>
