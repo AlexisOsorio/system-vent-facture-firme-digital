@@ -81,7 +81,7 @@ if (!empty($_POST)) {
             border: 1px solid #CCC;
             position: relative;
             cursor: pointer;
-            background: url(../utils/images/uploads/user.png);
+            background: url(../utils/img/imgproducto.png);
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
