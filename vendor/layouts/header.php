@@ -71,9 +71,8 @@ if (empty($_SESSION['active'])) {
                             <input type="hidden" name="action" class="form-control" value="addProd">
                             <div class="alerta alertAddProd"></div>
                             <button type="submit" class="btn btn-success"><i class="nav-icon fas fa-plus"></i> Agregar</button>
-                            <div class="offset-sm-3 col-md-2 float-right">
-                                <a href="#" class="btn bg-danger closeModal" onclick="closeModal();">Cerrar</a>
-                            </div>
+                            <a href="#" class="btn bg-danger closeModal" style="float: right;" onclick="closeModal();"><i class="nav-icon fas fa-ban"></i> Cerrar</a>
+                            
                         </form>
                     </div>
                 </div>
