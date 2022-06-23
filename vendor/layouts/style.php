@@ -1,4 +1,3 @@
-
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
@@ -9,5 +8,5 @@
 <!--Jquery-->
 <script type="text/javascript" src="../utils/js/jquery.min.js"></script>
 <!--Icono del Sistema-->
-<link rel="icon"  href="../utils/img/icon_page.png">
+<link rel="icon" href="../utils/img/icon_page.png">
 <script type="text/javascript" src="../utils/js/functions.js"></script>

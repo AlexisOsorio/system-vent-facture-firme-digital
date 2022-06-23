@@ -1,8 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['rol'] != 1 and $_SESSION['rol'] != 2) {
-    header("Location: ../views/index.php");
-}
+
 
 include_once "../../config/conexion.php";
 ?>
@@ -20,6 +18,7 @@ include_once "../../config/conexion.php";
     ?>
 
     <style>
+        
         .activar {
             color: white;
             border: 1px solid #17A2B8;
@@ -36,6 +35,26 @@ include_once "../../config/conexion.php";
             width: 70px;
             height: auto;
             margin: auto;
+        }
+
+        .modal {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgb(0, 0, 0, 0.81);
+            display: block;
+        }
+
+        .bodyModal {
+            width: 100%;
+            height: 100%;
+            display: -webkit-inline-flex;
+            display: -moz-inline-flex;
+            display: -ms-inline-flex;
+            display: -o-inline-flex;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -73,15 +92,20 @@ include_once "../../config/conexion.php";
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Producto">
                                     <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search"></i></button>
                                 </form>
-
-                                <ul class="nav justify-content-end">
-                                    <li class="nav-item">
-                                        <a href="../views/registro_stock.php" class=" btn bg-primary">
-                                            <i class="nav-icon fas fa-user-plus"></i>
-                                            Nuevo Producto
-                                        </a>
-                                    </li>
-                                </ul>
+                                <?php
+                                if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                ?>
+                                    <ul class="nav justify-content-end">
+                                        <li class="nav-item">
+                                            <a href="../views/registro_stock.php" class=" btn bg-primary">
+                                                <i class="nav-icon fas fa-user-plus"></i>
+                                                Nuevo Producto
+                                            </a>
+                                        </li>
+                                    </ul>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -95,7 +119,13 @@ include_once "../../config/conexion.php";
                                         <th scope="col-sm-2">STOCK</th>
                                         <th scope="col-sm-2">FECHA</th>
                                         <th scope="col-sm-2">FOTO</th>
-                                        <th scope="col-sm-2">ACCIONES</th>
+                                        <?php
+                                        if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                        ?>
+                                            <th scope="col-sm-2">ACCIONES</th>
+                                        <?php
+                                        }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <?php
@@ -129,7 +159,7 @@ include_once "../../config/conexion.php";
                                         if ($data['foto'] != 'imgproducto.png') {
                                             $foto = '../utils/img/uploads/' . $data['foto'];
                                         } else {
-                                            $foto = '../utils/img' . $data['foto'];
+                                            $foto = '../utils/' . $data['foto'];
                                         }
                                 ?>
                                         <tbody>
@@ -145,9 +175,9 @@ include_once "../../config/conexion.php";
                                                 if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                                                 ?>
                                                     <td>
-                                                        <a href="add_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-success"><i class="nav-icon fas fa-plus"></i> </a>
-                                                        <a href="editar_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> </a>
-                                                        <a href="delete_stock.php?id=<?php echo $data["codproducto"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> </a>
+                                                        <a class="btn bg-success add_stock" stock="<?php echo $data["codproducto"]; ?>" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="nav-icon fas fa-plus"></i> </a>
+                                                        <a class="btn bg-warning" href="editar_stock.php?id=<?php echo $data["codproducto"]; ?>"><i class="nav-icon fas fa-edit"></i> </a>
+                                                        <a class="btn bg-danger" href="delete_stock.php?id=<?php echo $data["codproducto"]; ?>"><i class="nav-icon fas fa-trash"></i> </a>
                                                     </td>
                                                 <?php
                                                 }

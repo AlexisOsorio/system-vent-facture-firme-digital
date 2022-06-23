@@ -145,11 +145,6 @@ if (!empty($_POST)) {
             top: -10px;
             z-index: 10;
         }
-
-        #tbl_list_productos img {
-            width: 50px;
-        }
-
         .imgProductoDelete {
             width: 175px;
         }

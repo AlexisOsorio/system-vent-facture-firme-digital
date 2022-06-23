@@ -51,6 +51,36 @@ if (empty($_SESSION['active'])) {
     </nav>
     <!-- /.navbar -->
 
+    <div class="modal">
+        <div class="bodyModal">
+            <div class="col-md-4">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h1 class="card-title"><i class="nav-icon fas fa-cubes"></i> Agregar Producto</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST" name="form_add_stock" id="form_add_stock" onsubmit="event.preventDefault(); sendDataProd();">
+                            <h2 style="font-size: 25px; text-align: center; font-weight: bolder;">Calculadora f85</h2>
+                            <div class="form-group row">
+                                <input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del Producto" class="form-control" require>
+                            </div>
+                            <div class="form-group row">
+                                <input type="text" name="precio" id="txtPrecio" placeholder="Precio del Producto" class="form-control" require>
+                            </div>
+                            <input type="hidden" name="preducto_id" id="preducto_id" class="form-control" require>
+                            <input type="hidden" name="action" class="form-control" value="addProd" require>
+                            <div class="alerta alertAddProd"></div>
+                            <button class="btn btn-success"><i class="nav-icon fas fa-plus"></i>Agregar</button>
+                            <div class="offset-sm-3 col-md-2 float-right">
+                                <a href="#" class="btn bg-danger closeModal" onclick="closeModal();">Cerrar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php
     include_once "nav.php"
     ?>

@@ -122,17 +122,18 @@
                 <?php
                 }
                 ?>
-                <?php
-                if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
-                ?>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cubes"></i>
-                            <p>
-                                Productos
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>
+                            Productos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <?php
+                    if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                    ?>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="../views/registro_stock.php" class="nav-link">
@@ -141,18 +142,19 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="../views/list_stock.php" class="nav-link">
-                                    <i class="fas fa-rectangle-list nav-icon"></i>
-                                    <p>Lista Productos</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="../views/list_stock.php" class="nav-link">
+                                <i class="fas fa-rectangle-list nav-icon"></i>
+                                <p>Lista Productos</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
