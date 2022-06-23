@@ -48,14 +48,15 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "agregar_ajax.php",
-            data: "data",
             async: true,
-            data: {
-                action: action,
-                producto: producto
-            },
+            data: {action,producto},
             success: function (response) {
-                console.log(response);
+                if (response != 'error') {
+                    var info = JSON.parse(response);
+                    
+                    $('#producto_id').val(info.codproducto);
+                    $('.name_prod').html(info.descripcion);
+                }
             },
 
             error: function (error) {
@@ -67,6 +68,8 @@ $(document).ready(function () {
         $('.modal').fadeIn();
     });
 });
+
+
 
 function closeModal() {
     $('.modal').fadeOut();
