@@ -62,15 +62,15 @@ if (empty($_SESSION['active'])) {
                         <form action="" method="POST" name="form_add_stock" id="form_add_stock" onsubmit="event.preventDefault(); sendDataProd();">
                             <h2 style="font-size: 25px; text-align: center; font-weight: bolder;">Calculadora f85</h2>
                             <div class="form-group row">
-                                <input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del Producto" class="form-control" require>
+                                <input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del Producto" class="form-control" required>
                             </div>
                             <div class="form-group row">
-                                <input type="text" name="precio" id="txtPrecio" placeholder="Precio del Producto" class="form-control" require>
+                                <input type="text" name="precio" id="txtPrecio" placeholder="Precio del Producto" class="form-control" required>
                             </div>
-                            <input type="hidden" name="preducto_id" id="preducto_id" class="form-control" require>
-                            <input type="hidden" name="action" class="form-control" value="addProd" require>
+                            <input type="hidden" name="preducto_id" id="preducto_id" class="form-control">
+                            <input type="hidden" name="action" class="form-control" value="addProd">
                             <div class="alerta alertAddProd"></div>
-                            <button class="btn btn-success"><i class="nav-icon fas fa-plus"></i>Agregar</button>
+                            <button type="submit" class="btn btn-success"><i class="nav-icon fas fa-plus"></i> Agregar</button>
                             <div class="offset-sm-3 col-md-2 float-right">
                                 <a href="#" class="btn bg-danger closeModal" onclick="closeModal();">Cerrar</a>
                             </div>

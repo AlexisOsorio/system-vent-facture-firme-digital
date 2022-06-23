@@ -42,7 +42,7 @@ include_once "../../config/conexion.php";
             width: 100%;
             height: 100%;
             background: rgb(0, 0, 0, 0.81);
-            display: block;
+            display: none;
         }
 
         .bodyModal {

@@ -44,6 +44,11 @@ $(document).ready(function () {
     $('.add_stock').click(function (e) {
         e.preventDefault();
         var producto = $(this).attr('stock');
-        
+        $('.modal').fadeIn();
+
     });
 });
+
+function closeModal() {
+    $('.modal').fadeOut();
+}
