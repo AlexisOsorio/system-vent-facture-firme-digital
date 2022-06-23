@@ -44,8 +44,27 @@ $(document).ready(function () {
     $('.add_stock').click(function (e) {
         e.preventDefault();
         var producto = $(this).attr('stock');
-        $('.modal').fadeIn();
+        var action = 'infoStock';
+        $.ajax({
+            type: "POST",
+            url: "agregar_ajax.php",
+            data: "data",
+            async: true,
+            data: {
+                action: action,
+                producto: producto
+            },
+            success: function (response) {
+                console.log(response);
+            },
 
+            error: function (error) {
+                console.log(error);
+            },
+        });
+
+
+        $('.modal').fadeIn();
     });
 });
 
