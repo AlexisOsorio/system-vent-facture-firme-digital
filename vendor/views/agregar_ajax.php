@@ -54,6 +54,26 @@ if (!empty($_POST)) {
         }
         exit;
     }
-    echo "error";
+
+    //Eliminar Producto
+    if ($_POST['action'] == 'delProd') {
+
+        if (empty($_POST['producto_id']) || !is_numeric($_POST['producto_id'])) {
+            echo 'Error';
+        } else {
+            # code...
+
+            $idproductoD = $_POST['producto_id'];
+
+            $query_D = mysqli_query($conexion, "UPDATE producto SET estatus = 0 WHERE codproducto = $idproductoD");
+            mysqli_close($conexion);
+            if ($query_D) {
+                echo 'OK';
+            } else {
+                echo 'error';
+            }
+        }
+        echo 'error';
+    }
     exit;
 }

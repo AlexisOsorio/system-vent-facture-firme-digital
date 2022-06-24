@@ -113,7 +113,25 @@ include_once "../../config/conexion.php";
                                     <tr class="text-center">
                                         <th scope="col-sm-2">ID</th>
                                         <th scope="col-sm-2">DESCRIPCIÓN</th>
-                                        <th scope="col-sm-2">PROVEEDOR</th>
+                                        <th scope="col-sm-2">
+                                            <?php
+                                            $query_proveedor = mysqli_query($conexion, "SELECT codproveedor, proveedor FROM proveedor  
+                                            WHERE estatus = 1 ORDER BY proveedor ASC ");
+                                            $result_proveedor = mysqli_num_rows($query_proveedor);
+                                            ?>
+                                            <div class="col-sm-auto">
+                                                <select name="proveedor" id="search_proveedor" class="form-control">
+                                                    <?php
+                                                    if ($result_proveedor > 0) {
+                                                        while ($proveedor = mysqli_fetch_array($query_proveedor)) {
+                                                    ?>
+                                                            <option value="<?php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                        </th>
                                         <th scope="col-sm-2">PRECIO</th>
                                         <th scope="col-sm-2">STOCK</th>
                                         <th scope="col-sm-2">FECHA</th>
