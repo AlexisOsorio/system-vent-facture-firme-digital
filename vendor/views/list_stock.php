@@ -176,7 +176,7 @@ include_once "../../config/conexion.php";
                                                     <td>
                                                         <a class="btn bg-success add_stock" stock="<?php echo $data["codproducto"]; ?>" href="#"><i class="nav-icon fas fa-plus"></i> </a>
                                                         <a class="btn bg-warning" href="editar_stock.php?id=<?php echo $data["codproducto"]; ?>"><i class="nav-icon fas fa-edit"></i> </a>
-                                                        <a class="btn bg-danger" href="delete_stock.php?id=<?php echo $data["codproducto"]; ?>"><i class="nav-icon fas fa-trash"></i> </a>
+                                                        <a class="btn bg-danger del_stock" stock="<?php echo $data["codproducto"]; ?>" href="#"><i class="nav-icon fas fa-trash"></i> </a>
                                                     </td>
                                                 <?php
                                                 }
