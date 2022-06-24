@@ -10,48 +10,61 @@ if (!empty($_POST)) {
 
     if (
         empty($_POST['descripcion']) || empty($_POST['proveedor']) || empty($_POST['precio']) || $_POST['precio'] <= 0
-        || empty($_POST['stock']) || $_POST['stock'] <= 0
+        || empty($_POST['id']) || empty($_POST['foto_actual']) || empty($_POST['foto_remove'])
     ) {
         $alerta = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
+        $codproducto = $_POST['id'];
         $descripcion = $_POST['descripcion'];
         $proveedor = $_POST['proveedor'];
         $precio = $_POST['precio'];
-        $existencia = $_POST['stock'];
-        $usuario_id = $_SESSION['idUser'];
+        $imgProd = $_POST['foto_actual'];
+        $imgRemove = $_POST['foto_remove'];
 
         $foto = $_FILES['foto'];
         $nombre_foto = $foto['name'];
         $type = $foto['type'];
         $url_tmp = $foto['tmp_name'];
 
-        $imgProd = 'imgproducto.png';
+        $imgUpd = '';
 
         if ($nombre_foto != '') {
             $destino = '../utils/img/uploads/';
             $img_nombre = 'img_' . md5(date('d-m-Y H:m:s'));
             $imgProd = $img_nombre . '.jpg';
             $src = $destino . $imgProd;
+        } else {
+            if ($_POST['foto_actual'] != $_POST['foto_remove']) {
+                $imgProd = 'imgproducto.png';
+            }
         }
 
-        $query = mysqli_query($conexion, "SELECT * FROM producto WHERE descripcion = '$descripcion'");
+        $query = mysqli_query($conexion, "SELECT * FROM producto WHERE descripcion = '$descripcion' AND codproducto != $codproducto");
         $result = mysqli_fetch_array($query);
 
         if ($result > 0) {
             $alerta = '<p class="msg_error">La descripcion del producto ya existe.</p>';
         } else {
 
-            $query_insert = mysqli_query($conexion, "INSERT INTO producto(descripcion,proveedor,precio,existencia,usuario_id,foto) 
-            values ('$descripcion','$proveedor', '$precio', '$existencia', '$usuario_id', '$imgProd')");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET descripcion = '$descripcion', 
+                                                    proveedor = $proveedor,precio = $precio,foto = '$imgProd'
+                                                    WHERE codproducto = $codproducto ");
 
-            if ($query_insert) {
+            if ($query_update) {
+
+                if (($nombre_foto != '' && ($_POST['foto_actual'] != 'imgproducto.png'))
+                    || ($_POST['foto_actual'] != $_POST['foto_remove'])
+                ) {
+                    unlink('../utils/img/uploads/' . $_POST['foto_actual']);
+                }
+
                 if ($nombre_foto != '') {
                     move_uploaded_file($url_tmp, $src);
                 }
-                $alerta = '<p class="msg_save">Producto guardado correctamente.</p>';
+                $alerta = '<p class="msg_save">Producto actualizado correctamente.</p>';
             } else {
-                $alerta = '<p class="msg_error">Erro al guardar el producto.</p>';
+                $alerta = '<p class="msg_error">Erro al actualizar el producto.</p>';
             }
         }
     }
@@ -81,10 +94,10 @@ if (empty($_REQUEST['id'])) {
 
         if ($data_prod['foto'] != 'imgproducto.pmg') {
             $fotoRemove = '';
-            $foto = '<img id="img" src="../utils/img/uploads/'.$data_prod['foto'].'" alt="Producto">';
+            $foto = '<img id="img" src="../utils/img/uploads/' . $data_prod['foto'] . '" alt="Producto">';
         }
 
-        print_r($data_prod);
+        //print_r($data_prod);
     } else {
         header('Location: list_stock.php');
     }
@@ -232,11 +245,13 @@ if (empty($_REQUEST['id'])) {
                                 <div class="card-body">
                                     <div class="alerta text-center"> <?php echo isset($alerta) ? $alerta : ''; ?></div>
                                     <form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?php echo $data_prod['codproducto']; ?>">
+                                        <input type="hidden" name="foto_actual" id="foto_actual" value="<?php echo $data_prod['foto'] ?>">
+                                        <input type="hidden" name="foto_remove" id="foto_remove" value="<?php echo $data_prod['foto'] ?>">
                                         <div class="form-group row">
                                             <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="descripcion" class="form-control" placeholder="Descripcion de Producto" id="descripcion" 
-                                                value="<?php echo $data_prod['descripcion'] ?>">
+                                                <input type="text" name="descripcion" class="form-control" placeholder="Descripcion de Producto" id="descripcion" value="<?php echo $data_prod['descripcion'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -265,8 +280,7 @@ if (empty($_REQUEST['id'])) {
                                         <div class="form-group row">
                                             <label for="precio" class="col-sm-2 col-form-label">Precio</label>
                                             <div class="col-sm-10">
-                                                <input type="number" name="precio" id="precio" placeholder="Precio del Producto" class="form-control" 
-                                                value="<?php echo $data_prod['precio'] ?>">
+                                                <input type="text" name="precio" id="precio" placeholder="Precio del Producto" class="form-control" value="<?php echo $data_prod['precio'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">

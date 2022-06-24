@@ -38,6 +38,10 @@ $(document).ready(function () {
         $(".delPhoto").addClass('notBlock');
         $("#img").remove();
 
+        if ($("#foto_actual") && $("foto_remove"))  {
+            $("#foto_remove").val('imgproducto.png');
+            
+        }
     });
 
     //modal add stock
