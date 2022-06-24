@@ -197,7 +197,7 @@ if (!empty($_POST)) {
                                         <div class="form-group row">
                                             <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" name="descripcion" class="form-control" placeholder="Descripcion de Producto" id="descripcion" cols="10" rows="2"></textarea>
+                                                <input type="text" name="descripcion" class="form-control" placeholder="Descripcion de Producto" id="descripcion">
                                             </div>
                                         </div>
                                         <div class="form-group row">

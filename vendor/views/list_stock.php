@@ -163,7 +163,7 @@ include_once "../../config/conexion.php";
                                 ?>
                                         <tbody class="text-center">
                                             <tr class="row<?php echo $data['codproducto']; ?>">
-                                                <th ><?php echo $data['codproducto']; ?></th>
+                                                <th><?php echo $data['codproducto']; ?></th>
                                                 <td><?php echo $data['descripcion']; ?></td>
                                                 <td><?php echo $data['proveedor']; ?></td>
                                                 <td class="celPrecio"><?php echo $data['precio']; ?></td>
