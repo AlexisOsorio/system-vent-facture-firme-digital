@@ -147,20 +147,18 @@ $(document).ready(function () {
         $('.modal').fadeIn();
     });
 
-    /*$('#search_proveedor').change(function (e) {
+    $('#search_proveedor').change(function (e) {
         e.preventDefault();
         var vendor = getUrl();
-        alert(vendor);
-
-        location.href = vendor + 'search_products.php?=proveedor=' + $(this).val();
-    });*/
+        location.href = vendor + 'search_products.php?proveedor=' + $(this).val();
+    });
 }); //end ready
-/*
+
 function getUrl() {
     var local = window.location;
-    var pathName = local.pathname.substring(0, local.pathname.lasIndexOf('../../') + 1);
+    var pathName = local.pathname.substring(0, local.pathname.lastIndexOf('/') + 1);
     return local.href.substring(0, local.href.length - ((local.pathname + local.search + local.hash).length - pathName.length))
-}*/
+}
 
 function sendDataProd() {
     $('.alertAddProd').html('');
