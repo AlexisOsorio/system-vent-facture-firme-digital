@@ -49,16 +49,44 @@ $(document).ready(function () {
             type: "POST",
             url: "agregar_ajax.php",
             async: true,
-            data: {action,producto},
+            data: {
+                action,
+                producto
+            },
             success: function (response) {
                 if (response != 'error') {
                     var info = JSON.parse(response);
-                    
-                    $('#producto_id').val(info.codproducto);
-                    $('.name_prod').html(info.descripcion);
+
+                    //$('#producto_id').val(info.codproducto);
+                    // $('.name_prod').html(info.descripcion);
+
+                    $('.bodyModal').html(
+                        '<div class="col-md-4">' +
+                            '<div class="card card-success">' +
+                                '<div class="card-header">' +
+                                    '<h1 class="card-title"><i class="nav-icon fas fa-cubes"></i> Agregar Producto</h1>' +
+                                '</div>' +
+                                '<div class="card-body">' +
+                                    '<form action="" method="POST" name="form_add_stock" id="form_add_stock" onsubmit="event.preventDefault(); sendDataProd();">' +
+                                        '<h2 class="name_prod" style="font-size: 25px; text-align: center; font-weight: bolder;">' + info.descripcion + '</h2>' +
+                                        '<div class="form-group row">' +
+                                            '<input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del Producto" class="form-control" required>' +
+                                        '</div>' +
+                                        '<div class="form-group row">' +
+                                            '<input type="text" name="precio" id="txtPrecio" placeholder="Precio del Producto" class="form-control" required>' +
+                                        '</div>' +
+                                        '<input type="hidden" name="producto_id" id="producto_id" class="form-control" value="' + info.codproducto + '">' +
+                                        '<input type="hidden" name="action" class="form-control" value="addProd">' +
+                                        '<div class="alerta alertAddProd"></div>' +
+                                        '<button type="submit" class="btn btn-success"><i class="nav-icon fas fa-plus"></i> Agregar</button>' +
+                                        '<a href="#" class="btn bg-danger closeModal" style="float: right;" onclick="closeModal();"><i class="nav-icon fas fa-ban"></i> Cerrar</a>' +
+                                    '</form>'+
+                                '</div>' +
+                            '</div>' +
+                        '</div>');
                 }
             },
-
+            /**/
             error: function (error) {
                 console.log(error);
             },
@@ -69,8 +97,35 @@ $(document).ready(function () {
     });
 });
 
+function sendDataProd() {
+    $('.alertAddProd').html('');
+    $.ajax({
+        type: "POST",
+        url: "agregar_ajax.php",
+        async: true,
+        data: $('#form_add_stock').serialize(),
+        success: function (response) {
+            if (response == 'error') {
+                $('.alertAddProd').html('<p style="color: red;">Error al agregar producto</p>')
+            } else {
+                var info = JSON.parse(response);
+                $('.row' + info.producto_id + '.celPrecio').html(info.nuevo_precio);
+                $('.row' + info.producto_id + '.celStock').html(info.nueva_existencia);
+                $('#txtCantidad').val('');
+                $('#txtPrecio').val('');
+                $('.alertAddProd').html('<p style="color: #28A745">Producto agregado con exito</p>')
+            }
+        },
 
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
 
 function closeModal() {
+    $('.alertAddProd').html('');
+    $('#txtCantidad').val('');
+    $('#txtPrecio').val('');
     $('.modal').fadeOut();
 }

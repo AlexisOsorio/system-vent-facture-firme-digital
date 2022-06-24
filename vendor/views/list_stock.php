@@ -18,7 +18,6 @@ include_once "../../config/conexion.php";
     ?>
 
     <style>
-        
         .activar {
             color: white;
             border: 1px solid #17A2B8;
@@ -162,13 +161,13 @@ include_once "../../config/conexion.php";
                                             $foto = '../utils/' . $data['foto'];
                                         }
                                 ?>
-                                        <tbody>
-                                            <tr class="text-center">
-                                                <th scope="row"><?php echo $data['codproducto']; ?></th>
+                                        <tbody class="text-center">
+                                            <tr class="row<?php echo $data['codproducto']; ?>">
+                                                <th ><?php echo $data['codproducto']; ?></th>
                                                 <td><?php echo $data['descripcion']; ?></td>
                                                 <td><?php echo $data['proveedor']; ?></td>
-                                                <td><?php echo $data['precio']; ?></td>
-                                                <td><?php echo $data['existencia']; ?></td>
+                                                <td class="celPrecio"><?php echo $data['precio']; ?></td>
+                                                <td class="celStock"><?php echo $data['existencia']; ?></td>
                                                 <td><?php echo $fecha->format('d-m-Y'); ?></td>
                                                 <td class="img_producto"><img src="<?php echo $foto; ?>" alt="<?php echo $data['descripcion']; ?>"></td>
                                                 <?php
