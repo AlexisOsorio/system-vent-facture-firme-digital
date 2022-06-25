@@ -83,12 +83,32 @@ include_once "../../config/conexion.php";
         <!-- Main content -->
         <section>
             <div class="container">
+                <?php
+                $where = 0;
+                $busqueda = '';
+                $search_proveedor = '';
+                $buscar = 0;
+
+                if (!empty($_REQUEST['busqueda']) && !empty($_REQUEST['proveedor'])) {
+                    header("Location: list_stock.php");
+                }
+                if (!empty($_REQUEST['busqueda'])) {
+                    $busqueda = strtolower($_REQUEST['busqueda']);
+                    $where = "(p.codproducto LIKE '%$busqueda%' OR p.descripcion LIKE '%$busqueda%') AND p.estatus = 1";
+                    $buscar = 'busqueda=' . $busqueda;
+                }
+                if (!empty($_REQUEST['proveedor'])) {
+                    $search_proveedor = strtolower($_REQUEST['proveedor']);
+                    $where = "p.proveedor LIKE $search_proveedor AND p.estatus = 1";
+                    $buscar = 'proveedor=' . $search_proveedor;
+                }
+                ?>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
-                                <form action="search_proveedor.php" method="get" class=" col-sm-9 d-flex">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Producto">
+                                <form action="search_products.php" method="get" class=" col-sm-9 d-flex">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Producto" value="<?php echo $busqueda ?>">
                                     <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search"></i></button>
                                 </form>
                                 <?php
@@ -115,18 +135,30 @@ include_once "../../config/conexion.php";
                                         <th scope="col-sm-2">DESCRIPCIÓN</th>
                                         <th scope="col-sm-2">
                                             <?php
+                                            $prd = 0;
+                                            if (!empty($_REQUEST['proveedor'])) {
+                                                $prd = $_REQUEST['proveedor'];
+                                            }
                                             $query_proveedor = mysqli_query($conexion, "SELECT codproveedor, proveedor FROM proveedor  
-                                            WHERE estatus = 1 ORDER BY proveedor ASC ");
+                                                                                        WHERE estatus = 1 ORDER BY proveedor ASC ");
                                             $result_proveedor = mysqli_num_rows($query_proveedor);
                                             ?>
                                             <div class="col-sm-auto">
-                                                <select name="proveedor" id="search_proveedor" class="form-control">
+                                                <select name="proveedor" id="search_proveedor" class="form-control" style="background-color: #17A2B8; border: #17A2B8; color: #fff; font-weight: bold;">
+                                                    <option value="" selected>PROVEEDOR</option>
                                                     <?php
                                                     if ($result_proveedor > 0) {
                                                         while ($proveedor = mysqli_fetch_array($query_proveedor)) {
+                                                            if ($prd == $proveedor['codproveedor']) {
                                                     ?>
-                                                            <option value="<php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                                                                <option style=" background-color: #fff;color: #000;" value="<?php echo $proveedor['codproveedor']; ?>" selected><?php echo $proveedor['proveedor']; ?></option>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <option style=" background-color: #fff;color: #000;" value="<?php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
                                                     <?php
+                                                                # code...
+                                                            }
                                                         }
                                                     }
                                                     ?>
@@ -148,7 +180,8 @@ include_once "../../config/conexion.php";
                                 <?php
 
                                 //paginador
-                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM producto WHERE estatus = 1");
+                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM producto as p
+                                                                        WHERE $where");
                                 $result_reg = mysqli_fetch_array($sql_reg);
                                 $registros_totales = $result_reg['registros_totales'];
 
@@ -163,10 +196,12 @@ include_once "../../config/conexion.php";
                                 $desde_pg = ($pag - 1) * $pag_num;
                                 $total_pg = ceil($registros_totales / $pag_num);
 
-                                $query = mysqli_query($conexion, "SELECT p.codproducto, p.descripcion,pr.proveedor, p.precio, p.existencia,
-                                                        p.date_add, p.foto FROM producto p INNER JOIN proveedor pr 
-                                                        ON p.proveedor = pr.codproveedor WHERE p.estatus = 1 
-                                                        ORDER BY p.codproducto DESC LIMIT $desde_pg,$pag_num ");
+                                $query = mysqli_query($conexion, "SELECT p.codproducto, p.descripcion,pr.proveedor, 
+                                                                    p.precio, p.existencia, p.date_add, p.foto 
+                                                                    FROM producto p INNER JOIN proveedor pr 
+                                                                    ON p.proveedor = pr.codproveedor 
+                                                                    WHERE $where ORDER BY p.codproducto 
+                                                                    DESC LIMIT $desde_pg,$pag_num ");
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
@@ -208,53 +243,61 @@ include_once "../../config/conexion.php";
                                 ?>
 
                             </table>
-                            <div>
-                                <nav aria-label="...">
-                                    <ul class="pagination justify-content-end">
-                                        <?php
-                                        if ($pag != 1) {
-                                            # code...
+                            <?php
+                            if ($total_pg != 0) {
+                                # code...
 
-                                        ?>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo 1; ?>"><i class="nav-icon fas fa-backward-step"></i></a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>" aria-label="Previous">
-                                                    <span aria-hidden="true"><i class="nav-icon fas fa-backward-fast"></i></span>
-                                                </a>
-                                            </li>
-                                        <?php
-                                        }
-                                        for ($i = 1; $i <= $total_pg; $i++) {
-                                            # code...
-                                            if ($i == $pag) {
-                                                echo '  <li class="page-link activar">' . $i . '</li>';
-                                            } else {
-                                                echo '  <li class="page-item">
-                                                            <a class="page-link" href="?pagina=' . $i . '">' . $i . '</a>
-                                                        </li>';
+                            ?>
+                                <div>
+                                    <nav aria-label="...">
+                                        <ul class="pagination justify-content-end">
+                                            <?php
+                                            if ($pag != 1) {
+                                                # code...
+
+                                            ?>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo 1; ?>&<?php echo $buscar; ?>"><i class="nav-icon fas fa-backward-step"></i></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>&<?php echo $buscar; ?>" aria-label="Previous">
+                                                        <span aria-hidden="true"><i class="nav-icon fas fa-backward-fast"></i></span>
+                                                    </a>
+                                                </li>
+                                            <?php
                                             }
-                                        }
-                                        if ($pag != $total_pg) {
-                                            # code...
+                                            for ($i = 1; $i <= $total_pg; $i++) {
+                                                # code...
+                                                if ($i == $pag) {
+                                                    echo '  <li class="page-link activar">' . $i . '</li>';
+                                                } else {
+                                                    echo '  <li class="page-item">
+                                                            <a class="page-link" href="?pagina=' . $i . '&' . $buscar . '">' . $i . '</a>
+                                                        </li>';
+                                                }
+                                            }
+                                            if ($pag != $total_pg) {
+                                                # code...
 
-                                        ?>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>" aria-label="Next">
-                                                    <span aria-hidden="true"><i class="nav-icon fas fa-forward-fast"></i></span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $total_pg; ?>"><i class="nav-icon fas fa-forward-step"></i></a>
-                                            </li>
+                                            ?>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>&<?php echo $buscar; ?>" aria-label="Next">
+                                                        <span aria-hidden="true"><i class="nav-icon fas fa-forward-fast"></i></span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?pagina=<?php echo $total_pg; ?>&<?php echo $buscar; ?>"><i class="nav-icon fas fa-forward-step"></i></a>
+                                                </li>
 
-                                        <?php
-                                        }
-                                        ?>
-                                    </ul>
-                                </nav>
-                            </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
 

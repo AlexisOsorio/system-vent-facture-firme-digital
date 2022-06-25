@@ -159,7 +159,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>
-                            Facturas
+                            Ventas
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -167,7 +167,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-file-circle-plus"></i>
-                                <p>Nuevo Factura</p>
+                                <p>Nuevo Venta</p>
                             </a>
                         </li>
                     </ul>
@@ -175,7 +175,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-rectangle-list nav-icon"></i>
-                                <p>Lista Facturas</p>
+                                <p>Lista Ventas</p>
                             </a>
                         </li>
                     </ul>

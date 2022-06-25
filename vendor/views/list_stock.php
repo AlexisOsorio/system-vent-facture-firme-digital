@@ -87,7 +87,7 @@ include_once "../../config/conexion.php";
                     <div class="row">
                         <div class="col-md-12" style="padding-bottom: 5px;">
                             <div class="form-group row">
-                                <form action="search_proveedor.php" method="get" class=" col-sm-9 d-flex">
+                                <form action="search_products.php" method="get" class=" col-sm-9 d-flex">
                                     <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Producto">
                                     <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search"></i></button>
                                 </form>
@@ -120,12 +120,13 @@ include_once "../../config/conexion.php";
                                             $result_proveedor = mysqli_num_rows($query_proveedor);
                                             ?>
                                             <div class="col-sm-auto">
-                                                <select name="proveedor" id="search_proveedor" class="form-control">
+                                                <select name="proveedor" id="search_proveedor" class="form-control" style="background-color: #17A2B8; border: #17A2B8; color: #fff; font-weight: bold;">
+                                                    <option value="" selected>PROVEEDOR</option>
                                                     <?php
                                                     if ($result_proveedor > 0) {
                                                         while ($proveedor = mysqli_fetch_array($query_proveedor)) {
                                                     ?>
-                                                            <option value="<php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                                                            <option style=" background-color: #fff;color: #000;" value="<?php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
                                                     <?php
                                                         }
                                                     }
