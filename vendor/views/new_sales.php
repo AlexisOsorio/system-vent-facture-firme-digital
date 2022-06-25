@@ -8,12 +8,16 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema Venta</title>
+    <title>Nueva Venta</title>
 
     <?php
     include_once "../layouts/style.php"
     ?>
- </head> 
+    <style>
+
+    </style>
+</head>
+
 <body class="hold-transition sidebar-mini">
     <?php
     include_once "../layouts/header.php"
@@ -23,14 +27,12 @@ session_start();
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h2>Sistema de Facturación</h2>
-                    </div>
-                    <div class="col-sm-6">
-                        <ul class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../views/index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Pagina Principal</li>
-                        </ul>
+                    <div class="col-sm-12">
+                        <h2 style="font-size: 27px;text-align: center; margin: 0;padding: 0; font-weight: bold;">Nueva Venta</h2>
+                        <div class="form-group row action_client">
+                            <label for="Datos" class="col-sm-2 col-form-label">Datos del Cliente</label>
+                            <a href="registro_clients.php" class="btn btn-primary btn_new_client"><i class="nav-icon fas fa-user-plus"></i> Nuevo Cliente</a>
+                        </div>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -38,32 +40,129 @@ session_start();
 
         <!-- Main content -->
         <section class="content">
-
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Title</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
-                        </button>
+            <div class="card border-primary">
+                <div class="card-body">
+                    <form action="" name="form_new_client" id="form_new_client">
+                        <input type="hidden" name="action" value="addClient">
+                        <input type="hidden" name="idclient" id="idclient" value="addClient" required>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="cedula" class="col-form-label">Cedula</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cedula del cliente" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="nombre" class="col-form-label">Nombre</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del cliente" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Telefono</label>
+                                <div class="col-sm-12">
+                                    <input type="number" disabled class="form-control" name="telefono" id="telefono" placeholder="Telefono del cliente" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="col-sm-2 col-form-label">Dirección</label>
+                                <div class="col-sm-12">
+                                    <input type="text" disabled class="form-control" name="direccion" id="direccion" placeholder="Dirección del cliente" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row text-center" id="div_register_client">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn  btn-success"><i class="nav-icon fas fa-save"></i> Registrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h2 style="font-size: 27px;text-align: center; margin: 0;padding: 0; font-weight: bold;">Datos Venta</h2>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <i class="nav-icon fas fa-user"></i><label for="Datos" class="col-sm-2 col-form-label">Vendedor</label>
+                                <label class="d-block text-danger"><?php echo $_SESSION['user']; ?></label>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <label for="Datos" class="col-sm-2 col-form-label">Acciones</label>
+                                <div class="form-group">
+                                    <a href="#" class="btn btn-secondary"><i class="nav-icon fas fa-ban"></i> Anular</a>
+                                    <a href="#" class="btn btn-danger"><i class="nav-icon fas fa-save"></i> Generar Venta</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    Start creating your amazing application!
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    Footer
-                </div>
-                <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped table-inverse">
+                            <thead class="bg-info thead-inverse">
+                                <tr>
+                                    <th>CODIGO</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>STOCK</th>
+                                    <th>CANTIDAD</th>
+                                    <th>PRECIO</th>
+                                    <th>PRECIO TOTAL</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-striped table-inverse">
+                            <thead class="bg-info thead-inverse">
+                                <tr>
+                                    <th>CODIGO</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>STOCK</th>
+                                    <th>CANTIDAD</th>
+                                    <th>PRECIO</th>
+                                    <th>PRECIO TOTAL</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
