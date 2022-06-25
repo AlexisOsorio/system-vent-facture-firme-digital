@@ -165,9 +165,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../views/new_sales.php" class="nav-link">
                                 <i class="nav-icon fas fa-file-circle-plus"></i>
-                                <p>Nuevo Venta</p>
+                                <p>Nueva Venta</p>
                             </a>
                         </li>
                     </ul>
