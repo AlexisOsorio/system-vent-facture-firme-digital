@@ -53,7 +53,7 @@ session_start();
                             <div class="col-sm-4">
                                 <label for="nombre" class="col-form-label">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="nombre_client" id="nombre_client" placeholder="Nombre del cliente" required>
+                                    <input type="text" disabled class="form-control" name="nombre_client" id="nombre_client" placeholder="Nombre del cliente" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">

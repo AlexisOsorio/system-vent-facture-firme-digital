@@ -154,13 +154,69 @@ $(document).ready(function () {
     });
 
     //campos para registrar cliente
-    $('.btn_new_client').click(function(e){
+    $('.btn_new_client').click(function (e) {
         e.preventDefault();
+        $('#nombre_client').removeAttr('disabled');
         $('#telefono_client').removeAttr('disabled');
         $('#direccion_client').removeAttr('disabled');
 
         $('#div_register_client').slideDown();
     });
+
+
+    //buscar cliente
+    $('#cedula_client').keyup(function (e) {
+        e.preventDefault();
+
+        var client = $(this).val();
+        var action = 'searchCliente';
+
+        $.ajax({
+            type: "POST",
+            url: "agregar_ajax.php",
+            async: true,
+            data: {
+                action: action,
+                cliente: client
+            },
+            success: function (response) {
+                if (response == 0) {
+                    $('#idclient').val('');
+                    $('#nombre_client').val('');
+                    $('#telefono_client').val('');
+                    $('#direccion_client').val('');
+                    //mostrar datos
+                    $('#btn_new_client').slideDown();
+                } else {
+                    var data = $.parseJSON(response);
+                    $('#idclient').val(data.idcliente);
+                    $('#nombre_client').val(data.nombre);
+                    $('#telefono_client').val(data.telefono);
+                    $('#direccion_client').val(data.direccion);
+                    //ocultar boton
+                    $('.btn_new_client').slideUp();
+
+                    //bloquear campos
+                    $('#nombre_client').attr('disabled', 'disabled');
+                    $('#telefono_client').attr('disabled', 'disabled');
+                    $('#direccion_client').attr('disabled', 'disabled');
+
+                    //ocultar boton guardar
+                    $('#div_register_client').slideUp();
+                }
+            },
+            error: function (error) {
+
+            },
+        });
+    });
+
+    //crear cliente - ventas
+    $('#form_new_client').submit(function(e){
+        e.preventDefault();
+        
+    })
+
 }); //end ready
 
 function getUrl() {
