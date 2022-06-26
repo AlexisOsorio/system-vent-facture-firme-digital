@@ -152,6 +152,15 @@ $(document).ready(function () {
         var vendor = getUrl();
         location.href = vendor + 'search_products.php?proveedor=' + $(this).val();
     });
+
+    //campos para registrar cliente
+    $('.btn_new_client').click(function(e){
+        e.preventDefault();
+        $('#telefono_client').removeAttr('disabled');
+        $('#direccion_client').removeAttr('disabled');
+
+        $('#div_register_client').slideDown();
+    });
 }); //end ready
 
 function getUrl() {
