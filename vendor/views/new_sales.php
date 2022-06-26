@@ -122,13 +122,17 @@ session_start();
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td scope="row"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td scope="row"><input type="number" class="form-control"></td>
+                                    <td>
+                                        <p>-</p>
+                                    </td>
+                                    <td>
+                                        <p>-</p>
+                                    </td>
+                                    <td><input type="number" class="form-control"></td>
+                                    <td><p>-</p></td>
+                                    <td><p>-</p></td>
+                                    <td><button type="submit"  class="btn btn-success"><i class="nav-icon fas fa-check"></i> Agregar</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -140,7 +144,6 @@ session_start();
                                 <tr>
                                     <th>CODIGO</th>
                                     <th>DESCRIPCIÓN</th>
-                                    <th>STOCK</th>
                                     <th>CANTIDAD</th>
                                     <th>PRECIO</th>
                                     <th>PRECIO TOTAL</th>
@@ -149,15 +152,40 @@ session_start();
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td scope="row"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td scope="row"><p>-</p></td>
+                                    <td><p>-</p></td>
+                                    <td><p>-</p></td>
+                                    <td><p>-</p></td>
+                                    <td><p>-</p></td>
+                                    <td><a href="#" class="btn btn-dark"><i class="nav-icon fas fa-trash"></i> Eliminar</a></td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td scope="row">Sub Total</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><p>-</p></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Iva</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><p>-</p></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Total</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><p>-</p></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
                         </table>
 
                     </div>
