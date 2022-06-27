@@ -69,7 +69,6 @@ if ($result_sql == 0) {
         $nombre = $data['nombre'];
         $correo = $data['correo'];
         $usuario = $data['usuario'];
-        $idrol = $data['idrol'];
         $rol = $data['rol'];
     }
 }

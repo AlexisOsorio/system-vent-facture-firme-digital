@@ -90,7 +90,7 @@ session_start();
                         <div class="form-group row datos_venta">
                             <div class="col-sm-6">
                                 <i class="nav-icon fas fa-user"></i><label for="Datos" class="col-sm-2 col-form-label">Vendedor</label>
-                                <label class="d-block text-danger"><?php echo $_SESSION['user']; ?></label>
+                                <label class="d-block text-danger"><?php echo $_SESSION['nombre']; ?></label>
                             </div>
                             <div class="col-sm-6 ">
                                 <label for="Datos" class="col-sm-2 col-form-label">Acciones</label>
@@ -119,6 +119,11 @@ session_start();
                                 </tr>
                             </thead>
                             <tbody>
+                                <style>
+                                    #add_product_venta{
+                                        display: none;
+                                    }
+                                </style>
                                 <tr>
                                     <td scope="row"><input type="text" name="txt_cod_producto" id="txt_cod_producto" class="form-control"></td>
                                     <td id="txt_decripcion">-</td>
@@ -152,18 +157,18 @@ session_start();
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td scope="row" colspan="5">SUBTOTAL $</td>
-                                    <td>1,380.00</td>
+                                    <td scope="row" colspan="5" class="text-right" style="font-weight: bold;">SUBTOTAL $</td>
+                                    <td style="font-weight: bold;">1,380.00</td>
 
                                 </tr>
                                 <tr>
-                                    <td scope="row" colspan="5">IVA(12%)</td>
-                                    <td>120.00</td>
+                                    <td scope="row" colspan="5" class="text-right" style="font-weight: bold;">IVA(12%)</td>
+                                    <td style="font-weight: bold;">120.00</td>
 
                                 </tr>
                                 <tr>
-                                    <td scope="row" colspan="5">TOTAL</td>
-                                    <td>1,500.00</td>
+                                    <td scope="row" colspan="5" class="text-right" style="font-weight: bold;">TOTAL</td>
+                                    <td style="font-weight: bold;">1,500.00</td>
 
                                 </tr>
                             </tfoot>

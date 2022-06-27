@@ -7,7 +7,7 @@ if (!empty($_POST)) {
     if ($_POST['action'] == 'infoStock') {
         $stock_id = $_POST['producto'];
 
-        $query = mysqli_query($conexion, "SELECT codproducto, descripcion FROM producto 
+        $query = mysqli_query($conexion, "SELECT codproducto, descripcion,existencia,precio FROM producto 
                                         WHERE codproducto = $stock_id AND estatus = 1");
         mysqli_close($conexion);
 
@@ -96,6 +96,28 @@ if (!empty($_POST)) {
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
        }
         exit;
-    }    
+    }
+    
+    //register clients mod sales
+    if ($_POST['action'] == 'addClient') {
+        
+        $cedula = $_POST['cedula_client'];
+        $nombre = $_POST['nombre_client'];
+        $telefono = $_POST['telefono_client'];
+        $direccion = $_POST['direccion_client'];
+        $usuario_id = $_SESSION['idUser'];
+
+        $query_insert = mysqli_query($conexion, "INSERT INTO cliente(ruc,nombre,telefono,direccion, usuario_id) 
+                                        VALUES('$cedula', '$nombre', '$telefono', '$direccion', '$usuario_id')");
+        if ($query_insert) {
+            $codClient = mysqli_insert_id($conexion);
+            $mensaje = $codClient;
+        }else {
+            $mensaje = 'error';
+        }
+        mysqli_close($conexion);
+        echo $mensaje;
+        exit;
+    }
 }
 exit;
