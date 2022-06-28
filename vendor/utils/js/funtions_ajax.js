@@ -341,7 +341,7 @@ $(document).ready(function () {
               async: true,
               data: {action:action,producto:codproducto,cantidad:cantidad},
               success: function(response) {
-                console.log(response);
+
                 /*if (response != 'error') {
                   var info = JSON.parse(response);
                   $('#detalle_venta').html(info.detalle);
