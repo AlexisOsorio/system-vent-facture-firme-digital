@@ -15,10 +15,9 @@ include_once '../../config/conexion.php';
     <?php
     include_once "../layouts/style.php"
     ?>
+
     <style>
-        #div_register_client {
-            display: none;
-        }
+
     </style>
 </head>
 
@@ -74,7 +73,7 @@ include_once '../../config/conexion.php';
                             </div>
                         </div>
                         <div class="form-group row text-center">
-                            <div class="col-sm-12"  id="div_register_client">
+                            <div class="col-sm-12"  id="div_register_client"  style="display: none;">
                                 <button type="submit" class="btn  btn-success"><i class="nav-icon fas fa-save"></i> Registrar</button>
                             </div>
                         </div>
@@ -108,9 +107,9 @@ include_once '../../config/conexion.php';
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table table-striped table-inverse tbl_venta">
-                            <thead class="bg-info thead-inverse">
-                                <tr>
+                        <table class="table table-striped table-inverse table-hover tbl_venta">
+                            <thead class="thead-inverse">
+                                <tr style="background-color: #17A2B8; color: #fff;">
                                     <th>CODIGO</th>
                                     <th>DESCRIPCIÓN</th>
                                     <th>STOCK</th>
@@ -119,13 +118,6 @@ include_once '../../config/conexion.php';
                                     <th>PRECIO TOTAL</th>
                                     <th>ACCIONES</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <style>
-                                    #add_product_venta{
-                                        display: none;
-                                    }
-                                </style>
                                 <tr>
                                     <td scope="row"><input type="text" name="txt_cod_producto" id="txt_cod_producto" class="form-control"></td>
                                     <td id="txt_decripcion">-</td>
@@ -133,11 +125,9 @@ include_once '../../config/conexion.php';
                                     <td><input type="text" name="txt_cant_producto" id="txt_cant_producto" value="0" min="1" disabled class="form-control"></td>
                                     <td id="txt_precio">0.00</td>
                                     <td id="txt_precio_total">0.00</td>
-                                    <td><a href="#" class="btn btn-success" id="add_product_venta"><i class="nav-icon fas fa-check"></i> Agregar</a></td>
+                                    <td><a href="#" id="add_product_venta" class="btn btn-success" style="display: none;">Agregar</a></td>
                                 </tr>
-                            </tbody>
-                            <thead class="bg-info thead-inverse">
-                                <tr>
+                                <tr style="background-color: #17A2B8; color: #fff;">
                                     <th>CODIGO</th>
                                     <th colspan="2">DESCRIPCIÓN</th>
                                     <th>CANTIDAD</th>
@@ -147,32 +137,10 @@ include_once '../../config/conexion.php';
                                 </tr>
                             </thead>
                             <tbody id="detalle_venta">
-                                <tr>
-                                    <td scope="row">1</td>
-                                    <td colspan="2">Laptop HP</td>
-                                    <td>1</td>
-                                    <td>1,500.00</td>
-                                    <td>1,500.00</td>
-                                    <td><a href="#" class="btn btn-dark link_delete" onclick="event.preventDefault(); 
-                                        del_product_detalle(1);"><i class="nav-icon fas fa-trash"></i> Eliminar</a></td>
-                                </tr>
+                                <!--Contenido desde AJAX-->
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td scope="row" colspan="5" class="text-right" style="font-weight: bold;">SUBTOTAL $</td>
-                                    <td style="font-weight: bold;">1,380.00</td>
-
-                                </tr>
-                                <tr>
-                                    <td scope="row" colspan="5" class="text-right" style="font-weight: bold;">IVA(12%)</td>
-                                    <td style="font-weight: bold;">120.00</td>
-
-                                </tr>
-                                <tr>
-                                    <td scope="row" colspan="5" class="text-right" style="font-weight: bold;">TOTAL</td>
-                                    <td style="font-weight: bold;">1,500.00</td>
-
-                                </tr>
+                            <tfoot id="detalle_totales">
+                                <!--Content ajax-->
                             </tfoot>
                         </table>
 

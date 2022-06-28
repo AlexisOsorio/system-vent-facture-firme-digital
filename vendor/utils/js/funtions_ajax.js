@@ -331,24 +331,43 @@ $(document).ready(function () {
     $('#add_product_venta').click(function (e) {
         e.preventDefault();
 
-        if ($('#add_product_venta').val() > 0) {
+        if ($('#txt_cant_producto').val() > 0) {
             var codproducto = $('#txt_cod_producto').val();
             var cantidad = $('#txt_cant_producto').val();
             var action = 'addProductDetall';
-
             $.ajax({
-                type: "POST",
-                url: "agregar_ajax.php",
-                async: true,
-                data: {action:action,producto:codproducto,cantidad:cantidad},
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function(error){
-
+              url: 'agregar_ajax.php',
+              type: 'POST',
+              async: true,
+              data: {action:action,producto:codproducto,cantidad:cantidad},
+              success: function(response) {
+                console.log(response);
+                /*if (response != 'error') {
+                  var info = JSON.parse(response);
+                  $('#detalle_venta').html(info.detalle);
+                  $('#detalle_totales').html(info.totales);
+                  $('#txt_cod_producto').val('');
+                  $('#txt_descripcion').html('-');
+                  $('#txt_stock').html('-');
+                  $('#txt_cant_producto').val('0');
+                  $('#txt_precio').html('0.00');
+                  $('#txt_precio_total').html('0.00');
+        
+                  // Bloquear cantidad
+                  $('#txt_cant_producto').attr('disabled','disabled');
+        
+                  // Ocultar boton agregar
+                  $('#add_product_venta').slideUp();
+                }else {
+                  console.log('No hay dato');
                 }
+                viewProcesar();*/
+              },
+              error: function(error) {
+        
+              }
             });
-        }
+          }
     });
 
 }); //end ready
