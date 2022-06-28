@@ -342,10 +342,11 @@ $(document).ready(function () {
               data: {action:action,producto:codproducto,cantidad:cantidad},
               success: function(response) {
 
-                /*if (response != 'error') {
-                  var info = JSON.parse(response);
-                  $('#detalle_venta').html(info.detalle);
-                  $('#detalle_totales').html(info.totales);
+                if (response != 'error') {
+                  var info_prod = JSON.parse(response);
+                  $('#detalle_venta').html(info_prod.detalle);
+                  $('#detalle_totales').html(info_prod.totales);
+
                   $('#txt_cod_producto').val('');
                   $('#txt_descripcion').html('-');
                   $('#txt_stock').html('-');
@@ -353,15 +354,15 @@ $(document).ready(function () {
                   $('#txt_precio').html('0.00');
                   $('#txt_precio_total').html('0.00');
         
-                  // Bloquear cantidad
+                  // Bloquear la cantidad
                   $('#txt_cant_producto').attr('disabled','disabled');
         
                   // Ocultar boton agregar
                   $('#add_product_venta').slideUp();
                 }else {
-                  console.log('No hay dato');
+                  console.log('No exiten datos');
                 }
-                viewProcesar();*/
+                viewProcesar();
               },
               error: function(error) {
         
@@ -371,6 +372,24 @@ $(document).ready(function () {
     });
 
 }); //end ready
+
+function searchForDetalle(id) {
+    var action = 'searchForDetalle';
+    var user = id;
+    
+    $.ajax({
+        url: 'agregar_ajax.php',
+        type: 'POST',
+        async: true,
+        data: {action:action,user:user},
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(error) {
+  
+        }
+      });
+}
 
 function getUrl() {
     var local = window.location;

@@ -160,3 +160,9 @@ include_once '../../config/conexion.php';
     <?php
     include_once "../layouts/footer.php"
     ?>
+    <script type="text/javascript">
+        $(document).ready(function(e){
+            var userId = '<?php echo $_SESSION['idUser']; ?>';
+            searchForDetalle(userId);
+        })
+    </script>

@@ -148,9 +148,9 @@ if (!empty($_POST)) {
                 }
 
                 while ($data = mysqli_fetch_assoc($query_detalle_temp)) {
-                    $precioTotal = round($data['cantidad'] * $data['precio_venta'], 2);
-                    $sub_total = round($sub_total + $precioTotal, 2);
-                    $total = round($total + $precioTotal, 2);
+                    $precioTotal = round($data['cantidad'] * $data['precio_venta']);
+                    $sub_total = round($sub_total + $precioTotal);
+                    $total = round($total + $precioTotal);
 
                     $detallTable .= '
                     <tr>
@@ -167,9 +167,9 @@ if (!empty($_POST)) {
                     ';
                 }
 
-                $impuesto = $sub_total * ($iva / 100);
-                $tl_sin_iva = $sub_total - $impuesto;
-                $total = round($tl_sin_iva + $impuesto, 2);
+                $impuesto = round($sub_total * ($iva / 100));
+                $tl_sin_iva = round($sub_total - $impuesto);
+                $total = round($tl_sin_iva + $impuesto);
 
                 $detall_Totals = '
                 <tr>
