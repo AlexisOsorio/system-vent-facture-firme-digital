@@ -366,7 +366,7 @@ $(document).ready(function () {
                     } else {
                         console.log('No exiten datos');
                     }
-                    //viewProcesar();
+                    viewProcesar();
                 },
                 error: function (error) {
 
@@ -409,7 +409,7 @@ function del_product_detalle(correlativo) {
                 $('#detalle_venta').html('');
                 $('#detalle_totales').html('');
             }
-
+            viewProcesar();
         },
         error: function (error) {
 
@@ -418,7 +418,7 @@ function del_product_detalle(correlativo) {
 }
 
 // mostrar/ ocultar boton Procesar
-/*function viewProcesar() {
+function viewProcesar() {
     if ($('#detalle_venta tr').length > 0) {
         $('#btn_facturar_venta').show();
         $('#btn_anular_venta').show();
@@ -426,7 +426,7 @@ function del_product_detalle(correlativo) {
         $('#btn_facturar_venta').hide();
         $('#btn_anular_venta').hide();
     }
-}*/
+}
 
 //buscar detalle
 function searchForDetalle(id) {
@@ -441,15 +441,15 @@ function searchForDetalle(id) {
             user: user
         },
         success: function (response) {
-            if (response != 'error') {
+            if (response == 0) {
+                console.log('No hay Datos');
+            } else {
+                
                 var info = JSON.parse(response);
                 $('#detalle_venta').html(info.detalle);
                 $('#detalle_totales').html(info.totales);
-
-            } else {
-                console.log('No hay Datos');
             }
-            //viewProcesar();
+            viewProcesar();
         },
         error: function (error) {
 

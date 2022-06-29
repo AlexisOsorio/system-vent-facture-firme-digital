@@ -306,7 +306,7 @@ if (!empty($_POST)) {
             $iva = 0;
             $total = 0;
             $data = "";
-            $arrayData = array();
+            $DateArray = array();
             if ($result > 0) {
                 if ($result_iva > 0) {
                     $info_iva = mysqli_fetch_assoc($query_iva);
@@ -349,10 +349,10 @@ if (!empty($_POST)) {
                 </tr>
                 ';
 
-                $arrayData['detalle'] = $detalleTabla;
-                $arrayData['totales'] = $detalleTotales;
+                $DateArray['detalle'] = $detalleTabla;
+                $DateArray['totales'] = $detalleTotales;
 
-                echo json_encode($arrayData, JSON_UNESCAPED_UNICODE);
+                echo json_encode($DateArray, JSON_UNESCAPED_UNICODE);
             } else {
                 $data = 0;
                 exit;

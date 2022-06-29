@@ -161,7 +161,7 @@ include_once '../../config/conexion.php';
     include_once "../layouts/footer.php"
     ?>
     <script type="text/javascript">
-        $(document).ready(function(e){
+        $(document).ready(function(){
             var userId = '<?php echo $_SESSION['idUser']; ?>';
             searchForDetalle(userId);
         })
