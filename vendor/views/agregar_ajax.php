@@ -361,5 +361,20 @@ if (!empty($_POST)) {
         }
         exit;
     }
+
+    //anular venta
+    if ($_POST['action'] == 'anularVenta') {
+        $data = "";
+        $token = md5($_SESSION['idUser']);
+        $query_del = mysqli_query($conexion, "DELETE FROM detalle_temp WHERE token_user = '$token'");
+        mysqli_close($conexion);
+        if ($query_del) {
+            echo 'ok';
+        } else {
+            $data = 0;
+            echo 'error';
+        }
+        exit;
+    }
 }
 exit;

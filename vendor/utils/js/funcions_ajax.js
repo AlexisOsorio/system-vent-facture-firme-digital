@@ -375,6 +375,31 @@ $(document).ready(function () {
         }
     });
 
+    //anular venta
+    $('#btn_anular_venta').click(function (e) {
+        e.preventDefault();
+        var rows = $('#detalle_venta tr').length;
+        if (rows > 0) {
+            var action = 'anularVenta';
+            $.ajax({
+                url: 'agregar_ajax.php',
+                type: 'POST',
+                async: true,
+                data: {
+                    action: action
+                },
+                success: function (response) {
+                    if (response != 0) {
+                        location.reload();
+                    }
+                },
+                error: function (error) {
+
+                }
+            });
+        }
+    });
+
 }); //end ready
 
 function del_product_detalle(correlativo) {
@@ -444,10 +469,10 @@ function searchForDetalle(id) {
             if (response == 0) {
                 console.log('No hay Datos');
             } else {
-                
                 var info = JSON.parse(response);
                 $('#detalle_venta').html(info.detalle);
                 $('#detalle_totales').html(info.totales);
+
             }
             viewProcesar();
         },
