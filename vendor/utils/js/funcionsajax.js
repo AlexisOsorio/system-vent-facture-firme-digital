@@ -400,6 +400,35 @@ $(document).ready(function () {
         }
     });
 
+    //facturar venta
+    $('#btn_facturar_venta').click(function (e) {
+        e.preventDefault();
+        var rows = $('#detalle_venta tr').length;
+        if (rows > 0) {
+            var action = 'procesarVenta';
+            var codCliente = $('#idclient').val();
+            $.ajax({
+                url: 'agregar_ajax.php',
+                type: 'POST',
+                async: true,
+                data: {
+                    action: action,
+                    codCliente:codCliente
+                },
+                success: function (response) {
+                    if (response != 'error') {
+                        //var info_prod = JSON.parse(response);
+                        //console.log(info_prod);
+                        location.reload();
+                    }
+                },
+                error: function (error) {
+
+                }
+            });
+        }
+    });
+
 }); //end ready
 
 function del_product_detalle(correlativo) {
