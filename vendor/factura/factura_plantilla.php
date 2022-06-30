@@ -17,10 +17,10 @@
 			</td>
 			<td class="info_empresa">
 				<div>
-					<span class="h2">SISTEMA VENTAS ABELOSH</span>
-					<p>Avenida las américas Zona 13, Guatemala</p>
-					<p>Teléfono: +(502) 2222-3333</p>
-					<p>Email: info@abelosh.com</p>
+					<span class="h2">SISTEMA VENTAS RPEIV</span>
+					<p>Amazonas, La Maná, Ecuador</p>
+					<p>Teléfono: +593 999999999</p>
+					<p>Email: admin@admin.com</p>
 				</div>
 			</td>
 			<td class="info_factura">
@@ -41,7 +41,7 @@
 					<span class="h3">Cliente</span>
 					<table class="datos_cliente">
 						<tr>
-							<td><label>Nit:</label><p>54895468</p></td>
+							<td><label>Cedula:</label><p>54895468</p></td>
 							<td><label>Teléfono:</label> <p>7854526</p></td>
 						</tr>
 						<tr>
