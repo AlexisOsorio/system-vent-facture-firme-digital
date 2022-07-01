@@ -416,10 +416,10 @@ $(document).ready(function () {
                     codCliente:codCliente
                 },
                 success: function (response) {
-                    if (response != 'error') {
-                        //var info_prod = JSON.parse(response);
-                        //console.log(info_prod);
-                        location.reload();
+                    if (response != 0) {
+                        var info_prod = JSON.parse(response);
+                        console.log(info_prod);
+                        //location.reload();
                     }
                 },
                 error: function (error) {

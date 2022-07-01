@@ -7,11 +7,10 @@
 	session_start();
 	if(empty($_SESSION['active']))
 	{
-		header('location: ../');
+		header('location: .../../index.php');
 	}
-
-	include "../../conexion.php";
-	require_once '../pdf/vendor/autoload.php';
+	include_once "../../config/conexion.php";
+	require_once 'pdf/vendor/autoload.php';
 	use Dompdf\Dompdf;
 
 	if(empty($_REQUEST['cl']) || empty($_REQUEST['f']))
@@ -63,6 +62,7 @@
 		    $html = ob_get_clean();
 
 			// instantiate and use the dompdf class
+			
 			$dompdf = new Dompdf();
 
 			$dompdf->loadHtml($html);

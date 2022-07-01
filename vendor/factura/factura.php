@@ -107,7 +107,7 @@
 			</tbody>
 			<tfoot id="detalle_totales">
 				<tr>
-					<td colspan="3" class="textright"><span>SUBTOTAL Q.</span></td>
+					<td colspan="3" class="textright"><span>SUBTOTAL $.</span></td>
 					<td class="textright"><span><?php echo $tl_sniva; ?></span></td>
 				</tr>
 				<tr>
@@ -115,7 +115,7 @@
 					<td class="textright"><span><?php echo $impuesto; ?></span></td>
 				</tr>
 				<tr>
-					<td colspan="3" class="textright"><span>TOTAL Q.</span></td>
+					<td colspan="3" class="textright"><span>TOTAL $.</span></td>
 					<td class="textright"><span><?php echo $total; ?></span></td>
 				</tr>
 		</tfoot>
