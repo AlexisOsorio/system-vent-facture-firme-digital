@@ -148,9 +148,9 @@ if (!empty($_POST)) {
                 }
 
                 while ($data = mysqli_fetch_assoc($query_detalle_temp)) {
-                    $precioTotal = round($data['cantidad'] * $data['precio_venta'],2);
-                    $sub_total = round($sub_total + $precioTotal,2);
-                    $total = round($total + $precioTotal,2);
+                    $precioTotal = round($data['cantidad'] * $data['precio_venta'], 2);
+                    $sub_total = round($sub_total + $precioTotal, 2);
+                    $total = round($total + $precioTotal, 2);
 
                     $detallTable .= '
                     <tr>
@@ -166,9 +166,9 @@ if (!empty($_POST)) {
                     ';
                 }
 
-                $impuesto = round($sub_total * ($iva / 100),2);
-                $tl_sin_iva = round($sub_total - $impuesto,2);
-                $total = round($tl_sin_iva + $impuesto,2);
+                $impuesto = round($sub_total * ($iva / 100), 2);
+                $tl_sin_iva = round($sub_total - $impuesto, 2);
+                $total = round($tl_sin_iva + $impuesto, 2);
 
                 $detall_Totals = '
                 <tr>
@@ -234,9 +234,9 @@ if (!empty($_POST)) {
                 }
 
                 while ($data = mysqli_fetch_assoc($query)) {
-                    $precioTotal = round($data['cantidad'] * $data['precio_venta'],2);
-                    $sub_total = round($sub_total + $precioTotal,2);
-                    $total = round($total + $precioTotal,2);
+                    $precioTotal = round($data['cantidad'] * $data['precio_venta'], 2);
+                    $sub_total = round($sub_total + $precioTotal, 2);
+                    $total = round($total + $precioTotal, 2);
 
                     $detallTable .= '
                     <tr>
@@ -252,9 +252,9 @@ if (!empty($_POST)) {
                     ';
                 }
 
-                $impuesto = round($sub_total * ($iva / 100),2);
-                $tl_sin_iva = round($sub_total - $impuesto,2);
-                $total = round($tl_sin_iva + $impuesto,2);
+                $impuesto = round($sub_total * ($iva / 100), 2);
+                $tl_sin_iva = round($sub_total - $impuesto, 2);
+                $total = round($tl_sin_iva + $impuesto, 2);
 
                 $detall_Totals = '
                 <tr>
@@ -313,9 +313,9 @@ if (!empty($_POST)) {
                     $iva = $info_iva['iva'];
                 }
                 while ($data = mysqli_fetch_assoc($query_detalle_tmp)) {
-                    $precioTotal = round($data['cantidad'] * $data['precio_venta'],2);
-                    $total = round($total + $precioTotal,2);
-                    $sub_total = round($sub_total + $precioTotal,2);
+                    $precioTotal = round($data['cantidad'] * $data['precio_venta'], 2);
+                    $total = round($total + $precioTotal, 2);
+                    $sub_total = round($sub_total + $precioTotal, 2);
 
                     $detallTable .= '
                     <tr>
@@ -330,9 +330,9 @@ if (!empty($_POST)) {
                     </tr>
                     ';
                 }
-                $impuesto = round($sub_total * ($iva / 100),2);
-                $tl_sniva = round($sub_total - $impuesto,2);
-                $total = round($tl_sniva + $impuesto,2);
+                $impuesto = round($sub_total * ($iva / 100), 2);
+                $tl_sniva = round($sub_total - $impuesto, 2);
+                $total = round($tl_sniva + $impuesto, 2);
 
                 $detall_Totals = '
                 <tr>
@@ -378,30 +378,29 @@ if (!empty($_POST)) {
     }
 
     //procesar venta
-    if ($_POST['action'] == 'procesarVenta'){
-        if (empty($_POST['codcliente'])) {
+    if ($_POST['action'] == 'procesarVenta') {
+        if (empty($_POST['codCliente'])) {
             $codCliente = 1;
+            
         }else {
-            $codCliente = $_POST['codcliente'];
+            $codCliente = $_POST['codCliente'];
         }
-
         $token = md5($_SESSION['idUser']);
         $usuario = $_SESSION['idUser'];
-
-        $query_pr = mysqli_query($conexion,"SELECT * FROM detalle_temp WHERE token_user = '$token'");
+        $query_pr = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE token_user = '$token'");
         $result_pr = mysqli_num_rows($query_pr);
 
         if ($result_pr > 0) {
-            $query_pr_alm = mysqli_query($conexion,"CALL procesar_venta($usuario, $codCliente, '$token')");
+            $query_pr_alm = mysqli_query($conexion, "CALL procesar_venta($usuario, $codCliente, '$token')");
             $result_alm = mysqli_num_rows($query_pr_alm);
-            
+
             if ($result_alm > 0) {
                 $data = mysqli_fetch_assoc($query_pr_alm);
-                echo json_encode($data,JSON_UNESCAPED_UNICODE);
-            }else {
+                echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            } else {
                 echo 'error';
             }
-        }else {
+        } else {
             echo 'error';
         }
         mysqli_close($conexion);

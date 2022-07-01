@@ -413,12 +413,13 @@ $(document).ready(function () {
                 async: true,
                 data: {
                     action: action,
-                    codCliente:codCliente
+                    codCliente: codCliente
                 },
                 success: function (response) {
-                    if (response != 0) {
+                    if (response != 'error') {
                         var info_prod = JSON.parse(response);
-                        console.log(info_prod);
+                        //console.log(info);
+                        generarPDF(info_prod.codcliente,info_prod.nofactura);
                         //location.reload();
                     }
                 },
@@ -431,6 +432,19 @@ $(document).ready(function () {
 
 }); //end ready
 
+//generar factura
+function generarPDF(cliente, factura) {
+    var ancho = 900;
+    var alto = 800;
+    //se calcula las posiciones x,y 
+    var x = parseInt((window.screen.width / 2) - (ancho / 2));
+    var y = parseInt((window.screen.height / 2) - (alto / 2));
+
+    $url = '../factura/generaFactura.php?cl='+cliente+'&f='+factura;
+    window.open($url,"Factura","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+}
+
+//del prod_detall
 function del_product_detalle(correlativo) {
     var action = 'delProductoDetalle';
     var id_detalle = correlativo;
