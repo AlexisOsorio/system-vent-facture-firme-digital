@@ -21,14 +21,14 @@
 		$noFactura = $_REQUEST['f'];
 		$anulada = '';
 
-		$query_config   = mysqli_query($conection,"SELECT * FROM configuracion");
+		$query_config   = mysqli_query($conexion,"SELECT * FROM configuracion");
 		$result_config  = mysqli_num_rows($query_config);
 		if($result_config > 0){
 			$configuracion = mysqli_fetch_assoc($query_config);
 		}
 
 
-		$query = mysqli_query($conection,"SELECT f.nofactura, DATE_FORMAT(f.fecha, '%d/%m/%Y') as fecha, DATE_FORMAT(f.fecha,'%H:%i:%s') as  hora, f.codcliente, f.estatus,
+		$query = mysqli_query($conexion,"SELECT f.nofactura, DATE_FORMAT(f.fecha, '%d/%m/%Y') as fecha, DATE_FORMAT(f.fecha,'%H:%i:%s') as  hora, f.codcliente, f.estatus,
 												 v.nombre as vendedor,
 												 cl.nit, cl.nombre, cl.telefono,cl.direccion
 											FROM factura f
@@ -48,7 +48,7 @@
 				$anulada = '<img class="anulada" src="img/anulado.png" alt="Anulada">';
 			}
 
-			$query_productos = mysqli_query($conection,"SELECT p.descripcion,dt.cantidad,dt.precio_venta,(dt.cantidad * dt.precio_venta) as precio_total
+			$query_productos = mysqli_query($conexion,"SELECT p.descripcion,dt.cantidad,dt.precio_venta,(dt.cantidad * dt.precio_venta) as precio_total
 														FROM factura f
 														INNER JOIN detallefactura dt
 														ON f.nofactura = dt.nofactura

@@ -420,7 +420,7 @@ $(document).ready(function () {
                         var info_prod = JSON.parse(response);
                         //console.log(info);
                         generarPDF(info_prod.codcliente,info_prod.nofactura);
-                        //location.reload();
+                        location.reload();
                     }
                 },
                 error: function (error) {
