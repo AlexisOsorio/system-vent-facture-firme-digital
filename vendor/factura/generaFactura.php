@@ -30,7 +30,7 @@
 
 		$query = mysqli_query($conexion,"SELECT f.nofactura, DATE_FORMAT(f.fecha, '%d/%m/%Y') as fecha, DATE_FORMAT(f.fecha,'%H:%i:%s') as  hora, f.codcliente, f.estatus,
 												 v.nombre as vendedor,
-												 cl.nit, cl.nombre, cl.telefono,cl.direccion
+												 cl.ruc, cl.nombre, cl.telefono,cl.direccion
 											FROM factura f
 											INNER JOIN usuario v
 											ON f.usuario = v.idusuario

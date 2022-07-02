@@ -31,7 +31,7 @@
 					<span class="h2"><?php echo strtoupper($configuracion['nombre']); ?></span>
 					<p><?php echo $configuracion['razon_social']; ?></p>
 					<p><?php echo $configuracion['direccion']; ?></p>
-					<p>NIT: <?php echo $configuracion['nit']; ?></p>
+					<p>RUC: <?php echo $configuracion['cedula']; ?></p>
 					<p>Teléfono: <?php echo $configuracion['telefono']; ?></p>
 					<p>Email: <?php echo $configuracion['email']; ?></p>
 				</div>
@@ -42,7 +42,7 @@
 			<td class="info_factura">
 				<div class="round">
 					<span class="h3">Factura</span>
-					<p>No. Factura: <strong><?php echo $factura['nofactura']; ?></strong></p>
+					<p>N°. Factura: <strong><?php echo $factura['nofactura']; ?></strong></p>
 					<p>Fecha: <?php echo $factura['fecha']; ?></p>
 					<p>Hora: <?php echo $factura['hora']; ?></p>
 					<p>Vendedor: <?php echo $factura['vendedor']; ?></p>
@@ -57,7 +57,7 @@
 					<span class="h3">Cliente</span>
 					<table class="datos_cliente">
 						<tr>
-							<td><label>Nit:</label><p><?php echo $factura['nit']; ?></p></td>
+							<td><label>Ruc/Cedula:</label><p><?php echo $factura['ruc']; ?></p></td>
 							<td><label>Teléfono:</label> <p><?php echo $factura['telefono']; ?></p></td>
 						</tr>
 						<tr>
