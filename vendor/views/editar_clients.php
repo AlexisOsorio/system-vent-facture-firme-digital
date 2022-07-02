@@ -163,7 +163,6 @@ if ($result_sql == 0) {
                                                 <input type="text" name="direccion" id="direccion" placeholder="Ingrese la Dirección del Cliente" class="form-control" value="<?php echo $direccion; ?>">
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10 float-right">
                                                 <input type="submit" class="btn btn-block btn-outline-primary" value="Guardar Cliente">

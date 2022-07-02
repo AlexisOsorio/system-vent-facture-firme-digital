@@ -10,7 +10,7 @@ include_once "../../config/conexion.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Clientes</title>
+    <title>Lista de Facturas</title>
 
     <?php
     include_once "../layouts/style.php"
@@ -39,14 +39,22 @@ include_once "../../config/conexion.php";
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h2><b>Lista Clientes</b></h2>
+                    <div class="col-sm-3">
+                        <h2><b>Lista de Facturas</b></h2>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a href="../views/new_sales.php" class=" btn bg-primary">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                Nueva Venta
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="col-sm-7">
+                        <ul class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../views/index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Lista Clientes</li>
-                        </ol>
+                            <li class="breadcrumb-item active">Lista Facturas</li>
+                        </ul>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -57,33 +65,50 @@ include_once "../../config/conexion.php";
             <div class="container">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12" style="padding-bottom: 5px;">
-                            <div class="form-group row">
-                                <form action="search_clients.php" method="get" class=" col-sm-9 d-flex">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="Buscar Cliente">
+                        <div class="offset-sm-9 col-sm-3 float-right" style="padding-bottom: 5px;">
+                            <div class="form-group">
+                                <form action="search_sales.php" method="get" class="d-flex">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="N° Factura">
                                     <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search"></i></button>
                                 </form>
-
-                                <ul class="nav justify-content-end">
-                                    <li class="nav-item">
-                                        <a href="../views/registro_clients.php" class=" btn bg-primary">
-                                            <i class="nav-icon fas fa-user-plus"></i>
-                                            Nuevo Ciente
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
+                        </div>
+                        <style>
+                            .buscar_fecha{
+                                padding-top: 3px;
+                                padding-bottom: 3px;
+                            }
+                            .buscar_fecha input{
+                                border: 1px solid #ced4da;
+                                border-radius: 0.25rem;
+                                padding: 0.375rem 0.75rem;
+                                width: 15%;
+                                color: #495057;
+                                background-color: white;
+                            }
+                        </style>
+                        <div class="col-sm-12" style="padding-bottom: 7px;">
+                            <form action="search_sales.php" method="GET" class="buscar_fecha">
+
+                                <label for="" class="col-form-control"> De: </label>
+                                <input type="date" name="fecha_de" id="fecha_de" class="" required>
+
+                                <label for="" class="col-form-control"> A </label>
+                                <input type="date" name="fecha_a" id="fecha_a" required>
+                                <button class="btn btn-info"><i class="nav-icon fas fa-search"></i></button>
+                            </form>
                         </div>
                         <div class="col-md-12">
                             <table class="table table-striped table-inverse">
                                 <thead class="bg-info thead-inverse">
-                                    <tr class="text-center">
-                                        <th scope="col-sm-2">ID</th>
-                                        <th scope="col-sm-2">CEDULA</th>
-                                        <th scope="col-sm-2">NOMBRE</th>
-                                        <th scope="col-sm-2">TELÉFONO</th>
-                                        <th scope="col-sm-2">DIRECCIÓN</th>
-                                        <th scope="col-sm-2">ACCIONES</th>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>FECHA / HORAS</th>
+                                        <th>CLIENTE</th>
+                                        <th>VENDEDOR</th>
+                                        <th>ESTADO</th>
+                                        <th class="text-right">TOTAL FACTURA</th>
+                                        <th class="text-center">ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -116,13 +141,14 @@ include_once "../../config/conexion.php";
                                         }
                                 ?>
                                         <tbody>
-                                            <tr class="text-center">
+                                            <tr>
                                                 <th scope="row"><?php echo $data['idcliente']; ?></th>
                                                 <td><?php echo $ruc; ?></td>
                                                 <td><?php echo $data['nombre']; ?></td>
                                                 <td><?php echo $data['telefono']; ?></td>
                                                 <td><?php echo $data['direccion']; ?></td>
-                                                <td>
+                                                <th class="text-right"></th>
+                                                <td class="text-right">
                                                     <a href="editar_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
                                                     <?php
                                                     if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
