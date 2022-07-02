@@ -10,7 +10,7 @@
 		header('location: .../../index.php');
 	}
 	include_once "../../config/conexion.php";
-	require_once 'dompdf/vendor/autoload.php';
+	require_once 'pdf/vendor/autoload.php';
 	use Dompdf\Dompdf;
 
 	if(empty($_REQUEST['cl']) || empty($_REQUEST['f']))

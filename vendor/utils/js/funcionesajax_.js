@@ -434,7 +434,7 @@ $(document).ready(function () {
 
 //generar factura
 function generarPDF(cliente, factura) {
-    var ancho = 800;
+    var ancho = 750;
     var alto = 700;
     //se calcula las posiciones x,y 
     var x = parseInt((window.screen.width / 2) - (ancho / 2));
