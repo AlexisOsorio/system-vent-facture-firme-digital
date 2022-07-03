@@ -84,9 +84,10 @@ include_once "../../config/conexion.php";
                                 margin: 10px auto;
                             }
 
-                            .buscar_fecha label{
+                            .buscar_fecha label {
                                 margin: 0 10px;
                             }
+
                             .buscar_fecha input {
                                 width: auto;
                                 border: 1px solid #ced4da;
@@ -96,6 +97,7 @@ include_once "../../config/conexion.php";
                                 color: #495057;
                                 background-color: white;
                             }
+
                             .tbn {
                                 margin: 0 10px;
                                 display: inline-block;
@@ -110,6 +112,36 @@ include_once "../../config/conexion.php";
                                 font-size: 1rem;
                                 line-height: 1.5;
                                 border-radius: 0.25rem;
+                                transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                            }
+
+                            .div_acciones {
+                                display: -webkit-flex;
+                                display: -moz-flex;
+                                display: -ms-flex;
+                                display: -o-flex;
+                                display: flex;
+                                justify-content: center;
+                            }
+
+                            .totalfactura {
+                                display: -webkit-flex;
+                                display: -moz-flex;
+                                display: -ms-flex;
+                                display: -o-flex;
+                                display: flex;
+                                justify-content: space-between;
+                            }
+
+                            .pagada .anulada {
+                                padding: 4px 15px;
+                            }
+
+                            .inactive {
+                                background-color: #713545;
+                                border: #713545;
+                                color: #FFFFFF;
+                                cursor: default;
                                 transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
                             }
                         </style>
@@ -181,17 +213,33 @@ include_once "../../config/conexion.php";
                                                 <td><?php echo $data['vendedor']; ?></td>
                                                 <td><?php echo $estatus; ?></td>
                                                 <th class="text-center totalfactura"><span style="width: 10px;">$</span><?php echo $data['totalfactura']; ?></th>
-                                                <td class="text-right">
-                                                    <a href="editar_clients.php?id=<?php echo $data["nofactura"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar</a>
-                                                    <?php
-                                                    if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
-                                                        if ($data['nofactura'] != 1) {
-                                                    ?>
-                                                            <a href="delete_clients.php?id=<?php echo $data["nofactura"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar</a>
-                                                    <?php
+                                                <td class="text-center">
+                                                    <div class="div_acciones">
+                                                        <div>
+                                                            <button class="btn btn-primary view_factura" type="button" cl="<?php echo $data['codcliente']; ?>" f="<?php echo $data['nofactura']; ?>">
+                                                                <i class="nav-icon fas fa-eye"></i>
+                                                            </button>
+                                                        </div>
+                                                        <?php
+                                                        if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                                            if ($data['estatus'] == 1) {
+                                                        ?>
+                                                                <div class="div_factura">
+                                                                    <button class="btn_anular anular_factura tbn btn-danger" fac="<?php echo $data['nofactura']; ?>">
+                                                                        <i class="nav-icon fas fa-ban"></i>
+                                                                    </button>
+                                                                </div>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <div class="div_factura">
+                                                                    <button type="button" class="btn_anular tbn btn-danger inactive"><i class="nav-icon fas fa-ban"></i></button>
+                                                                </div>
+                                                        <?php
+                                                            }
                                                         }
-                                                    }
-                                                    ?>
+                                                        ?>
+                                                    </div>
                                                 </td>
                                             </tr>
 
