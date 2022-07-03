@@ -130,7 +130,7 @@ include_once "../../config/conexion.php";
                                 display: -ms-flex;
                                 display: -o-flex;
                                 display: flex;
-                                justify-content: space-between;
+                                justify-content: space-around;
                             }
 
                             .pagada .anulada {
@@ -164,7 +164,7 @@ include_once "../../config/conexion.php";
                                         <th>VENDEDOR</th>
                                         <th>ESTADO</th>
                                         <th class="text-right">TOTAL FACTURA</th>
-                                        <th class="text-center">ACCIONES</th>
+                                        <th class="text-center">ACCION</th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -201,8 +201,6 @@ include_once "../../config/conexion.php";
                                     while ($data = mysqli_fetch_array($query)) {
                                         if ($data['estatus'] == 1) {
                                             $estatus = '<span class="pagada badge badge-success">Pagada</span>';
-                                        } else {
-                                            $estatus = '<span class="anulada badge badge-danger">Anulada</span>';
                                         }
                                 ?>
                                         <tbody>
@@ -220,25 +218,7 @@ include_once "../../config/conexion.php";
                                                                 <i class="nav-icon fas fa-eye"></i>
                                                             </button>
                                                         </div>
-                                                        <?php
-                                                        if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
-                                                            if ($data['estatus'] == 1) {
-                                                        ?>
-                                                                <div class="div_factura">
-                                                                    <button class="btn_anular anular_factura tbn btn-danger" fac="<?php echo $data['nofactura']; ?>">
-                                                                        <i class="nav-icon fas fa-ban"></i>
-                                                                    </button>
-                                                                </div>
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <div class="div_factura">
-                                                                    <button type="button" class="btn_anular tbn btn-danger inactive"><i class="nav-icon fas fa-ban"></i></button>
-                                                                </div>
-                                                        <?php
-                                                            }
-                                                        }
-                                                        ?>
+
                                                     </div>
                                                 </td>
                                             </tr>

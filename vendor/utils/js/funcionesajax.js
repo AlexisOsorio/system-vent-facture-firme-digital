@@ -430,6 +430,15 @@ $(document).ready(function () {
         }
     });
 
+    //View Bill
+    $('.view_factura').click(function(e){
+        e.preventDefault();
+        
+        var codCliente = $(this).attr('cl');
+        var noFactura = $(this).attr('f');
+        generarPDF(codCliente,noFactura);
+    })
+
 }); //end ready
 
 //generar factura
