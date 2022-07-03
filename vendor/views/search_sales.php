@@ -7,9 +7,35 @@ $busqueda = '';
 $fecha_de = '';
 $fecha_a = '';
 
+if (isset($_REQUEST)) {
+    
+}
+
 if (!empty($_REQUEST['busqueda'])) {
-    if (is_numeric($_REQUEST['busqueda'])) {
-        # code...
+    if (!is_numeric($_REQUEST['busqueda'])) {
+        header('location: list_sales.php');
+    }
+    $busqueda = strtolower($_REQUEST['busqueda']);
+    $where = 'nofactura = $busqueda';
+    $buscar = 'busqueda = $busqueda';
+}
+
+if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
+    $fecha_de = $_REQUEST['fecha_de'];
+    $fecha_a = $_REQUEST['fecha_a'];
+
+    $buscar = '';
+
+    if ($fecha_de > $fecha_a) {
+        header('location: list_sales.php');
+    } elseif ($fecha_de == $fecha_a) {
+        $where = 'fecha = LIKE "%$fecha_de%"';
+        $buscar = 'fecha_de=$fecha_de&$fecha_a=fecha_a';
+    } else {
+        $fc_de = $fecha_de . '00:00:00';
+        $fc_a = $fecha_a.'23:59:59';
+        $where = 'fecha BETWEEN "$fc_de" AND "$fc_a"';
+        $buscar = 'fecha_de=$fecha_de&fecha_a=$fecha_a';
     }
 }
 ?>
