@@ -45,7 +45,7 @@ include_once "../../config/conexion.php";
                     <ul class="nav justify-content-end">
                         <li class="nav-item">
                             <a href="../views/new_sales.php" class=" btn bg-primary">
-                                <i class="nav-icon fas fa-user-plus"></i>
+                                <i class="nav-icon fas fa-file-circle-plus"></i>
                                 Nueva Venta
                             </a>
                         </li>
@@ -74,11 +74,21 @@ include_once "../../config/conexion.php";
                             </div>
                         </div>
                         <style>
-                            .buscar_fecha{
+                            .buscar_fecha {
                                 padding-top: 3px;
                                 padding-bottom: 3px;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+                                border-radius: 10px;
+                                margin: 10px auto;
                             }
-                            .buscar_fecha input{
+
+                            .buscar_fecha label{
+                                margin: 0 10px;
+                            }
+                            .buscar_fecha input {
+                                width: auto;
                                 border: 1px solid #ced4da;
                                 border-radius: 0.25rem;
                                 padding: 0.375rem 0.75rem;
@@ -86,16 +96,30 @@ include_once "../../config/conexion.php";
                                 color: #495057;
                                 background-color: white;
                             }
+                            .tbn {
+                                margin: 0 10px;
+                                display: inline-block;
+                                font-weight: 400;
+                                text-align: center;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                -ms-user-select: none;
+                                user-select: none;
+                                border: 1px solid transparent;
+                                padding: 0.375rem 0.75rem;
+                                font-size: 1rem;
+                                line-height: 1.5;
+                                border-radius: 0.25rem;
+                                transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                            }
                         </style>
                         <div class="col-sm-12" style="padding-bottom: 7px;">
                             <form action="search_sales.php" method="GET" class="buscar_fecha">
-
-                                <label for="" class="col-form-control"> De: </label>
+                                <label for="fecha_de" class="col-form-control"> De: </label>
                                 <input type="date" name="fecha_de" id="fecha_de" class="" required>
-
-                                <label for="" class="col-form-control"> A </label>
+                                <label for="fecha_a" class="col-form-control"> A </label>
                                 <input type="date" name="fecha_a" id="fecha_a" required>
-                                <button class="btn btn-info"><i class="nav-icon fas fa-search"></i></button>
+                                <button class="tbn btn-info"><i class="nav-icon fas fa-search"></i></button>
                             </form>
                         </div>
                         <div class="col-md-12">
@@ -114,7 +138,7 @@ include_once "../../config/conexion.php";
                                 <?php
 
                                 //paginador
-                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM cliente WHERE estatus = 1");
+                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM factura WHERE estatus != 10");
                                 $result_reg = mysqli_fetch_array($sql_reg);
                                 $registros_totales = $result_reg['registros_totales'];
 
@@ -129,32 +153,41 @@ include_once "../../config/conexion.php";
                                 $desde_pg = ($pag - 1) * $pag_num;
                                 $total_pg = ceil($registros_totales / $pag_num);
 
-                                $query = mysqli_query($conexion, "SELECT * FROM cliente 
-                                    WHERE estatus = 1 ORDER BY idcliente ASC LIMIT $desde_pg,$pag_num ");
+                                $query = mysqli_query($conexion, "SELECT f.nofactura, f.fecha, f.totalfactura, f.codcliente, f.estatus,
+                                                                         u.nombre as vendedor,
+                                                                         cl.nombre as cliente
+                                                                        FROM factura f
+                                                                        INNER JOIN usuario u
+                                                                        ON f.usuario = u.idusuario
+                                                                        INNER JOIN cliente cl
+                                                                        ON f.codcliente = cl.idcliente 
+                                                                        WHERE f.estatus != 10 
+                                                                        ORDER BY f.fecha DESC LIMIT $desde_pg,$pag_num ");
+                                mysqli_close($conexion);
                                 $result = mysqli_num_rows($query);
                                 if ($result > 0) {
                                     while ($data = mysqli_fetch_array($query)) {
-                                        if ($data['ruc'] == 0) {
-                                            $ruc = 'C/F';
+                                        if ($data['estatus'] == 1) {
+                                            $estatus = '<span class="pagada badge badge-success">Pagada</span>';
                                         } else {
-                                            $ruc = $data['ruc'];
+                                            $estatus = '<span class="anulada badge badge-danger">Anulada</span>';
                                         }
                                 ?>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row"><?php echo $data['idcliente']; ?></th>
-                                                <td><?php echo $ruc; ?></td>
-                                                <td><?php echo $data['nombre']; ?></td>
-                                                <td><?php echo $data['telefono']; ?></td>
-                                                <td><?php echo $data['direccion']; ?></td>
-                                                <th class="text-right"></th>
+                                            <tr id="row_<?php echo $data['nofactura']; ?>">
+                                                <th scope="row"><?php echo $data['nofactura']; ?></th>
+                                                <td><?php echo $data['fecha']; ?></td>
+                                                <td><?php echo $data['cliente']; ?></td>
+                                                <td><?php echo $data['vendedor']; ?></td>
+                                                <td><?php echo $estatus; ?></td>
+                                                <th class="text-center totalfactura"><span style="width: 10px;">$</span><?php echo $data['totalfactura']; ?></th>
                                                 <td class="text-right">
-                                                    <a href="editar_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar Cliente</a>
+                                                    <a href="editar_clients.php?id=<?php echo $data["nofactura"]; ?>" class="btn bg-warning"><i class="nav-icon fas fa-edit"></i> Editar</a>
                                                     <?php
                                                     if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
-                                                        if ($data['idcliente'] != 1) {
+                                                        if ($data['nofactura'] != 1) {
                                                     ?>
-                                                            <a href="delete_clients.php?id=<?php echo $data["idcliente"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar Cliente</a>
+                                                            <a href="delete_clients.php?id=<?php echo $data["nofactura"]; ?>" class="btn bg-danger"><i class="nav-icon fas fa-trash"></i> Eliminar</a>
                                                     <?php
                                                         }
                                                     }
