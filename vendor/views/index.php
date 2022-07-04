@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,20 @@ session_start();
 
 <body class="hold-transition sidebar-mini">
     <?php
-    include_once "../layouts/header.php"
+    include_once "../layouts/header.php";
+
+    include_once "../../config/conexion.php";
+
+    $query_dashboard = mysqli_query($conexion, "CALL datos_dashboard();");
+    $result_dash = mysqli_num_rows($query_dashboard);
+
+    if ($result_dash > 0) {
+        $data_d = mysqli_fetch_assoc($query_dashboard);
+        mysqli_close($conexion);
+    }
+
+
+
     ?>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -37,46 +51,50 @@ session_start();
                     <div class="container-fluid">
                         <div class="row text-center">
                             <div class="col-sm-1"></div>
-                            <div class="col-sm-2">
-                                <div class="card bg-primary">
-                                    <a href="list_users.php" style="margin-top: 5px;">
-                                        <i class="nav-icon fas fa-users" style="font-size: 40px;"></i>
-                                        <p>
-                                            <strong>Usuarios</strong><br>
-                                            <span>100</span>
-                                        </p>
-                                    </a>
+                            <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                                <div class="col-sm-2">
+                                    <div class="card bg-primary">
+                                        <a href="list_users.php" style="margin-top: 5px;">
+                                            <i class="nav-icon fas fa-users" style="font-size: 40px;"></i>
+                                            <p>
+                                                <strong>Usuarios</strong><br>
+                                                <span><?= $data_d['usuarios']  ?></span>
+                                            </p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                             <div class="col-sm-2">
                                 <div class="card bg-success">
                                     <a href="list_clients.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-hand-holding-dollar" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Clientes</strong><br>
-                                            <span>100</span>
+                                            <span><?= $data_d['clientes']  ?></span>
                                         </p>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="card bg-info">
-                                    <a href="list_proveedor.php" style="margin-top: 5px;">
-                                        <i class="nav-icon fas fa-truck" style="font-size: 40px;"></i>
-                                        <p>
-                                            <strong>Proveedores</strong><br>
-                                            <span>100</span>
-                                        </p>
-                                    </a>
+                            <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                                <div class="col-sm-2">
+                                    <div class="card bg-info">
+                                        <a href="list_proveedor.php" style="margin-top: 5px;">
+                                            <i class="nav-icon fas fa-truck" style="font-size: 40px;"></i>
+                                            <p>
+                                                <strong>Proveedores</strong><br>
+                                                <span><?= $data_d['proveedores']  ?></span>
+                                            </p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                             <div class="col-sm-2">
                                 <div class="card bg-warning">
                                     <a href="list_stock.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-cubes" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Productos</strong><br>
-                                            <span>100</span>
+                                            <span><?= $data_d['productos']  ?></span>
                                         </p>
                                     </a>
                                 </div>
@@ -87,7 +105,7 @@ session_start();
                                         <i class="nav-icon fas fa-file-invoice-dollar" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Ventas</strong><br>
-                                            <span>100</span>
+                                            <span><?= $data_d['ventas']  ?></span>
                                         </p>
                                     </a>
                                 </div>
