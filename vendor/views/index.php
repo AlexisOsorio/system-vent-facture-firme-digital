@@ -14,6 +14,17 @@ session_start();
     <?php
     include_once "../layouts/style.php"
     ?>
+
+    <style>
+        .rows {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -7.5px;
+            margin-left: -7.5px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -49,7 +60,7 @@ session_start();
                 </div>
                 <div class="container">
                     <div class="container-fluid">
-                        <div class="row text-center">
+                        <div class="rows text-center">
                             <div class="col-sm-1"></div>
                             <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                                 <div class="col-sm-2">
