@@ -38,8 +38,8 @@ session_start();
                         <div class="row text-center">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2">
-                                <div class="card bg-primary" style="padding: 2px;">
-                                    <a href="list_users.php">
+                                <div class="card bg-primary">
+                                    <a href="list_users.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-users" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Usuarios</strong><br>
@@ -49,8 +49,8 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <div class="card bg-success" style="padding: 2px;">
-                                    <a href="list_clients.php">
+                                <div class="card bg-success">
+                                    <a href="list_clients.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-hand-holding-dollar" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Clientes</strong><br>
@@ -60,8 +60,8 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <div class="card bg-info" style="padding: 2px;">
-                                    <a href="list_proveedor.php">
+                                <div class="card bg-info">
+                                    <a href="list_proveedor.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-truck" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Proveedores</strong><br>
@@ -71,8 +71,8 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <div class="card bg-warning" style="padding: 2px;">
-                                    <a href="list_stock.php">
+                                <div class="card bg-warning">
+                                    <a href="list_stock.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-cubes" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Productos</strong><br>
@@ -82,8 +82,8 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <div class="card bg-danger" style="padding: 2px;">
-                                    <a href="list_sales.php">
+                                <div class="card bg-danger">
+                                    <a href="list_sales.php" style="margin-top: 5px;">
                                         <i class="nav-icon fas fa-file-invoice-dollar" style="font-size: 40px;"></i>
                                         <p>
                                             <strong>Ventas</strong><br>
@@ -120,20 +120,26 @@ session_start();
                                     <div class="text-center">
                                         <img src="../utils/img/photo-users.png" class="profile-user-img img-fluid img-circle">
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-control">Nombre: <span><?php echo $_SESSION['nombre'] ?></span></label>
+                                    <div class="text-center">
+                                        <p style="font-size: 16px;font-weight: bold; background-color: #17A2B8; color: white; margin-top: 10px; padding: 5px; border-radius: 0.25rem;">Informacion Personal</p>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-control">Correo: <span><?php echo $_SESSION['email'] ?></span></label>
+                                        <label class="col-form-control">Nombre: <span class="badge badge-info" style="font-size: 13px;"><?php echo $_SESSION['nombre'] ?></span></label>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-control">Rol: <span><?php echo $_SESSION['rol_name'] ?></span></label>
+                                        <label class="col-form-control">Correo: <span class="badge badge-info" style="font-size: 13px;"><?php echo $_SESSION['email'] ?></span></label>
+                                    </div>
+                                    <div class="text-center">
+                                        <p style="font-size: 16px;font-weight: bold; background-color: #17A2B8; color: white; padding: 5px; border-radius: 0.25rem;">Datos del Usuario</p>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-control">Usuario: <span><?php echo $_SESSION['user'] ?></strong></label>
+                                        <label class="col-form-control">Rol: <span class="badge badge-success" style="font-size: 13px;"><?php echo $_SESSION['rol_name'] ?></span></label>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-control">Usuario: <span class="badge badge-success" style="font-size: 13px;"><?php echo $_SESSION['user'] ?></strong></label>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item active">Cambiar Contraseña</li>
+                                        <li class="list-group active" style="background-color: #17A2B8;color: #fff; text-align: center; font-weight: bold; padding: 5px;">Cambiar Contraseña</li>
                                         <form action="" method="POST" name="frmElegirPass" id="frmElegirPass">
                                             <div class="form-group">
                                                 <label for="txt_actualP" class="col-sm-5 col-form-label">Contraseña Actual</label>
@@ -190,7 +196,7 @@ session_start();
                                         <div class="form-group">
                                             <label for="txtRSocial" class="col-sm-5 col-form-label">Razon Social: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtRSocial" id="txtRSocial" placeholder="Razon Social de la Empresa" value="" class="form-control" required>
+                                                <input type="text" name="txtRSocial" id="txtRSocial" placeholder="Razon Social de la Empresa" value="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -202,7 +208,7 @@ session_start();
                                         <div class="form-group">
                                             <label for="txtCElectronico" class="col-sm-5 col-form-label">Correo Electrónico: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtCElectronico" id="txtCElectronico" placeholder="Correo Electronico de la Empresa" value="" class="form-control" required>
+                                                <input type="email" name="txtCElectronico" id="txtCElectronico" placeholder="Correo Electronico de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -217,9 +223,10 @@ session_start();
                                                 <input type="text" name="txtIva" id="txtIva" placeholder="Iva de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="alertFormEmpresa" style="display: none;"></div>
                                         <div class="form-group text-center">
-                                                <button type="submit" class="btn btn-primary btnElegirPass"><i class="nav-icon fas fa-save"></i> Guardar Datos</button>
-                                            </div>
+                                            <button type="submit" class="btn btn-primary btnElegirPass"><i class="nav-icon fas fa-save"></i> Guardar Datos</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
