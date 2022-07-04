@@ -7,8 +7,14 @@ $busqueda = '';
 $fecha_de = '';
 $fecha_a = '';
 
-if (isset($_REQUEST)) {
-    
+if (isset($_REQUEST['busqueda']) && $_REQUEST['busqueda'] == '') {
+    header('location: list_sales.php');
+}
+
+if (isset($_REQUEST['fecha_de']) || isset($_REQUEST['fecha_a'])) {
+    if ($_REQUEST['fecha_de'] == '' || $_REQUEST['fecha_a'] == '') {
+        header('location: list_sales.php');
+    }
 }
 
 if (!empty($_REQUEST['busqueda'])) {
@@ -16,8 +22,8 @@ if (!empty($_REQUEST['busqueda'])) {
         header('location: list_sales.php');
     }
     $busqueda = strtolower($_REQUEST['busqueda']);
-    $where = 'nofactura = $busqueda';
-    $buscar = 'busqueda = $busqueda';
+    $where = "nofactura = $busqueda";
+    $buscar = "busqueda = $busqueda";
 }
 
 if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
@@ -29,13 +35,13 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
     if ($fecha_de > $fecha_a) {
         header('location: list_sales.php');
     } elseif ($fecha_de == $fecha_a) {
-        $where = 'fecha = LIKE "%$fecha_de%"';
-        $buscar = 'fecha_de=$fecha_de&$fecha_a=fecha_a';
+        $where = "fecha LIKE '$fecha_de%'";
+        $buscar = "fecha_de=$fecha_de&fecha_a=$fecha_a";
     } else {
-        $fc_de = $fecha_de . '00:00:00';
-        $fc_a = $fecha_a.'23:59:59';
-        $where = 'fecha BETWEEN "$fc_de" AND "$fc_a"';
-        $buscar = 'fecha_de=$fecha_de&fecha_a=$fecha_a';
+        $fc_de = $fecha_de . ' 00:00:00';
+        $fc_a = $fecha_a . ' 23:59:59';
+        $where = "fecha BETWEEN '$fc_de' AND '$fc_a'";
+        $buscar = "fecha_de=$fecha_de&fecha_a=$fecha_a";
     }
 }
 ?>
@@ -104,7 +110,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
                         <div class="offset-sm-9 col-sm-3 float-right" style="padding-bottom: 5px;">
                             <div class="form-group">
                                 <form action="search_sales.php" method="get" class="d-flex">
-                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="N° Factura">
+                                    <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="N° Factura" value="<?php echo $busqueda ?>">
                                     <button type="submit" class="btn btn-outline-info"><i class="nav-icon fas fa-search"></i></button>
                                 </form>
                             </div>
@@ -184,9 +190,9 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
                         <div class="col-sm-12" style="padding-bottom: 7px;">
                             <form action="search_sales.php" method="GET" class="buscar_fecha">
                                 <label for="fecha_de" class="col-form-control"> De: </label>
-                                <input type="date" name="fecha_de" id="fecha_de" class="" required>
+                                <input type="date" name="fecha_de" id="fecha_de" value="<?php echo $fecha_de ?>" required>
                                 <label for="fecha_a" class="col-form-control"> A </label>
-                                <input type="date" name="fecha_a" id="fecha_a" required>
+                                <input type="date" name="fecha_a" id="fecha_a" value="<?php echo $fecha_a ?>" required>
                                 <button class="tbn btn-info"><i class="nav-icon fas fa-search"></i></button>
                             </form>
                         </div>
@@ -206,7 +212,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
                                 <?php
 
                                 //paginador
-                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM factura WHERE estatus != 10");
+                                $sql_reg =  mysqli_query($conexion, "SELECT COUNT(*) as registros_totales FROM factura WHERE $where");
                                 $result_reg = mysqli_fetch_array($sql_reg);
                                 $registros_totales = $result_reg['registros_totales'];
 
@@ -229,7 +235,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
                                                                         ON f.usuario = u.idusuario
                                                                         INNER JOIN cliente cl
                                                                         ON f.codcliente = cl.idcliente 
-                                                                        WHERE f.estatus != 10 
+                                                                        WHERE $where AND f.estatus != 10 
                                                                         ORDER BY f.fecha DESC LIMIT $desde_pg,$pag_num ");
                                 mysqli_close($conexion);
                                 $result = mysqli_num_rows($query);
@@ -275,10 +281,10 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
 
                                         ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo 1; ?>"><i class="nav-icon fas fa-backward-step"></i></a>
+                                                <a class="page-link" href="?pagina=<?php echo 1; ?>&<?php echo $buscar ?>"><i class="nav-icon fas fa-backward-step"></i></a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>" aria-label="Previous">
+                                                <a class="page-link" href="?pagina=<?php echo $pag - 1; ?>&<?php echo $buscar ?>" aria-label="Previous">
                                                     <span aria-hidden="true"><i class="nav-icon fas fa-backward-fast"></i></span>
                                                 </a>
                                             </li>
@@ -290,7 +296,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
                                                 echo '  <li class="page-link activar">' . $i . '</li>';
                                             } else {
                                                 echo '  <li class="page-item">
-                                                            <a class="page-link" href="?pagina=' . $i . '">' . $i . '</a>
+                                                            <a class="page-link" href="?pagina=' . $i . '&' . $buscar . '">' . $i . '</a>
                                                         </li>';
                                             }
                                         }
@@ -299,12 +305,12 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
 
                                         ?>
                                             <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>" aria-label="Next">
+                                                <a class="page-link" href="?pagina=<?php echo $pag + 1; ?>&<?php echo $buscar ?>" aria-label="Next">
                                                     <span aria-hidden="true"><i class="nav-icon fas fa-forward-fast"></i></span>
                                                 </a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="?pagina=<?php echo $total_pg; ?>"><i class="nav-icon fas fa-forward-step"></i></a>
+                                                <a class="page-link" href="?pagina=<?php echo $total_pg; ?>&<?php echo $buscar ?>"><i class="nav-icon fas fa-forward-step"></i></a>
                                             </li>
 
                                         <?php
