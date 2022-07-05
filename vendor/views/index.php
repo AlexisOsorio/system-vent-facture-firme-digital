@@ -276,15 +276,19 @@ session_start();
                                             <div class="col-sm-12">
                                                 <input type="text" value="<?= $iva_empresa ?>" name="txtIva" id="txtIva" placeholder="Iva de la Empresa" value="" class="form-control" required>
                                             </div>
-                                        </div>
-                                        <div class="alertFormEmpresa" style="display: none;"></div>
-                                        <div class="form-group text-center">
-                                            <button type="submit" class="btn btn-primary btnElegirPass"><i class="nav-icon fas fa-save"></i> Guardar Datos</button>
-                                        </div>
+                                        </div>  
+                                        <?php if ($_SESSION['rol'] == 1) {
+                                        ?>
+                                            <div class="alertFormEmpresa" style="display: none;"></div>
+                                            <div class="form-group text-center">
+                                                <button type="submit" class="btn btn-primary btnElegirPass"><i class="nav-icon fas fa-save"></i> Guardar Datos</button>
+                                            </div>
+                                        <?php } ?>
                                     </form>
                                 </div>
                             </div>
                         </div>
+
                         <!-- /.card -->
                     </div>
                 </div>

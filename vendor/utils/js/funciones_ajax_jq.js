@@ -520,6 +520,72 @@ $(document).ready(function () {
 
     })
 
+    //formulario empresa
+    $('#frmEmpresa').submit(function(e){
+        e.preventDefault();
+        var intRuc = $('#txtRuc').val();
+        var Nombre_e = $('#txtNombre').val();
+        var Rsocial = $('#txtRSocial').val();
+        var intT_e = $('#txtTelefono').val();
+        var e_emp = $('#txtCElectronico').val();
+        var d_emp = $('#txtDireccion').val();
+        var intIva = $('#txtIva').val();
+
+        if (intRuc == '' || Nombre_e == '' || Rsocial == '' || intT_e == '' || e_emp == '' || d_emp == '' || intIva == '') {
+            $('.alertFormEmpresa').html('<p class="text-center"'+ 
+                                        'style="background-color: #DC3545; '+
+                                        'color: #fff;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-triangle-exclamation"></i>'+ 
+                                        ' Todos los campos son obligatorios '+
+                                        '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
+            $('.alertFormEmpresa').slideDown();
+            return false;
+        }
+
+        $.ajax({
+            url: 'agregar_ajax.php',
+            type: 'POST',
+            async: true,
+            data: $('#frmEmpresa').serialize(),
+            beforeSend: function(){
+                $('.alertFormEmpresa').slideUp();
+                $('.alertFormEmpresa').html('');
+                $('#frmEmpresa').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response != 'error') {
+                    var info_pas = JSON.parse(response);
+                    if (info_pas.codeP == '00') {
+                        $('.alertFormEmpresa').html('<p class="text-center"'+ 
+                                        'style="background-color: #28A745; '+
+                                        'color: #fff;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-check"></i> '+info_pas.mesg+'</p>');
+                        $('#frmEmpresa input').removeAttr('disabled')
+                        $('.alertFormEmpresa').slideDown();
+                    }else{
+                        $('.alertFormEmpresa').html('<p class="text-center"'+ 
+                                        'style="background-color: #DC3545; '+
+                                        'color: #fff;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-circle-xmark"></i> '+info_pas.mesg+'</p>');
+                    }
+                    $('.alertFormEmpresa').slideDown();
+                }
+            },
+            error: function (error) {
+
+            }
+        });
+    })
+
     //button pass
     $('.btnElegirPass').submit(function(e){
         e.preventDefault();
