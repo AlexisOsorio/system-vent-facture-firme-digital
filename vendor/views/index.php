@@ -33,6 +33,30 @@ session_start();
 
     include_once "../../config/conexion.php";
 
+    //datos de la empresa
+    $ruc = '';
+    $n_empresa = '';
+    $r_social = '';
+    $t_empresa = '';
+    $email_empresa = '';
+    $d_empreas = '';
+    $iva_empresa = '';
+
+    $query_dts = mysqli_query($conexion, "SELECT * FROM configuracion");
+    $result_dts = mysqli_num_rows($query_dts);
+    if ($result_dts > 0) {
+        while ($info_array_empreas = mysqli_fetch_assoc($query_dts)) {
+            $ruc = $info_array_empreas['cedula'];
+            $n_empresa =  $info_array_empreas['nombre'];
+            $r_social =  $info_array_empreas['razon_social'];
+            $t_empresa =  $info_array_empreas['telefono'];
+            $email_empresa =  $info_array_empreas['email'];
+            $d_empreas =  $info_array_empreas['direccion'];
+            $iva_empresa =  $info_array_empreas['iva'];
+        }
+    }
+
+    //dashboard
     $query_dashboard = mysqli_query($conexion, "CALL datos_dashboard();");
     $result_dash = mysqli_num_rows($query_dashboard);
 
@@ -185,7 +209,7 @@ session_start();
                                             <div class="form-group">
                                                 <label for="txt_confirmarP" class="col-sm-5 col-form-label">Confirmar Contraseña</label>
                                                 <div class="col-sm-12">
-                                                    <input  type="password" name="txt_confirmarP" id="txt_confirmarP" placeholder="Confirmar Contraseña" class="form-control newPass" required>
+                                                    <input type="password" name="txt_confirmarP" id="txt_confirmarP" placeholder="Confirmar Contraseña" class="form-control newPass" required>
                                                 </div>
                                             </div>
                                             <div class="alertElejirPass" style="display:none;"></div>
@@ -197,7 +221,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- /.card -->
                         <!-- Default box -->
                         <div class="col-sm-6">
@@ -214,43 +238,43 @@ session_start();
                                         <div class="form-group">
                                             <label for="txtRuc" class="col-sm-5 col-form-label">Ruc/Cedula: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtRuc" id="txtRuc" placeholder="Ruc/Cedula de la Empresa" value="" class="form-control" required>
+                                                <input type="text" value="<?= $ruc ?>" name="txtRuc" id="txtRuc" placeholder="Ruc/Cedula de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="txtNombre" class="col-sm-5 col-form-label">Nombre: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtNombre" id="txtNombre" placeholder="Nombre de la Empresa" value="" class="form-control" required>
+                                                <input type="text" value="<?= $n_empresa ?>" name="txtNombre" id="txtNombre" placeholder="Nombre de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="txtRSocial" class="col-sm-5 col-form-label">Razon Social: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtRSocial" id="txtRSocial" placeholder="Razon Social de la Empresa" value="" class="form-control">
+                                                <input type="text" value="<?= $r_social ?>" name="txtRSocial" id="txtRSocial" placeholder="Razon Social de la Empresa" value="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="txtTelefono" class="col-sm-5 col-form-label">Telefono: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtTelefono" id="txtTelefono" placeholder="Telefono de la Empresa" value="" class="form-control" required>
+                                                <input type="text" value="<?= $t_empresa ?>" name="txtTelefono" id="txtTelefono" placeholder="Telefono de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="txtCElectronico" class="col-sm-5 col-form-label">Correo Electrónico: </label>
                                             <div class="col-sm-12">
-                                                <input type="email" name="txtCElectronico" id="txtCElectronico" placeholder="Correo Electronico de la Empresa" value="" class="form-control" required>
+                                                <input type="email" value="<?= $email_empresa ?>" name="txtCElectronico" id="txtCElectronico" placeholder="Correo Electronico de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="txtDireccion" class="col-sm-5 col-form-label">Direccion: </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtDireccion" id="txtDireccion" placeholder="Dirección de la Empresa" value="" class="form-control" required>
+                                                <input type="text" value="<?= $d_empreas ?>" name="txtDireccion" id="txtDireccion" placeholder="Dirección de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="txtIva" class="col-sm-5 col-form-label">IVA (%): </label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="txtIva" id="txtIva" placeholder="Iva de la Empresa" value="" class="form-control" required>
+                                                <input type="text" value="<?= $iva_empresa ?>" name="txtIva" id="txtIva" placeholder="Iva de la Empresa" value="" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="alertFormEmpresa" style="display: none;"></div>
