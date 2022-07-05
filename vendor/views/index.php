@@ -179,13 +179,13 @@ session_start();
                                             <div class="form-group">
                                                 <label for="txt_nuevaP" class="col-sm-5 col-form-label">Contraseña Nueva</label>
                                                 <div class="col-sm-12">
-                                                    <input type="password" name="txt_nuevaP" id="txt_nuevaP" placeholder="Contraseña Nueva" class="form-control" required>
+                                                    <input type="password" name="txt_nuevaP" id="txt_nuevaP" placeholder="Contraseña Nueva" class="form-control newPass" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="txt_confirmarP" class="col-sm-5 col-form-label">Confirmar Contraseña</label>
                                                 <div class="col-sm-12">
-                                                    <input type="password" name="txt_confirmarP" id="txt_confirmarP" placeholder="Confirmar Contraseña" class="form-control" required>
+                                                    <input  type="password" name="txt_confirmarP" id="txt_confirmarP" placeholder="Confirmar Contraseña" class="form-control newPass" required>
                                                 </div>
                                             </div>
                                             <div class="alertElejirPass" style="display:none;"></div>
@@ -197,6 +197,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- /.card -->
                         <!-- Default box -->
                         <div class="col-sm-6">

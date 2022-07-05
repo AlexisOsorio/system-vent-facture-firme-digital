@@ -439,7 +439,128 @@ $(document).ready(function () {
         generarPDF(codCliente,noFactura);
     })
 
+    //changePass validacion
+    $('.newPass').keyup(function(){
+        validar_Pass();
+    });
+
+    //cambiar contraseña de formulario
+    $('#frmElegirPass').submit(function(e){
+        e.preventDefault();
+        var pass_actual = $('#txt_actualP').val();
+        var pass_new = $('#txt_nuevaP').val();
+        var pass_confirmado = $('#txt_confirmarP').val();
+        var action = 'changeContra';
+
+        if (pass_new != pass_confirmado) {
+            $('.alertElejirPass').html('<p class="text-center"'+ 
+                                        'style="background-color: #DC3545; '+
+                                        'color: #fff;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-circle-xmark"></i>'+ 
+                                        'Las contraseñas no coinciden</p>');
+            $('.alertElejirPass').slideDown();
+            return false;
+        }
+    
+        if (pass_new.length < 6) {
+            $('.alertElejirPass').html('<p class="text-center"'+ 
+                                        'style="background-color: #FFC107; '+
+                                        'color: #000;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-triangle-exclamation"></i> '+
+                                        'La contraseña debe ser de 6 caracteres como minimo '+
+                                        '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
+            $('.alertElejirPass').slideDown();
+            return false;
+        }
+
+        $.ajax({
+            url: 'agregar_ajax.php',
+            type: 'POST',
+            async: true,
+            data: {
+                action: action,
+                pass_actual: pass_actual, 
+                pass_new: pass_new, 
+                pass_confirmado: pass_confirmado
+            },
+            success: function (response) {
+                if (response != 'error') {
+                    var info_pas = JSON.parse(response);
+                    if (info_pas.codeP == '00') {
+                        $('.alertElejirPass').html('<p class="text-center"'+ 
+                                        'style="background-color: #28A745; '+
+                                        'color: #fff;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-check"></i> '+info_pas.mesg+'</p>');
+                        $('#frmElegirPass')[0].reset();
+                    }else{
+                        $('.alertElejirPass').html('<p class="text-center"'+ 
+                                        'style="background-color: #DC3545; '+
+                                        'color: #fff;'+
+                                        'font-weight: bold;'+
+                                        'padding: 5px; '+
+                                        'border-radius: 0.25rem;">'+
+                                        '<i class="nav-icon fas fa-circle-xmark"></i> '+info_pas.mesg+'</p>');
+                    }
+                    $('.alertElejirPass').slideDown();
+                }
+            },
+            error: function (error) {
+
+            }
+        });
+
+    })
+
+    //button pass
+    $('.btnElegirPass').submit(function(e){
+        e.preventDefault();
+    })
+
 }); //end ready
+
+//validad contraseña
+function validar_Pass(){
+    var pass_new = $('#txt_nuevaP').val();
+    var confirm_pas_new = $('#txt_confirmarP').val();
+
+    if (pass_new != confirm_pas_new) {
+        $('.alertElejirPass').html('<p class="text-center"'+ 
+                                    'style="background-color: #DC3545; '+
+                                    'color: #fff;'+
+                                    'font-weight: bold;'+
+                                    'padding: 5px; '+
+                                    'border-radius: 0.25rem;">'+
+                                    '<i class="nav-icon fas fa-circle-xmark"></i>'+ 
+                                    'Las contraseñas no coinciden</p>');
+        $('.alertElejirPass').slideDown();
+        return false;
+    }
+
+    if (pass_new.length < 6) {
+        $('.alertElejirPass').html('<p class="text-center"'+ 
+                                    'style="background-color: #FFC107; '+
+                                    'color: #000;'+
+                                    'font-weight: bold;'+
+                                    'padding: 5px; '+
+                                    'border-radius: 0.25rem;">'+
+                                    '<i class="nav-icon fas fa-triangle-exclamation"></i> '+
+                                    'La contraseña debe ser de 6 caracteres como minimo '+
+                                    '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
+        $('.alertElejirPass').slideDown();
+        return false;
+    }
+    $('.alertElejirPass').html('');
+    $('.alertElejirPass').slideUp();
+}
 
 //generar factura
 function generarPDF(cliente, factura) {

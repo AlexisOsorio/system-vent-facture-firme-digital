@@ -381,8 +381,7 @@ if (!empty($_POST)) {
     if ($_POST['action'] == 'procesarVenta') {
         if (empty($_POST['codCliente'])) {
             $codCliente = 1;
-            
-        }else {
+        } else {
             $codCliente = $_POST['codCliente'];
         }
         $token = md5($_SESSION['idUser']);
@@ -404,6 +403,45 @@ if (!empty($_POST)) {
             echo 'error';
         }
         mysqli_close($conexion);
+        exit;
+    }
+
+    //cambiar contra
+    if ($_POST['action'] == 'changeContra') {
+        if (!empty($_POST['pass_actual']) && !empty($_POST['pass_new'])) {
+            $password_c = md5($_POST['pass_actual']);
+            $new_pass = md5($_POST['pass_new']);
+            $idUser = $_SESSION['idUser'];
+
+            $codeP = '';
+            $mesg = '';
+            $DateArray = array();
+
+            $query_user_p = mysqli_query($conexion, "SELECT * FROM usuario 
+                                                    WHERE clave = '$password_c' AND idusuario = $idUser");
+            $result_pass = mysqli_num_rows($query_user_p);
+
+            if ($result_pass > 0) {
+                $query_update_pas = mysqli_query($conexion, "UPDATE usuario SET clave = '$new_pass' 
+                                                            WHERE idusuario = $idUser");
+                mysqli_close($conexion);
+
+                if ($query_update_pas) {
+                    $codeP = '00';
+                    $mesg = "Su contraseña se actualizo correctamente";
+                } else {
+                    $codeP = '2';
+                    $mesg = "No se puede cambiar la contraseña";
+                }
+            } else {
+                $codeP = '1';
+                $mesg = "La contraseña es incorrecta";
+            }
+            $DateArray = array('codeP' => $codeP, 'mesg' => $mesg);
+            echo json_encode($DateArray,JSON_UNESCAPED_UNICODE);
+        } else {
+            echo 'error';
+        }
         exit;
     }
 }
