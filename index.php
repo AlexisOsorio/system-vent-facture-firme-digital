@@ -53,8 +53,9 @@ if (!empty($_SESSION['active'])) {
     <link rel="stylesheet" type="text/css" href="utils/css/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="utils/css/styles.css">
     <!--Icono del Sistema-->
-<link rel="icon" href="utils/images/uploads/user.png">
-    <script src="https://kit.fontawesome.com/258935b168.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="utils/images/uploads/img-logo-empresa.jpg">
+    <script src="https://kit.fontawesome.com/258935b168.js" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
