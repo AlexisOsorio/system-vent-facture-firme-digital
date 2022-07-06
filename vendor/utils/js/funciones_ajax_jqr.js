@@ -533,8 +533,8 @@ $(document).ready(function () {
 
         if (intRuc == '' || Nombre_e == '' || Rsocial == '' || intT_e == '' || e_emp == '' || d_emp == '' || intIva == '') {
             $('.alertFormEmpresa').html('<p class="text-center"'+ 
-                                        'style="background-color: #DC3545; '+
-                                        'color: #fff;'+
+                                        'style="background-color: #FFC107; '+
+                                        'color: #000;'+
                                         'font-weight: bold;'+
                                         'padding: 5px; '+
                                         'border-radius: 0.25rem;">'+
