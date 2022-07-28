@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<img class="anulada" src="img/anulado.png" alt="Anulada">
+<img class="anulada" src="img/anulad.png" alt="">
 <div id="page_pdf">
 	<table id="factura_head">
 		<tr>

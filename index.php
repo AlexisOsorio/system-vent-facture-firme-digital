@@ -73,7 +73,7 @@ if (!empty($_SESSION['active'])) {
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="div">
-                        <h5>Usuario</h5>
+                        <h5>Correo Electronico</h5>
                         <input type="email" name="usuario" class="input">
                     </div>
                 </div>

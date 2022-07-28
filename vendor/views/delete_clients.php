@@ -105,7 +105,7 @@ if (empty($_REQUEST['id'])) {
                                             <button type="submit" class="btn btn-block bg-danger "><i class="nav-icon fas fa-trash"></i> Eliminar</button>
                                         </form>
                                         <div class="offset-sm-5 col-md-2 float-right">
-                                            <a href="list_clientstrash.php" class="btn bg-secondary">Cancelar</a>
+                                            <a href="list_clients.php" class="btn bg-secondary">Cancelar</a>
                                         </div>
                                     </div>
                                 </div>
