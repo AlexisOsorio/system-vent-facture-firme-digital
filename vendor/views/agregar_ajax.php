@@ -444,5 +444,8 @@ if (!empty($_POST)) {
         }
         exit;
     }
+
+    //cambiar datos empresa 
+    
 }
 exit;

@@ -41,12 +41,12 @@
 					<span class="h3">Cliente</span>
 					<table class="datos_cliente">
 						<tr>
-							<td><label>Cedula:</label><p>54895468</p></td>
-							<td><label>Teléfono:</label> <p>7854526</p></td>
+							<td><label>Cedula:</label><p>054895468</p></td>
+							<td><label>Teléfono:</label> <p>097854526</p></td>
 						</tr>
 						<tr>
 							<td><label>Nombre:</label> <p>Angel Arana Cabrera</p></td>
-							<td><label>Dirección:</label> <p>Calzada Buena Vista</p></td>
+							<td><label>Dirección:</label> <p>Ecuador</p></td>
 						</tr>
 					</table>
 				</div>
@@ -104,7 +104,7 @@
 			</tbody>
 			<tfoot id="detalle_totales">
 				<tr>
-					<td colspan="3" class="textright"><span>SUBTOTAL Q.</span></td>
+					<td colspan="3" class="textright"><span>SUBTOTAL $.</span></td>
 					<td class="textright"><span>516.67</span></td>
 				</tr>
 				<tr>
@@ -112,7 +112,7 @@
 					<td class="textright"><span>516.67</span></td>
 				</tr>
 				<tr>
-					<td colspan="3" class="textright"><span>TOTAL Q.</span></td>
+					<td colspan="3" class="textright"><span>TOTAL .</span></td>
 					<td class="textright"><span>516.67</span></td>
 				</tr>
 		</tfoot>

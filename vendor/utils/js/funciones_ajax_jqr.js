@@ -591,6 +591,8 @@ $(document).ready(function () {
         e.preventDefault();
     })
 
+    
+
 }); //end ready
 
 //validad contraseña
