@@ -62,7 +62,7 @@ if (!empty($_SESSION['active'])) {
     <img class="wave" src="utils/images/ola.png" alt="img1">
     <div class="contenedor">
         <div class="img">
-
+            <img src="utils/images/fondo_s.svg" alt="">
         </div>
         <div class="contenido-login">
             <form action="" method="post">
