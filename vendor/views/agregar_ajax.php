@@ -448,8 +448,6 @@ if (!empty($_POST)) {
     //cambiar datos empresa 
     if ($_POST['action'] == 'udpateDate_Empresa') {
 
-        print_r($_POST);
-        exit;
         if (
             empty($_POST['txtRuc'])  || empty($_POST['txtNombre']) || empty($_POST['txtRSocial'])
             || empty($_POST['txtTelefono']) || empty($_POST['txtCElectronico'])

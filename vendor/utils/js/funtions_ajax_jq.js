@@ -531,7 +531,7 @@ $(document).ready(function () {
         var d_emp = $('#txtDireccion').val();
         var intIva = $('#txtIva').val();
 
-        if (intRuc == '' || Nombre_e == '' || Rsocial == '' || intT_e == '' || e_emp == '' || d_emp == '' || intIva == '') {
+        if (intRuc == '' || Nombre_e == '' || intT_e == '' || e_emp == '' || d_emp == '' || intIva == '') {
             $('.alertFormEmpresa').html('<p class="text-center"'+ 
                                         'style="background-color: #FFC107; '+
                                         'color: #000;'+
