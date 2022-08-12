@@ -449,7 +449,7 @@ if (!empty($_POST)) {
     if ($_POST['action'] == 'udpateDate_Empresa') {
 
         if (
-            empty($_POST['txtRuc'])  || empty($_POST['txtNombre']) || empty($_POST['txtRSocial'])
+            empty($_POST['txtRuc'])  || empty($_POST['txtNombre'])
             || empty($_POST['txtTelefono']) || empty($_POST['txtCElectronico'])
             || empty($_POST['txtDireccion']) || empty($_POST['txtIva'])
         ) {
@@ -476,10 +476,10 @@ if (!empty($_POST)) {
                 $code = '2';
                 $mesg = 'No se pudo actualizar los datos';
             }
-            $DateArray = array('code' => $code, 'mesg' => $mesg);
-            echo json_encode($DateArray, JSON_UNESCAPED_UNICODE);
-            exit;
         }
+        $DateArray = array('code' => $code, 'mesg' => $mesg);
+        echo json_encode($DateArray, JSON_UNESCAPED_UNICODE);
+        exit;
     }
 }
 exit;

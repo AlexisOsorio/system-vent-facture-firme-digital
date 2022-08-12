@@ -419,7 +419,7 @@ $(document).ready(function () {
                     if (response != 'error') {
                         var info_prod = JSON.parse(response);
                         //console.log(info);
-                        generarPDF(info_prod.codcliente,info_prod.nofactura);
+                        generarPDF(info_prod.codcliente, info_prod.nofactura);
                         location.reload();
                     }
                 },
@@ -431,21 +431,21 @@ $(document).ready(function () {
     });
 
     //View Bill
-    $('.view_factura').click(function(e){
+    $('.view_factura').click(function (e) {
         e.preventDefault();
-        
+
         var codCliente = $(this).attr('cl');
         var noFactura = $(this).attr('f');
-        generarPDF(codCliente,noFactura);
+        generarPDF(codCliente, noFactura);
     })
 
     //changePass validacion
-    $('.newPass').keyup(function(){
+    $('.newPass').keyup(function () {
         validar_Pass();
     });
 
     //cambiar contraseña de formulario
-    $('#frmElegirPass').submit(function(e){
+    $('#frmElegirPass').submit(function (e) {
         e.preventDefault();
         var pass_actual = $('#txt_actualP').val();
         var pass_new = $('#txt_nuevaP').val();
@@ -453,28 +453,28 @@ $(document).ready(function () {
         var action = 'changeContra';
 
         if (pass_new != pass_confirmado) {
-            $('.alertElejirPass').html('<p class="text-center"'+ 
-                                        'style="background-color: #DC3545; '+
-                                        'color: #fff;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-circle-xmark"></i>'+ 
-                                        'Las contraseñas no coinciden</p>');
+            $('.alertElejirPass').html('<p class="text-center"' +
+                'style="background-color: #DC3545; ' +
+                'color: #fff;' +
+                'font-weight: bold;' +
+                'padding: 5px; ' +
+                'border-radius: 0.25rem;">' +
+                '<i class="nav-icon fas fa-circle-xmark"></i>' +
+                'Las contraseñas no coinciden</p>');
             $('.alertElejirPass').slideDown();
             return false;
         }
-    
+
         if (pass_new.length < 6) {
-            $('.alertElejirPass').html('<p class="text-center"'+ 
-                                        'style="background-color: #FFC107; '+
-                                        'color: #000;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-triangle-exclamation"></i> '+
-                                        'La contraseña debe ser de 6 caracteres como minimo '+
-                                        '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
+            $('.alertElejirPass').html('<p class="text-center"' +
+                'style="background-color: #FFC107; ' +
+                'color: #000;' +
+                'font-weight: bold;' +
+                'padding: 5px; ' +
+                'border-radius: 0.25rem;">' +
+                '<i class="nav-icon fas fa-triangle-exclamation"></i> ' +
+                'La contraseña debe ser de 6 caracteres como minimo ' +
+                '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
             $('.alertElejirPass').slideDown();
             return false;
         }
@@ -485,30 +485,30 @@ $(document).ready(function () {
             async: true,
             data: {
                 action: action,
-                pass_actual: pass_actual, 
-                pass_new: pass_new, 
+                pass_actual: pass_actual,
+                pass_new: pass_new,
                 pass_confirmado: pass_confirmado
             },
             success: function (response) {
                 if (response != 'error') {
                     var info_pas = JSON.parse(response);
                     if (info_pas.codeP == '00') {
-                        $('.alertElejirPass').html('<p class="text-center"'+ 
-                                        'style="background-color: #28A745; '+
-                                        'color: #fff;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-check"></i> '+info_pas.mesg+'</p>');
+                        $('.alertElejirPass').html('<p class="text-center"' +
+                            'style="background-color: #28A745; ' +
+                            'color: #fff;' +
+                            'font-weight: bold;' +
+                            'padding: 5px; ' +
+                            'border-radius: 0.25rem;">' +
+                            '<i class="nav-icon fas fa-check"></i> ' + info_pas.mesg + '</p>');
                         $('#frmElegirPass')[0].reset();
-                    }else{
-                        $('.alertElejirPass').html('<p class="text-center"'+ 
-                                        'style="background-color: #DC3545; '+
-                                        'color: #fff;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-circle-xmark"></i> '+info_pas.mesg+'</p>');
+                    } else {
+                        $('.alertElejirPass').html('<p class="text-center"' +
+                            'style="background-color: #DC3545; ' +
+                            'color: #fff;' +
+                            'font-weight: bold;' +
+                            'padding: 5px; ' +
+                            'border-radius: 0.25rem;">' +
+                            '<i class="nav-icon fas fa-circle-xmark"></i> ' + info_pas.mesg + '</p>');
                     }
                     $('.alertElejirPass').slideDown();
                 }
@@ -521,7 +521,7 @@ $(document).ready(function () {
     })
 
     //formulario empresa
-    $('#frmEmpresa').submit(function(e){
+    $('#frmEmpresa').submit(function (e) {
         e.preventDefault();
         var intRuc = $('#txtRuc').val();
         var Nombre_e = $('#txtNombre').val();
@@ -532,15 +532,15 @@ $(document).ready(function () {
         var intIva = $('#txtIva').val();
 
         if (intRuc == '' || Nombre_e == '' || intT_e == '' || e_emp == '' || d_emp == '' || intIva == '') {
-            $('.alertFormEmpresa').html('<p class="text-center"'+ 
-                                        'style="background-color: #FFC107; '+
-                                        'color: #000;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-triangle-exclamation"></i>'+ 
-                                        ' Todos los campos son obligatorios '+
-                                        '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
+            $('.alertFormEmpresa').html('<p class="text-center"' +
+                'style="background-color: #FFC107; ' +
+                'color: #000;' +
+                'font-weight: bold;' +
+                'padding: 5px; ' +
+                'border-radius: 0.25rem;">' +
+                '<i class="nav-icon fas fa-triangle-exclamation"></i>' +
+                ' Todos los campos son obligatorios ' +
+                '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
             $('.alertFormEmpresa').slideDown();
             return false;
         }
@@ -550,37 +550,35 @@ $(document).ready(function () {
             type: 'POST',
             async: true,
             data: $('#frmEmpresa').serialize(),
-            beforeSend: function(){
+            beforeSend: function () {
                 $('.alertFormEmpresa').slideUp();
                 $('.alertFormEmpresa').html('');
                 $('#frmEmpresa').attr('disabled', 'disabled');
             },
             success: function (response) {
                 console.log(response);
-/*
-                if (response != 'error') {
-                    var info_pas = JSON.parse(response);
-                    if (info_pas.codeP == '00') {
-                        $('.alertFormEmpresa').html('<p class="text-center"'+ 
-                                        'style="background-color: #28A745; '+
-                                        'color: #fff;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-check"></i> '+info_pas.mesg+'</p>');
-                        $('#frmEmpresa input').removeAttr('disabled')
-                        $('.alertFormEmpresa').slideDown();
-                    }else{
-                        $('.alertFormEmpresa').html('<p class="text-center"'+ 
-                                        'style="background-color: #DC3545; '+
-                                        'color: #fff;'+
-                                        'font-weight: bold;'+
-                                        'padding: 5px; '+
-                                        'border-radius: 0.25rem;">'+
-                                        '<i class="nav-icon fas fa-circle-xmark"></i> '+info_pas.mesg+'</p>');
-                    }
+
+                var info_em = JSON.parse(response);
+                if (info_em.code == '00') {
+                    $('.alertFormEmpresa').html('<p class="text-center"' +
+                        'style="background-color: #28A745; ' +
+                        'color: #fff;' +
+                        'font-weight: bold;' +
+                        'padding: 5px; ' +
+                        'border-radius: 0.25rem;">' +
+                        '<i class="nav-icon fas fa-check"></i> ' + info_em.mesg + '</p>');
                     $('.alertFormEmpresa').slideDown();
-                }*/
+                } else {
+                    $('.alertFormEmpresa').html('<p class="text-center"' +
+                        'style="background-color: #DC3545; ' +
+                        'color: #fff;' +
+                        'font-weight: bold;' +
+                        'padding: 5px; ' +
+                        'border-radius: 0.25rem;">' +
+                        '<i class="nav-icon fas fa-circle-xmark"></i> ' + info_em.mesg + '</p>');
+                }
+                $('.alertFormEmpresa').slideDown();
+                $('#frmEmpresa input').removeAttr('disabled');
             },
             error: function (error) {
 
@@ -589,42 +587,42 @@ $(document).ready(function () {
     })
 
     //button pass
-    $('.btnElegirPass').submit(function(e){
+    $('.btnElegirPass').submit(function (e) {
         e.preventDefault();
     })
 
-    
+
 
 }); //end ready
 
 //validad contraseña
-function validar_Pass(){
+function validar_Pass() {
     var pass_new = $('#txt_nuevaP').val();
     var confirm_pas_new = $('#txt_confirmarP').val();
 
     if (pass_new != confirm_pas_new) {
-        $('.alertElejirPass').html('<p class="text-center"'+ 
-                                    'style="background-color: #DC3545; '+
-                                    'color: #fff;'+
-                                    'font-weight: bold;'+
-                                    'padding: 5px; '+
-                                    'border-radius: 0.25rem;">'+
-                                    '<i class="nav-icon fas fa-circle-xmark"></i>'+ 
-                                    'Las contraseñas no coinciden</p>');
+        $('.alertElejirPass').html('<p class="text-center"' +
+            'style="background-color: #DC3545; ' +
+            'color: #fff;' +
+            'font-weight: bold;' +
+            'padding: 5px; ' +
+            'border-radius: 0.25rem;">' +
+            '<i class="nav-icon fas fa-circle-xmark"></i>' +
+            'Las contraseñas no coinciden</p>');
         $('.alertElejirPass').slideDown();
         return false;
     }
 
     if (pass_new.length < 6) {
-        $('.alertElejirPass').html('<p class="text-center"'+ 
-                                    'style="background-color: #FFC107; '+
-                                    'color: #000;'+
-                                    'font-weight: bold;'+
-                                    'padding: 5px; '+
-                                    'border-radius: 0.25rem;">'+
-                                    '<i class="nav-icon fas fa-triangle-exclamation"></i> '+
-                                    'La contraseña debe ser de 6 caracteres como minimo '+
-                                    '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
+        $('.alertElejirPass').html('<p class="text-center"' +
+            'style="background-color: #FFC107; ' +
+            'color: #000;' +
+            'font-weight: bold;' +
+            'padding: 5px; ' +
+            'border-radius: 0.25rem;">' +
+            '<i class="nav-icon fas fa-triangle-exclamation"></i> ' +
+            'La contraseña debe ser de 6 caracteres como minimo ' +
+            '<i class="nav-icon fas fa-triangle-exclamation"></i></p>');
         $('.alertElejirPass').slideDown();
         return false;
     }
@@ -640,8 +638,8 @@ function generarPDF(cliente, factura) {
     var x = parseInt((window.screen.width / 2) - (ancho / 2));
     var y = parseInt((window.screen.height / 2) - (alto / 2));
 
-    $url = '../factura/generaFactura.php?cl='+cliente+'&f='+factura;
-    window.open($url,"Factura","left="+x+",top="+y+",height="+alto+",width="+ancho+",scrollbar=si,location=no,resizable=si,menubar=no");
+    $url = '../factura/generaFactura.php?cl=' + cliente + '&f=' + factura;
+    window.open($url, "Factura", "left=" + x + ",top=" + y + ",height=" + alto + ",width=" + ancho + ",scrollbar=si,location=no,resizable=si,menubar=no");
 }
 
 //del prod_detall

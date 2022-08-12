@@ -19,7 +19,7 @@
 		<tr>
 			<td class="logo_factura">
 				<div>
-					<img src="img/logo.png">
+					<img src="img/logo_empresa.png">
 				</div>
 			</td>
 			<td class="info_empresa">
