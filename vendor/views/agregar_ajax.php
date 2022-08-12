@@ -438,7 +438,7 @@ if (!empty($_POST)) {
                 $mesg = "La contraseña es incorrecta";
             }
             $DateArray = array('codeP' => $codeP, 'mesg' => $mesg);
-            echo json_encode($DateArray,JSON_UNESCAPED_UNICODE);
+            echo json_encode($DateArray, JSON_UNESCAPED_UNICODE);
         } else {
             echo 'error';
         }
@@ -446,6 +446,42 @@ if (!empty($_POST)) {
     }
 
     //cambiar datos empresa 
-    
+    if ($_POST['action'] == 'udpateDate_Empresa') {
+
+        print_r($_POST);
+        exit;
+        if (
+            empty($_POST['txtRuc'])  || empty($_POST['txtNombre']) || empty($_POST['txtRSocial'])
+            || empty($_POST['txtTelefono']) || empty($_POST['txtCElectronico'])
+            || empty($_POST['txtDireccion']) || empty($_POST['txtIva'])
+        ) {
+            $code = '1';
+            $mesg = 'Todos los campos son obligatorios';
+        } else {
+            $intRuc = intval($_POST['txtRuc']);
+            $dNombre = $_POST['txtNombre'];
+            $dRSocial = $_POST['txtRSocial'];
+            $dTelefono = intval($_POST['txtTelefono']);
+            $dCElectronico = $_POST['txtCElectronico'];
+            $dDireccion = $_POST['txtDireccion'];
+            $dIva = $_POST['txtIva'];
+
+            $query_update_empresa = mysqli_query($conexion, "UPDATE configuracion SET cedula = $intRuc, nombre = '$dNombre', 
+                                                            razon_social = '$dRSocial', telefono = $dTelefono, 
+                                                            email = '$dCElectronico', direccion = '$dDireccion', 
+                                                            iva = '$dIva' WHERE id = 1");
+            mysqli_close($conexion);
+            if ($query_update_empresa) {
+                $code = '00';
+                $mesg = 'Datos actualizados correctamente';
+            } else {
+                $code = '2';
+                $mesg = 'No se pudo actualizar los datos';
+            }
+            $DateArray = array('code' => $code, 'mesg' => $mesg);
+            echo json_encode($DateArray, JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+    }
 }
 exit;

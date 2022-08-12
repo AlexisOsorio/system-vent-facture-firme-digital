@@ -556,6 +556,8 @@ $(document).ready(function () {
                 $('#frmEmpresa').attr('disabled', 'disabled');
             },
             success: function (response) {
+                console.log(response);
+/*
                 if (response != 'error') {
                     var info_pas = JSON.parse(response);
                     if (info_pas.codeP == '00') {
@@ -578,7 +580,7 @@ $(document).ready(function () {
                                         '<i class="nav-icon fas fa-circle-xmark"></i> '+info_pas.mesg+'</p>');
                     }
                     $('.alertFormEmpresa').slideDown();
-                }
+                }*/
             },
             error: function (error) {
 
