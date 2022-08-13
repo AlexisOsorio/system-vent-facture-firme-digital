@@ -30,6 +30,8 @@
 					<p>Fecha: 20/01/2019</p>
 					<p>Hora: 10:30am</p>
 					<p>Vendedor: Jorge Pérez Hernández Cabrera</p>
+					<br>
+					<img style="width: 400px; padding: 2px;" src="img/generatedBarcode1.png" alt="">
 				</div>
 			</td>
 		</tr>

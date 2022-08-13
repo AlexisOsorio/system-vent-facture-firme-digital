@@ -46,6 +46,8 @@
 					<p>Fecha: <?php echo $factura['fecha']; ?></p>
 					<p>Hora: <?php echo $factura['hora']; ?></p>
 					<p>Vendedor: <?php echo $factura['vendedor']; ?></p>
+					<br>
+					<img style="width: 180px; padding: 4px;" src="img/generatedBarcode1.png" alt="">
 				</div>
 			</td>
 		</tr>
