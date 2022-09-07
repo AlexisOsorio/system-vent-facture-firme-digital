@@ -225,7 +225,7 @@ if (!empty($_POST)) {
                                         <div class="form-group row">
                                             <label for="precio" class="col-sm-2 col-form-label">Precio</label>
                                             <div class="col-sm-10">
-                                                <input type="number" name="precio" id="precio" placeholder="Precio del Producto" class="form-control">
+                                                <input type="text" name="precio" id="precio" placeholder="Precio del Producto" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">

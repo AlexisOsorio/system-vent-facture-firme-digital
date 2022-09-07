@@ -90,7 +90,10 @@ include_once "../../config/conexion.php";
                 $buscar = 0;
 
                 if (!empty($_REQUEST['busqueda']) && !empty($_REQUEST['proveedor'])) {
-                    header("Location: list_stock.php");
+                    header("Location: error de busqueda");
+                                header("Location: ../views/list_stock.php");
+                                echo "<script lenguage='javascript'>window.location='../views/list_stock.php'</script>";
+                                exit();
                 }
                 if (!empty($_REQUEST['busqueda'])) {
                     $busqueda = strtolower($_REQUEST['busqueda']);
